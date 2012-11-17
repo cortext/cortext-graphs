@@ -6,9 +6,12 @@ if (Meteor.isClient) {
         if (window.CorTextGraphs.MainRouter === undefined) {
             window.CorTextGraphs.MainRouter = Backbone.Router.extend({
                 routes: {
+                    '': 'default',
                     'open/*path': 'index'
                 },
-
+                default: function() {
+                    $('#sigma').html(Template.hello());
+                },
                 index: function(path) {
                     path = decodeURIComponent(path);
                     Session.set('path', path);
