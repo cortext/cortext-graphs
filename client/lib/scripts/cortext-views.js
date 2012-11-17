@@ -25,13 +25,13 @@ if (Meteor.isClient) {
 
                     object.edges && _.keys(object.edges).forEach(function(key) {
                         var edge = object.edges[key];
-                        //validID = edge['source'] && edge['target'] && edge['id'];
-                        /*validID && that.sigma.addEdge(
+                        validID = edge['source'] && edge['target'] && edge['id'];
+                        validID && that.sigma.addEdge(
                             edge['id'],
                             edge['source'],
                             edge['target'],
-                             edge
-                        );*/
+                            edge
+                        );
                     });
                     this.sigma.draw(1000, 1000, 1000, true);
                 },
@@ -52,6 +52,7 @@ if (Meteor.isClient) {
                     var that = this;
                     $.get(Session.get('path'),
                         function(data, textStatus) {
+                            Session.set('title', data.meta.title);
                             that.sigma.emptyGraph();
                             that.pushGraph(data);
                         });
