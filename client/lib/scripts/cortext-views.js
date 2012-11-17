@@ -25,11 +25,11 @@ if (Meteor.isClient) {
 
                     object.edges && _.keys(object.edges).forEach(function(key) {
                         var edge = object.edges[key];
-                        validID = edge['source'] && edge['target'] && edge['id'];
+                        validID = edge['source'] && edge['source'];
                         validID && that.sigma.addEdge(
-                            edge['id'],
+                            key,
                             edge['source'],
-                            edge['target'],
+                            edge['dest'],
                             edge
                         );
                     });
@@ -41,7 +41,7 @@ if (Meteor.isClient) {
                     this.sigma = window.sigma.init(
                         document.getElementById('sigma'));
                     this.sigma.drawingProperties({
-                        defaultLabelColor: '#ccc',
+                        //defaultLabelColor: '#ccc',
                         font: 'Arial',
                         edgeColor: 'source',
                         defaultEdgeType: 'curve'
