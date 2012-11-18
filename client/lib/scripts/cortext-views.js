@@ -15,43 +15,6 @@ if (Meteor.isClient) {
                     }
                 },
                 /*
-                 * Graph drawing function
-                 */
-                pushGraph: function(object) {
-                    var that = this;
-                    /*
-                     * draw nodes
-                     */
-                    object.nodes && _.keys(object.nodes).forEach(function(key) {
-                        var node = object.nodes[key];
-                        node.id = "node-low-" + key;
-                        node.community = node.community.toString();
-                        node.size = node.weight;
-                        node.inDegree = node['in-degree'];
-                        node.outDegree = node['out-degree'];
-                        node.color = '#' + sigma.tools.rgbToHex(
-                                    parseFloat(node.r),
-                                    parseFloat(node.g),
-                                    parseFloat(node.b));
-                        that.sigma.addNode(node.id, node);
-                    });
-                    /*
-                     * draw edges
-                     */
-                    object.edges && _.keys(object.edges).forEach(function(key) {
-                        var edge = object.edges[key];
-                        validID = edge['source'] && edge['source'];
-                        validID && that.sigma.addEdge(
-                            "edge-low-" + key,
-                            "node-low-" + edge['source'],
-                            "node-low-" + edge['dest'],
-                            edge
-                        );
-                    });
-                    // TODO this.sigma.parseGexf(Session.get('clusterpath'));
-                    this.sigma.draw(1000,1000,1000,true);
-                },
-                /*
                  * initialize sigma instance and draw the graph
                  */
                 render: function() {
@@ -75,7 +38,44 @@ if (Meteor.isClient) {
                             that.sigma.emptyGraph();
                             that.pushGraph(data);
                             that.pushClusters();
+                            that.sigma.draw();
                         });
+                },
+                /*
+                 * low-level graph drawing
+                */
+                pushGraph: function(object) {
+                    var that = this;
+                    /*
+                     * draw nodes
+                     */
+                    object.nodes && _.keys(object.nodes).forEach(
+                        function(key) {
+                            var node = object.nodes[key];
+                            node.id = 'node-low-' + key;
+                            node.size = node.weight;
+                            node.inDegree = node['in-degree'];
+                            node.outDegree = node['out-degree'];
+                            node.color = '#' + sigma.tools.rgbToHex(
+                                        parseFloat(node.r),
+                                        parseFloat(node.g),
+                                        parseFloat(node.b));
+                            that.sigma.addNode(node.id, node);
+                    });
+                    /*
+                     * draw edges
+                     */
+                    object.edges && _.keys(object.edges).forEach(
+                        function(key) {
+                            var edge = object.edges[key];
+                            validID = edge['source'] && edge['source'];
+                            validID && that.sigma.addEdge(
+                                'edge-low-' + key,
+                                'node-low-' + edge['source'],
+                                'node-low-' + edge['dest'],
+                                edge
+                            );
+                    });
                 },
                 /*
                  * draw clusters
@@ -85,17 +85,17 @@ if (Meteor.isClient) {
                     $.get(Session.get('clusterpath'),
                         function(object, textStatus) {
                             var self = that;
-                            object.nodes && _.keys(object.nodes).forEach(function(key) {
-                                var node = object.nodes[key];
-                                node.id = 'node-high-' + key;
-                                node.size = node.weight;
-                                node.color = '#' + sigma.tools.rgbToHex(
-                                    parseFloat(node.r),
-                                    parseFloat(node.g),
-                                    parseFloat(node.b));
-                                self.sigma.addNode(node.id, node);
+                            object.nodes && _.keys(object.nodes).forEach(
+                                function(key) {
+                                    var node = object.nodes[key];
+                                    node.id = 'node-high-' + key;
+                                    node.size = node.weight;
+                                    node.color = '#' + sigma.tools.rgbToHex(
+                                        parseFloat(node.r),
+                                        parseFloat(node.g),
+                                        parseFloat(node.b));
+                                    self.sigma.addNode(node.id, node);
                             });
-                            self.sigma.draw(1000, 1000, 1000, true);
                         });
 
                 }
