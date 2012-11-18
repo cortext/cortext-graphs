@@ -1,0 +1,409 @@
+<gexf xmlns:viz="http://www.gexf.net/1.1draft/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.gephi.org/gexf/1.1draft" xmlns:ns0="xsi" version="1.1" ns0:schemaLocation="http://www.gephi.org/gexf/1.1draft http://gephi.org/gexf/1.1draft.xsd">
+  <meta lastmodified="2012-11-18T04:48:21.426077">
+    <creator>CorText</creator>
+    <description>hhn-synthbio1969_2012top100-Cited References-Cited References-cosine-10000-oT0.75-5-louTrue</description>
+  </meta>
+  <graph defaultedgetype="undirected" mode="static" label="hhn-synthbio1969_2012top100-Cited References-Cited References-cosine-10000-oT0.75-5-louTrue">
+    <attributes class="node" mode="dynamic"/>
+    <attributes class="node" mode="static">
+      <attribute id="category" title="category" type="string">
+        <default></default>
+      </attribute>
+      <attribute id="index" title="index" type="string">
+        <default></default>
+      </attribute>
+      <attribute id="width_prob" title="width_prob" type="string">
+        <default></default>
+      </attribute>
+      <attribute id="weight" title="weight" type="float">
+        <default></default>
+      </attribute>
+      <attribute id="level" title="level" type="string">
+        <default></default>
+      </attribute>
+      <attribute id="widthp" title="widthp" type="float">
+        <default></default>
+      </attribute>
+      <attribute id="density" title="density" type="float">
+        <default></default>
+      </attribute>
+      <attribute id="period" title="period" type="string">
+        <default></default>
+      </attribute>
+      <attribute id="label" title="label" type="string">
+        <default></default>
+      </attribute>
+      <attribute id="width" title="width" type="float">
+        <default></default>
+      </attribute>
+      <attribute id="shape" title="shape" type="string">
+        <default></default>
+      </attribute>
+      <attribute id="univ_index" title="univ_index" type="string">
+        <default></default>
+      </attribute>
+      <attribute id="y" title="y" type="float">
+        <default></default>
+      </attribute>
+      <attribute id="x" title="x" type="float">
+        <default></default>
+      </attribute>
+    </attributes>
+    <attributes class="edge" mode="dynamic"/>
+    <attributes class="edge" mode="static">
+      <attribute id="0" title="level_edge" type="string">
+        <default></default>
+      </attribute>
+      <attribute id="1" title="dest_edge" type="string">
+        <default></default>
+      </attribute>
+      <attribute id="2" title="source_edge" type="string">
+        <default></default>
+      </attribute>
+      <attribute id="3" title="weight_edge" type="float">
+        <default></default>
+      </attribute>
+    </attributes>
+    <nodes>
+      <node id="1" label="Elowitz MB_2002_SCIENCE &amp; Ozbudak EM_2002_NAT GENET">
+        <attvalues>
+          <attvalue for="category" value="Cited References &amp; Cited References"/>
+          <attvalue for="weight" value="35.2474047193"/>
+          <attvalue for="level" value="high"/>
+          <attvalue for="widthp" value="480.575110347"/>
+          <attvalue for="density" value="0.916862517512"/>
+          <attvalue for="period" value="1969_2012"/>
+          <attvalue for="width" value="206"/>
+        </attvalues>
+        <viz:color r="0" g="188" b="0" a="1.0"/>
+        <viz:position x="63.3823251815" y="890.420463661" z="0.0"/>
+        <viz:shape value="disc"/>
+        <viz:size value="5.34010159803"/>
+      </node>
+      <node id="2" label="Elowitz MB_2000_NATURE &amp; Gardner TS_2000_NATURE">
+        <attvalues>
+          <attvalue for="category" value="Cited References &amp; Cited References"/>
+          <attvalue for="weight" value="73.0919853622"/>
+          <attvalue for="level" value="high"/>
+          <attvalue for="widthp" value="996.561001034"/>
+          <attvalue for="density" value="0.752754607927"/>
+          <attvalue for="period" value="1969_2012"/>
+          <attvalue for="width" value="480"/>
+        </attvalues>
+        <viz:color r="235" g="0" b="0" a="1.0"/>
+        <viz:position x="327.640391923" y="859.666424823" z="0.0"/>
+        <viz:shape value="disc"/>
+        <viz:size value="10.0"/>
+      </node>
+      <node id="3" label="Lartigue C_2007_SCIENCE &amp; Smith HO_2003_P NATL ACAD SCI USA">
+        <attvalues>
+          <attvalue for="category" value="Cited References &amp; Cited References"/>
+          <attvalue for="weight" value="40.6438883735"/>
+          <attvalue for="level" value="high"/>
+          <attvalue for="widthp" value="554.152604868"/>
+          <attvalue for="density" value="0.925457712545"/>
+          <attvalue for="period" value="1969_2012"/>
+          <attvalue for="width" value="260"/>
+        </attvalues>
+        <viz:color r="0" g="119" b="221" a="1.0"/>
+        <viz:position x="941.790237688" y="266.960540045" z="0.0"/>
+        <viz:shape value="disc"/>
+        <viz:size value="6.00458420371"/>
+      </node>
+      <node id="4" label="Luisi PL_2006_NATURWISSENSCHAFTEN &amp; Noireaux V_2004_P NATL ACAD SCI USA">
+        <attvalues>
+          <attvalue for="category" value="Cited References &amp; Cited References"/>
+          <attvalue for="weight" value="33.6179588417"/>
+          <attvalue for="level" value="high"/>
+          <attvalue for="widthp" value="458.358690765"/>
+          <attvalue for="density" value="0.911385868598"/>
+          <attvalue for="period" value="1969_2012"/>
+          <attvalue for="width" value="183"/>
+        </attvalues>
+        <viz:color r="66" g="0" b="161" a="1.0"/>
+        <viz:position x="937.841008447" y="67.2568531465" z="0.0"/>
+        <viz:shape value="disc"/>
+        <viz:size value="5.13946382871"/>
+      </node>
+      <node id="5" label="Basu S_2005_NATURE &amp; You LC_2004_NATURE">
+        <attvalues>
+          <attvalue for="category" value="Cited References &amp; Cited References"/>
+          <attvalue for="weight" value="41.6130815857"/>
+          <attvalue for="level" value="high"/>
+          <attvalue for="widthp" value="567.366914932"/>
+          <attvalue for="density" value="0.812040666849"/>
+          <attvalue for="period" value="1969_2012"/>
+          <attvalue for="width" value="277"/>
+        </attvalues>
+        <viz:color r="102" g="255" b="0" a="1.0"/>
+        <viz:position x="501.826861952" y="800.596741205" z="0.0"/>
+        <viz:shape value="disc"/>
+        <viz:size value="6.12392340166"/>
+      </node>
+      <node id="6" label="Purnick PEM_2009_NAT REV MOL CELL BIO &amp; Ellis T_2009_NAT BIOTECHNOL">
+        <attvalues>
+          <attvalue for="category" value="Cited References &amp; Cited References"/>
+          <attvalue for="weight" value="38.8396516254"/>
+          <attvalue for="level" value="high"/>
+          <attvalue for="widthp" value="529.553027077"/>
+          <attvalue for="density" value="0.849655069948"/>
+          <attvalue for="period" value="1969_2012"/>
+          <attvalue for="width" value="344"/>
+        </attvalues>
+        <viz:color r="255" g="201" b="0" a="1.0"/>
+        <viz:position x="603.943715324" y="564.97324054" z="0.0"/>
+        <viz:shape value="disc"/>
+        <viz:size value="5.78242399487"/>
+      </node>
+      <node id="7" label="Deans TL_2007_CELL &amp; Weber W_2007_P NATL ACAD SCI USA">
+        <attvalues>
+          <attvalue for="category" value="Cited References &amp; Cited References"/>
+          <attvalue for="weight" value="36.9460294922"/>
+          <attvalue for="level" value="high"/>
+          <attvalue for="widthp" value="503.734738529"/>
+          <attvalue for="density" value="0.829545867566"/>
+          <attvalue for="period" value="1969_2012"/>
+          <attvalue for="width" value="197"/>
+        </attvalues>
+        <viz:color r="0" g="170" b="151" a="1.0"/>
+        <viz:position x="324.185214358" y="592.115529792" z="0.0"/>
+        <viz:shape value="disc"/>
+        <viz:size value="5.54925753873"/>
+      </node>
+    </nodes>
+    <edges>
+      <edge source="1" target="7" id="1" weight="0.0036526643491">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="7"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="0.0036526643491"/>
+        </attvalues>
+      </edge>
+      <edge source="1" target="5" id="2" weight="0.00186420360105">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="5"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="0.00186420360105"/>
+        </attvalues>
+      </edge>
+      <edge source="1" target="2" id="3" weight="0.0018134210248">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="2"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="0.0018134210248"/>
+        </attvalues>
+      </edge>
+      <edge source="1" target="1" id="4" weight="0.0129983899719">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="1"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="0.0129983899719"/>
+        </attvalues>
+      </edge>
+      <edge source="2" target="2" id="5" weight="0.0104562745961">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="2"/>
+          <attvalue for="2" value="2"/>
+          <attvalue for="3" value="0.0104562745961"/>
+        </attvalues>
+      </edge>
+      <edge source="2" target="7" id="6" weight="0.00327733312168">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="7"/>
+          <attvalue for="2" value="2"/>
+          <attvalue for="3" value="0.00327733312168"/>
+        </attvalues>
+      </edge>
+      <edge source="2" target="1" id="7" weight="0.0018134210248">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="1"/>
+          <attvalue for="2" value="2"/>
+          <attvalue for="3" value="0.0018134210248"/>
+        </attvalues>
+      </edge>
+      <edge source="2" target="6" id="8" weight="0.00243244397714">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="6"/>
+          <attvalue for="2" value="2"/>
+          <attvalue for="3" value="0.00243244397714"/>
+        </attvalues>
+      </edge>
+      <edge source="2" target="5" id="9" weight="0.0027994978788">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="5"/>
+          <attvalue for="2" value="2"/>
+          <attvalue for="3" value="0.0027994978788"/>
+        </attvalues>
+      </edge>
+      <edge source="3" target="6" id="10" weight="0.00409247225553">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="6"/>
+          <attvalue for="2" value="3"/>
+          <attvalue for="3" value="0.00409247225553"/>
+        </attvalues>
+      </edge>
+      <edge source="3" target="3" id="11" weight="0.0316484826606">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="3"/>
+          <attvalue for="2" value="3"/>
+          <attvalue for="3" value="0.0316484826606"/>
+        </attvalues>
+      </edge>
+      <edge source="3" target="4" id="12" weight="0.0146743287926">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="4"/>
+          <attvalue for="2" value="3"/>
+          <attvalue for="3" value="0.0146743287926"/>
+        </attvalues>
+      </edge>
+      <edge source="4" target="3" id="13" weight="0.0146743287926">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="3"/>
+          <attvalue for="2" value="4"/>
+          <attvalue for="3" value="0.0146743287926"/>
+        </attvalues>
+      </edge>
+      <edge source="4" target="4" id="14" weight="0.0261662928988">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="4"/>
+          <attvalue for="2" value="4"/>
+          <attvalue for="3" value="0.0261662928988"/>
+        </attvalues>
+      </edge>
+      <edge source="5" target="2" id="15" weight="0.0027994978788">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="2"/>
+          <attvalue for="2" value="5"/>
+          <attvalue for="3" value="0.0027994978788"/>
+        </attvalues>
+      </edge>
+      <edge source="5" target="5" id="16" weight="0.0153325047813">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="5"/>
+          <attvalue for="2" value="5"/>
+          <attvalue for="3" value="0.0153325047813"/>
+        </attvalues>
+      </edge>
+      <edge source="5" target="7" id="17" weight="0.00916160486236">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="7"/>
+          <attvalue for="2" value="5"/>
+          <attvalue for="3" value="0.00916160486236"/>
+        </attvalues>
+      </edge>
+      <edge source="5" target="6" id="18" weight="0.00359392590892">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="6"/>
+          <attvalue for="2" value="5"/>
+          <attvalue for="3" value="0.00359392590892"/>
+        </attvalues>
+      </edge>
+      <edge source="5" target="1" id="19" weight="0.00186420360105">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="1"/>
+          <attvalue for="2" value="5"/>
+          <attvalue for="3" value="0.00186420360105"/>
+        </attvalues>
+      </edge>
+      <edge source="6" target="2" id="20" weight="0.00243244397714">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="2"/>
+          <attvalue for="2" value="6"/>
+          <attvalue for="3" value="0.00243244397714"/>
+        </attvalues>
+      </edge>
+      <edge source="6" target="7" id="21" weight="0.00268555582606">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="7"/>
+          <attvalue for="2" value="6"/>
+          <attvalue for="3" value="0.00268555582606"/>
+        </attvalues>
+      </edge>
+      <edge source="6" target="5" id="22" weight="0.00359392590892">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="5"/>
+          <attvalue for="2" value="6"/>
+          <attvalue for="3" value="0.00359392590892"/>
+        </attvalues>
+      </edge>
+      <edge source="6" target="6" id="23" weight="0.00518962120495">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="6"/>
+          <attvalue for="2" value="6"/>
+          <attvalue for="3" value="0.00518962120495"/>
+        </attvalues>
+      </edge>
+      <edge source="6" target="3" id="24" weight="0.00409247225553">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="3"/>
+          <attvalue for="2" value="6"/>
+          <attvalue for="3" value="0.00409247225553"/>
+        </attvalues>
+      </edge>
+      <edge source="7" target="2" id="25" weight="0.00327733312168">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="2"/>
+          <attvalue for="2" value="7"/>
+          <attvalue for="3" value="0.00327733312168"/>
+        </attvalues>
+      </edge>
+      <edge source="7" target="5" id="26" weight="0.00916160486236">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="5"/>
+          <attvalue for="2" value="7"/>
+          <attvalue for="3" value="0.00916160486236"/>
+        </attvalues>
+      </edge>
+      <edge source="7" target="7" id="27" weight="0.0565301253931">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="7"/>
+          <attvalue for="2" value="7"/>
+          <attvalue for="3" value="0.0565301253931"/>
+        </attvalues>
+      </edge>
+      <edge source="7" target="6" id="28" weight="0.00268555582606">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="6"/>
+          <attvalue for="2" value="7"/>
+          <attvalue for="3" value="0.00268555582606"/>
+        </attvalues>
+      </edge>
+      <edge source="7" target="1" id="29" weight="0.0036526643491">
+        <attvalues>
+          <attvalue for="0" value="high"/>
+          <attvalue for="1" value="1"/>
+          <attvalue for="2" value="7"/>
+          <attvalue for="3" value="0.0036526643491"/>
+        </attvalues>
+      </edge>
+    </edges>
+  </graph>
+</gexf>
