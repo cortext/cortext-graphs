@@ -17,15 +17,16 @@ if (Meteor.isClient) {
             window.CorTextGraphs.MainRouter = Backbone.Router.extend({
                 routes: {
                     '': 'default',
+                    //'open/:path/*clusterpath': 'index'
                     'open/*path': 'index'
                 },
                 default: function() {
                     Session.set('title', '');
                     $('#sigma').html(Template.hello());
                 },
-                index: function(path) {
-                    path = decodeURIComponent(path);
-                    Session.set('path', path);
+                index: function(path, clusterpath) {
+                    Session.set('path', decodeURIComponent(path));
+                    //Session.set('clusterpath', decodeURIComponent(clusterpath));
                     window.CorTextGraphs.sigmaview.render();
                 }
             });

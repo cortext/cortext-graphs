@@ -25,37 +25,13 @@ if (Meteor.isClient) {
                      */
                     object.nodes && _.keys(object.nodes).forEach(function(key) {
                         var node = object.nodes[key];
-                        /*
-                         * on the fly adding clusters
-                         */
-                        if (that._categories[node.community.toString()] === undefined) {
-                            that._categories[node.community.toString()] = {
-                                id: 'cluster-' + node.community.toString(),
-                                size: 2000,
-                                x: [node.x],
-                                y: [node.y],
-                                label: '',
-                            };
-                        } else {
-                            that._categories[node.community.toString()].x.push(node.x);
-                            that._categories[node.community.toString()].y.push(node.y);
-                        }
-                        node.id = key;
+                        node.id = "node-low-" + key;
+                        node.community = node.community.toString();
                         node.size = node.weight;
                         node.inDegree = node['in-degree'];
                         node.outDegree = node['out-degree'];
                         that.sigma.addNode(node.id, node);
                     });
-                    /* TODO draw clusters above nodes without hiding them all ....
-                     * this._categories && _.keys(this._categories).forEach(function(key) {
-                        var node = that._categories[key];
-                        node.x = _.reduce(node.x, function(memo, num) {
-                            return memo + num; }, 0) / node.x.length;
-                        node.y = _.reduce(node.y, function(memo, num) {
-                            return memo + num; }, 0) / node.y.length;
-                        that.sigma.addNode(node.id, node);
-                    });
-                    */
                     /*
                      * draw edges
                      */
@@ -63,13 +39,14 @@ if (Meteor.isClient) {
                         var edge = object.edges[key];
                         validID = edge['source'] && edge['source'];
                         validID && that.sigma.addEdge(
-                            key,
-                            edge['source'],
-                            edge['dest'],
+                            "edge-low-" + key,
+                            "node-low-" + edge['source'],
+                            "node-low-" + edge['dest'],
                             edge
                         );
                     });
-                    this.sigma.draw(1000, 1000, 1000, true);
+                    // TODO this.sigma.parseGexf(Session.get('clusterpath'));
+                    this.sigma.draw(1000,1000,1000,true);
                 },
                 render: function() {
                     this.$el.empty();
