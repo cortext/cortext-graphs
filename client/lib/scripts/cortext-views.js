@@ -18,7 +18,6 @@ if (Meteor.isClient) {
                  * Graph drawing function
                  */
                 pushGraph: function(object) {
-                    this._categories = {};
                     var that = this;
                     /*
                      * draw nodes
@@ -30,6 +29,10 @@ if (Meteor.isClient) {
                         node.size = node.weight;
                         node.inDegree = node['in-degree'];
                         node.outDegree = node['out-degree'];
+                        node.color = '#' + sigma.tools.rgbToHex(
+                                    parseFloat(node.r),
+                                    parseFloat(node.g),
+                                    parseFloat(node.b));
                         that.sigma.addNode(node.id, node);
                     });
                     /*
@@ -48,13 +51,16 @@ if (Meteor.isClient) {
                     // TODO this.sigma.parseGexf(Session.get('clusterpath'));
                     this.sigma.draw(1000,1000,1000,true);
                 },
+                /*
+                 * initialize sigma instance and draw the graph
+                 */
                 render: function() {
                     this.$el.empty();
                     // TODO add a spinner
                     this.sigma = window.sigma.init(
                         document.getElementById('sigma'));
+                    //this.sigma.bind('overnodes',showNodeInfo).bind('outnodes',hideNodeInfo).draw();
                     this.sigma.drawingProperties({
-                        //defaultLabelColor: '#ccc',
                         font: 'Arial',
                         edgeColor: 'source',
                         defaultEdgeType: 'curve'
@@ -68,7 +74,30 @@ if (Meteor.isClient) {
                             Session.set('title', data.meta.title);
                             that.sigma.emptyGraph();
                             that.pushGraph(data);
+                            that.pushClusters();
                         });
+                },
+                /*
+                 * draw clusters
+                 */
+                pushClusters: function() {
+                    var that = this;
+                    $.get(Session.get('clusterpath'),
+                        function(object, textStatus) {
+                            var self = that;
+                            object.nodes && _.keys(object.nodes).forEach(function(key) {
+                                var node = object.nodes[key];
+                                node.id = 'node-high-' + key;
+                                node.size = node.weight;
+                                node.color = '#' + sigma.tools.rgbToHex(
+                                    parseFloat(node.r),
+                                    parseFloat(node.g),
+                                    parseFloat(node.b));
+                                self.sigma.addNode(node.id, node);
+                            });
+                            self.sigma.draw(1000, 1000, 1000, true);
+                        });
+
                 }
             });
             /*
