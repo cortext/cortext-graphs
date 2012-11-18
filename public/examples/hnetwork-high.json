@@ -1,0 +1,684 @@
+{
+    "nodes": {
+        "1": {
+            "category": "Terms & Terms", 
+            "index": 7, 
+            "b": 0, 
+            "width_prob": 68.877299365395771, 
+            "g": 217, 
+            "weight": 35.011482122584106, 
+            "level": "high", 
+            "color": [
+                0.97253529411764705, 
+                0.85488823529411773, 
+                0.0, 
+                1.0
+            ], 
+            "widthp": 68.877299365395771, 
+            "density": 0.7365069976257671, 
+            "period": "1_1", 
+            "label": "associations & missions de service public", 
+            "width": 35, 
+            "shape": "o", 
+            "univ_index": 5, 
+            "a": 1, 
+            "y": 0.36896039383872115, 
+            "x": 0.88339748596835088, 
+            "r": 247, 
+            "size": 9.5560609480124956
+        }, 
+        "2": {
+            "category": "Terms & Terms", 
+            "index": 3, 
+            "b": 221, 
+            "width_prob": 61.837645936778422, 
+            "g": 133, 
+            "weight": 31.433108660847434, 
+            "level": "high", 
+            "color": [
+                0.0, 
+                0.52158823529411769, 
+                0.86670000000000003, 
+                1.0
+            ], 
+            "widthp": 61.837645936778422, 
+            "density": 0.80055894257864546, 
+            "period": "1_1", 
+            "label": "absence de s\u00e9lection & transmission des savoirs", 
+            "width": 33, 
+            "shape": "o", 
+            "univ_index": 0, 
+            "a": 1, 
+            "y": 0.10606048828762142, 
+            "x": 0.64398044503970964, 
+            "r": 0, 
+            "size": 9.5560609480124956
+        }, 
+        "3": {
+            "category": "Terms & Terms", 
+            "index": 6, 
+            "b": 0, 
+            "width_prob": 54.160550063999175, 
+            "g": 255, 
+            "weight": 27.53071255386223, 
+            "level": "high", 
+            "color": [
+                0.5176235294117647, 
+                1.0, 
+                0.0, 
+                1.0
+            ], 
+            "widthp": 54.160550063999175, 
+            "density": 0.86284346305206183, 
+            "period": "1_1", 
+            "label": "recherche scientifique & soutien de base", 
+            "width": 28, 
+            "shape": "o", 
+            "univ_index": 7, 
+            "a": 1, 
+            "y": 0.63146239895038037, 
+            "x": 0.92281025943885053, 
+            "r": 131, 
+            "size": 9.5560609480124956
+        }, 
+        "4": {
+            "category": "Terms & Terms", 
+            "index": 2, 
+            "b": 0, 
+            "width_prob": 45.730484605088655, 
+            "g": 0, 
+            "weight": 23.245569425048686, 
+            "level": "high", 
+            "color": [
+                0.85362156862745098, 
+                0.0, 
+                0.0, 
+                1.0
+            ], 
+            "widthp": 45.730484605088655, 
+            "density": 0.71585531701832794, 
+            "period": "1_1", 
+            "label": "pays du monde & fin de carri\u00e8re", 
+            "width": 24, 
+            "shape": "o", 
+            "univ_index": 1, 
+            "a": 1, 
+            "y": 0.62227476966973339, 
+            "x": 0.55671426723419248, 
+            "r": 217, 
+            "size": 9.5560609480124956
+        }, 
+        "5": {
+            "category": "Terms & Terms", 
+            "index": 8, 
+            "b": 160, 
+            "width_prob": 48.859710288302992, 
+            "g": 170, 
+            "weight": 24.83620712534784, 
+            "level": "high", 
+            "color": [
+                0.0, 
+                0.66669999999999996, 
+                0.62746470588235292, 
+                1.0
+            ], 
+            "widthp": 48.859710288302992, 
+            "density": 0.89444686879261859, 
+            "period": "1_1", 
+            "label": "r\u00e9seaux d'anciens \u00e9tudiants & rang mondial", 
+            "width": 28, 
+            "shape": "o", 
+            "univ_index": 6, 
+            "a": 1, 
+            "y": 0.49916998912308708, 
+            "x": 0.062013552058703701, 
+            "r": 0, 
+            "size": 9.5560609480124956
+        }, 
+        "6": {
+            "category": "Terms & Terms", 
+            "index": 5, 
+            "b": 149, 
+            "width_prob": 46.924556794450254, 
+            "g": 0, 
+            "weight": 23.852536270382231, 
+            "level": "high", 
+            "color": [
+                0.52024117647058821, 
+                0.0, 
+                0.58692156862745093, 
+                1.0
+            ], 
+            "widthp": 46.924556794450254, 
+            "density": 0.79676031889576349, 
+            "period": "1_1", 
+            "label": "march\u00e9 de l'emploi & cycles universitaires", 
+            "width": 23, 
+            "shape": "o", 
+            "univ_index": 2, 
+            "a": 1, 
+            "y": 0.25538587329785095, 
+            "x": 0.64356057478420581, 
+            "r": 132, 
+            "size": 9.5560609480124956
+        }, 
+        "7": {
+            "category": "Terms & Terms", 
+            "index": 9, 
+            "b": 0, 
+            "width_prob": 42.849943153752733, 
+            "g": 217, 
+            "weight": 21.78134207502168, 
+            "level": "high", 
+            "color": [
+                0.0, 
+                0.85362156862745098, 
+                0.0, 
+                1.0
+            ], 
+            "widthp": 42.849943153752733, 
+            "density": 0.80293930727964136, 
+            "period": "1_1", 
+            "label": "transfert de la masse salariale & Pacte pour la Recherche", 
+            "width": 17, 
+            "shape": "o", 
+            "univ_index": 4, 
+            "a": 1, 
+            "y": 0.45245034124620231, 
+            "x": 0.73339875484043859, 
+            "r": 0, 
+            "size": 9.5560609480124956
+        }, 
+        "8": {
+            "category": "Terms & Terms", 
+            "index": 0, 
+            "b": 0, 
+            "width_prob": 56.55058913807602, 
+            "g": 156, 
+            "weight": 28.745609349835618, 
+            "level": "high", 
+            "color": [
+                0.0, 
+                0.61306862745098034, 
+                0.0, 
+                1.0
+            ], 
+            "widthp": 56.55058913807602, 
+            "density": 0.91837744052076686, 
+            "period": "1_1", 
+            "label": "m\u00e9thodes p\u00e9dagogiques & voie technologique", 
+            "width": 36, 
+            "shape": "o", 
+            "univ_index": 9, 
+            "a": 1, 
+            "y": 0.39918936213988876, 
+            "x": 0.32341749498129369, 
+            "r": 0, 
+            "size": 9.5560609480124956
+        }, 
+        "9": {
+            "category": "Terms & Terms", 
+            "index": 1, 
+            "b": 0, 
+            "width_prob": 84.27471928701064, 
+            "g": 93, 
+            "weight": 42.838247940733744, 
+            "level": "high", 
+            "color": [
+                1.0, 
+                0.36470588235294116, 
+                0.0, 
+                1.0
+            ], 
+            "widthp": 84.27471928701064, 
+            "density": 0.83010925912422007, 
+            "period": "1_1", 
+            "label": "lyc\u00e9e & taux de r\u00e9ussite", 
+            "width": 37, 
+            "shape": "o", 
+            "univ_index": 8, 
+            "a": 1, 
+            "y": 0.10520382569289451, 
+            "x": 0.38122327492216651, 
+            "r": 255, 
+            "size": 9.5560609480124956
+        }, 
+        "10": {
+            "category": "Terms & Terms", 
+            "index": 4, 
+            "b": 201, 
+            "width_prob": 80.117737177376043, 
+            "g": 0, 
+            "weight": 40.725184476336437, 
+            "level": "high", 
+            "color": [
+                0.0, 
+                0.0, 
+                0.78826862745098036, 
+                1.0
+            ], 
+            "widthp": 80.117737177376043, 
+            "density": 0.94813330074828273, 
+            "period": "1_1", 
+            "label": "s\u00e9curit\u00e9 alimentaire & infrastructures", 
+            "width": 41, 
+            "shape": "o", 
+            "univ_index": 3, 
+            "a": 1, 
+            "y": 0.88482369124142068, 
+            "x": 0.3340684099490927, 
+            "r": 0, 
+            "size": 9.5560609480124956
+        }
+    }, 
+    "meta": {
+        "period": "1_1", 
+        "method": {
+            "overl_size": false, 
+            "field1": "Terms", 
+            "dist": "distributional", 
+            "het_typ": true, 
+            "field2": "Terms", 
+            "CDM": "louvain", 
+            "nb_per": "1", 
+            "compute_optimal_distance_thres": true, 
+            "k_nearest": 50, 
+            "top_node": 200, 
+            "no_orphan": false, 
+            "time_sp": "homogeneous", 
+            "norm": false, 
+            "top_edges": 10000, 
+            "int-thres": 0.25, 
+            "d_thres": 0.20000000000000001, 
+            "period_size": null, 
+            "orph": "False"
+        }, 
+        "title": "hhn-txtretenus1_1top200-Terms-Terms-distributional-10000-oT0.53-50-louTrue"
+    }, 
+    "edges": {
+        "1": {
+            "dest": 1, 
+            "source": 1, 
+            "weight": 0.0027585110104152116, 
+            "level": "high"
+        }, 
+        "2": {
+            "dest": 2, 
+            "source": 1, 
+            "weight": 0.0015345968984980039, 
+            "level": "high"
+        }, 
+        "3": {
+            "dest": 7, 
+            "source": 1, 
+            "weight": 0.0037933565292276373, 
+            "level": "high"
+        }, 
+        "4": {
+            "dest": 6, 
+            "source": 1, 
+            "weight": 0.00097864595972684681, 
+            "level": "high"
+        }, 
+        "5": {
+            "dest": 3, 
+            "source": 1, 
+            "weight": 0.0010833227055939904, 
+            "level": "high"
+        }, 
+        "6": {
+            "dest": 10, 
+            "source": 1, 
+            "weight": 0.00088549323158061937, 
+            "level": "high"
+        }, 
+        "7": {
+            "dest": 1, 
+            "source": 2, 
+            "weight": 0.0015345968984980039, 
+            "level": "high"
+        }, 
+        "8": {
+            "dest": 2, 
+            "source": 2, 
+            "weight": 0.012315483883168742, 
+            "level": "high"
+        }, 
+        "9": {
+            "dest": 4, 
+            "source": 2, 
+            "weight": 0.0018631768438322005, 
+            "level": "high"
+        }, 
+        "10": {
+            "dest": 7, 
+            "source": 2, 
+            "weight": 0.0019838270534295994, 
+            "level": "high"
+        }, 
+        "11": {
+            "dest": 6, 
+            "source": 2, 
+            "weight": 0.0010822288502661623, 
+            "level": "high"
+        }, 
+        "12": {
+            "dest": 9, 
+            "source": 2, 
+            "weight": 0.00093547786146902317, 
+            "level": "high"
+        }, 
+        "13": {
+            "dest": 1, 
+            "source": 3, 
+            "weight": 0.0010833227055939904, 
+            "level": "high"
+        }, 
+        "14": {
+            "dest": 4, 
+            "source": 3, 
+            "weight": 0.0012767920065980096, 
+            "level": "high"
+        }, 
+        "15": {
+            "dest": 7, 
+            "source": 3, 
+            "weight": 0.0014408676041795148, 
+            "level": "high"
+        }, 
+        "16": {
+            "dest": 6, 
+            "source": 3, 
+            "weight": 0.00091704549321419769, 
+            "level": "high"
+        }, 
+        "17": {
+            "dest": 3, 
+            "source": 3, 
+            "weight": 0.0017233058946066135, 
+            "level": "high"
+        }, 
+        "18": {
+            "dest": 8, 
+            "source": 3, 
+            "weight": 0.00071070882496399057, 
+            "level": "high"
+        }, 
+        "19": {
+            "dest": 2, 
+            "source": 4, 
+            "weight": 0.0018631768438322005, 
+            "level": "high"
+        }, 
+        "20": {
+            "dest": 3, 
+            "source": 4, 
+            "weight": 0.0012767920065980096, 
+            "level": "high"
+        }, 
+        "21": {
+            "dest": 4, 
+            "source": 4, 
+            "weight": 0.012417817702130865, 
+            "level": "high"
+        }, 
+        "22": {
+            "dest": 7, 
+            "source": 4, 
+            "weight": 0.0041070978900851077, 
+            "level": "high"
+        }, 
+        "23": {
+            "dest": 6, 
+            "source": 4, 
+            "weight": 0.0012046834489894802, 
+            "level": "high"
+        }, 
+        "24": {
+            "dest": 8, 
+            "source": 4, 
+            "weight": 0.00091011112314400748, 
+            "level": "high"
+        }, 
+        "25": {
+            "dest": 9, 
+            "source": 4, 
+            "weight": 0.00093186230219657461, 
+            "level": "high"
+        }, 
+        "26": {
+            "dest": 10, 
+            "source": 4, 
+            "weight": 0.0010495096585843213, 
+            "level": "high"
+        }, 
+        "27": {
+            "dest": 6, 
+            "source": 5, 
+            "weight": 0.00099052990367919785, 
+            "level": "high"
+        }, 
+        "28": {
+            "dest": 10, 
+            "source": 5, 
+            "weight": 0.00084463952889564365, 
+            "level": "high"
+        }, 
+        "29": {
+            "dest": 5, 
+            "source": 5, 
+            "weight": 0.0043196681220660773, 
+            "level": "high"
+        }, 
+        "30": {
+            "dest": 8, 
+            "source": 5, 
+            "weight": 0.0014155985945246625, 
+            "level": "high"
+        }, 
+        "31": {
+            "dest": 1, 
+            "source": 6, 
+            "weight": 0.00097864595972684681, 
+            "level": "high"
+        }, 
+        "32": {
+            "dest": 2, 
+            "source": 6, 
+            "weight": 0.0010822288502661623, 
+            "level": "high"
+        }, 
+        "33": {
+            "dest": 4, 
+            "source": 6, 
+            "weight": 0.0012046834489894802, 
+            "level": "high"
+        }, 
+        "34": {
+            "dest": 7, 
+            "source": 6, 
+            "weight": 0.0026600586264331596, 
+            "level": "high"
+        }, 
+        "35": {
+            "dest": 6, 
+            "source": 6, 
+            "weight": 0.0082516869483362457, 
+            "level": "high"
+        }, 
+        "36": {
+            "dest": 5, 
+            "source": 6, 
+            "weight": 0.00099052990367919785, 
+            "level": "high"
+        }, 
+        "37": {
+            "dest": 3, 
+            "source": 6, 
+            "weight": 0.00091704549321419769, 
+            "level": "high"
+        }, 
+        "38": {
+            "dest": 9, 
+            "source": 6, 
+            "weight": 0.00056497741782475725, 
+            "level": "high"
+        }, 
+        "39": {
+            "dest": 8, 
+            "source": 6, 
+            "weight": 0.0011364990969292903, 
+            "level": "high"
+        }, 
+        "40": {
+            "dest": 1, 
+            "source": 7, 
+            "weight": 0.0037933565292276373, 
+            "level": "high"
+        }, 
+        "41": {
+            "dest": 2, 
+            "source": 7, 
+            "weight": 0.0019838270534295994, 
+            "level": "high"
+        }, 
+        "42": {
+            "dest": 4, 
+            "source": 7, 
+            "weight": 0.0041070978900851077, 
+            "level": "high"
+        }, 
+        "43": {
+            "dest": 7, 
+            "source": 7, 
+            "weight": 0.0051066274651011241, 
+            "level": "high"
+        }, 
+        "44": {
+            "dest": 6, 
+            "source": 7, 
+            "weight": 0.0026600586264331596, 
+            "level": "high"
+        }, 
+        "45": {
+            "dest": 3, 
+            "source": 7, 
+            "weight": 0.0014408676041795148, 
+            "level": "high"
+        }, 
+        "46": {
+            "dest": 9, 
+            "source": 7, 
+            "weight": 0.0010339076096957868, 
+            "level": "high"
+        }, 
+        "47": {
+            "dest": 4, 
+            "source": 8, 
+            "weight": 0.00091011112314400748, 
+            "level": "high"
+        }, 
+        "48": {
+            "dest": 5, 
+            "source": 8, 
+            "weight": 0.0014155985945246625, 
+            "level": "high"
+        }, 
+        "49": {
+            "dest": 6, 
+            "source": 8, 
+            "weight": 0.0011364990969292903, 
+            "level": "high"
+        }, 
+        "50": {
+            "dest": 3, 
+            "source": 8, 
+            "weight": 0.00071070882496399057, 
+            "level": "high"
+        }, 
+        "51": {
+            "dest": 9, 
+            "source": 8, 
+            "weight": 0.00042777878011511581, 
+            "level": "high"
+        }, 
+        "52": {
+            "dest": 8, 
+            "source": 8, 
+            "weight": 0.0039480744063173367, 
+            "level": "high"
+        }, 
+        "53": {
+            "dest": 2, 
+            "source": 9, 
+            "weight": 0.00093547786146902317, 
+            "level": "high"
+        }, 
+        "54": {
+            "dest": 4, 
+            "source": 9, 
+            "weight": 0.00093186230219657461, 
+            "level": "high"
+        }, 
+        "55": {
+            "dest": 7, 
+            "source": 9, 
+            "weight": 0.0010339076096957868, 
+            "level": "high"
+        }, 
+        "56": {
+            "dest": 6, 
+            "source": 9, 
+            "weight": 0.00056497741782475725, 
+            "level": "high"
+        }, 
+        "57": {
+            "dest": 8, 
+            "source": 9, 
+            "weight": 0.00042777878011511581, 
+            "level": "high"
+        }, 
+        "58": {
+            "dest": 9, 
+            "source": 9, 
+            "weight": 0.0015825658787822635, 
+            "level": "high"
+        }, 
+        "59": {
+            "dest": 10, 
+            "source": 9, 
+            "weight": 0.001041034816021144, 
+            "level": "high"
+        }, 
+        "60": {
+            "dest": 1, 
+            "source": 10, 
+            "weight": 0.00088549323158061937, 
+            "level": "high"
+        }, 
+        "61": {
+            "dest": 5, 
+            "source": 10, 
+            "weight": 0.00084463952889564365, 
+            "level": "high"
+        }, 
+        "62": {
+            "dest": 9, 
+            "source": 10, 
+            "weight": 0.001041034816021144, 
+            "level": "high"
+        }, 
+        "63": {
+            "dest": 4, 
+            "source": 10, 
+            "weight": 0.0010495096585843213, 
+            "level": "high"
+        }, 
+        "64": {
+            "dest": 10, 
+            "source": 10, 
+            "weight": 0.011984771948557875, 
+            "level": "high"
+        }
+    }
+}
