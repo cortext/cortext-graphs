@@ -37,7 +37,6 @@ if (Meteor.isClient) {
                             Session.set('title', data.meta.title);
                             that.sigma.emptyGraph();
                             that.pushClusters(data);
-                            that.sigma.draw();
                         });
                 },
                 /*
@@ -77,6 +76,7 @@ if (Meteor.isClient) {
                                 edge
                             );
                     });
+                    this.sigma.draw();
                 },
                 /*
                  * draw clusters
