@@ -29,15 +29,14 @@ if (Meteor.isClient) {
                         defaultEdgeType: 'curve'
                     }).graphProperties({
                         minNodeSize: 1,
-                        maxNodeSize: 10
+                        maxNodeSize: 80
                     });
                     var that = this;
                     $.get(Session.get('path'),
                         function(data, textStatus) {
                             Session.set('title', data.meta.title);
                             that.sigma.emptyGraph();
-                            that.pushGraph(data);
-                            that.pushClusters();
+                            that.pushClusters(data);
                             that.sigma.draw();
                         });
                 },
@@ -49,11 +48,13 @@ if (Meteor.isClient) {
                     /*
                      * draw nodes
                      */
+                    var maxweight = _.max(object.nodes,
+                        function(node) { return node.weight; }).weight;
                     object.nodes && _.keys(object.nodes).forEach(
                         function(key) {
                             var node = object.nodes[key];
                             node.id = 'node-low-' + key;
-                            node.size = node.weight;
+                            node.size = 2 * (node.weight / maxweight);
                             node.inDegree = node['in-degree'];
                             node.outDegree = node['out-degree'];
                             node.color = '#' + sigma.tools.rgbToHex(
@@ -80,7 +81,7 @@ if (Meteor.isClient) {
                 /*
                  * draw clusters
                  */
-                pushClusters: function() {
+                pushClusters: function(data) {
                     var that = this;
                     $.get(Session.get('clusterpath'),
                         function(object, textStatus) {
@@ -89,13 +90,16 @@ if (Meteor.isClient) {
                                 function(key) {
                                     var node = object.nodes[key];
                                     node.id = 'node-high-' + key;
-                                    node.size = node.weight;
-                                    node.color = '#' + sigma.tools.rgbToHex(
-                                        parseFloat(node.r),
-                                        parseFloat(node.g),
-                                        parseFloat(node.b));
+                                    node.size = node.width;
+                                    node.cluster = true;
+                                    node.color = 'rgba(' +
+                                        parseFloat(node.r).toString() + ',' +
+                                        parseFloat(node.g).toString() + ',' +
+                                        parseFloat(node.b).toString() + ',' +
+                                        '0.3' + ')';
                                     self.sigma.addNode(node.id, node);
                             });
+                            that.pushGraph(data);
                         });
 
                 }
