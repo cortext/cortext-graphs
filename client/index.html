@@ -32,20 +32,10 @@
             <div id="sigma" class="span8">
             </div>
             <div id="sidebar" class="span4">
-                <div class="well sidebar-nav">
-                    <ul class="nav nav-list">
-                        <li class="">
-                            <a href="#">
-                            Note A
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                </div>
             </div>
         </div>
 
-        <div id="footer" class="row-fluid ">
+        <div id="footer" class="row-fluid">
          <div class="container">
             <p class="muted credit"><a href="https://github.com/cortext/cortext-graphs/">Cortext Graphs</a> is a <a href="http://www.gnu.org/licenses/agpl-3.0.html">Free Software</a> made by <a href="http://www.cortext.net/">Cortext research team at IFRIS Universit&eacute; Paris-Est</a></p>
           </div>
@@ -58,14 +48,27 @@
 <div class="hero-unit">
     <div>
         <h1>
-        Hello
+            {{{ text }}}
         </h1>
         <p>
         </p>
     </div>
+    {{#if example}}
     <a class="btn btn-primary" href="#open/http%3A%2F%2Flocalhost%3A3000%2Fhnetwork-low.json/http%3A%2F%2Flocalhost%3A3000%2Fhnetwork-high.json">
         Load example »
     </a>
+    {{/if}}
 </div>
 </template>
 
+<template name="nodepanel">
+<div class="well sidebar-nav">
+    <ul class="nav nav-list">
+        <li class="">
+            <a href="#">
+            Note A
+            </a>
+        </li>
+    </ul>
+</div>
+</template>

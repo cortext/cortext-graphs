@@ -21,7 +21,7 @@ if (Meteor.isClient) {
                 },
                 default: function() {
                     Session.set('title', '');
-                    $('#sigma').html(Template.hello());
+            $('#sigma').html(Template.hello({example: true, text: 'Welcome to CorText Graphs'}));
                 },
                 index: function(path, clusterpath) {
                     Session.set('path', decodeURIComponent(path));
