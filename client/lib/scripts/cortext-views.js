@@ -13,6 +13,25 @@ if (Meteor.isClient) {
                     if (this.sigma !== null) {
                         this.sigma.emptyGraph();
                     }
+                    var livesidebar = Meteor.render(function() {
+                        return Template.nodepanel({
+                            node: Session.get('selected_node'),
+                            cluster: Session.get('selected_cluster')
+                        });
+                    });
+                    $('#sidebar').html(livesidebar);
+                },
+                updateSidebar: function(e) {
+                    var node = e.target.getNodes([e.content[0]]);
+                    if (node.length == 0) return;
+                    if (node[0].attr.level === 'high') {
+                        return;
+                    }
+                    var cluster = e.target.getNodes(
+                        ['node-high-' + node[0].attr.cluster_index]);
+                    if (cluster.length == 0) return;
+                    Session.set('selected_node', node[0]);
+                    Session.set('selected_cluster', cluster[0]);
                 },
                 /*
                  * initialize sigma instance and draw the graph
@@ -22,7 +41,7 @@ if (Meteor.isClient) {
                     // TODO add a spinner
                     this.sigma = window.sigma.init(
                         document.getElementById('sigma'));
-                    //this.sigma.bind('overnodes',showNodeInfo).bind('outnodes',hideNodeInfo).draw();
+                    this.sigma.bind('overnodes', this.updateSidebar).draw();
                     this.sigma.drawingProperties({
                         font: 'Arial',
                         edgeColor: 'source',
@@ -89,7 +108,7 @@ if (Meteor.isClient) {
                             object.nodes && _.keys(object.nodes).forEach(
                                 function(key) {
                                     var node = object.nodes[key];
-                                    node.id = 'node-high-' + key;
+                                    node.id = 'node-high-' + node.index;
                                     node.size = node.width;
                                     node.cluster = true;
                                     node.color = 'rgba(' +

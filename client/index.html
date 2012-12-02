@@ -63,12 +63,47 @@
 
 <template name="nodepanel">
 <div class="well sidebar-nav">
-    <ul class="nav nav-list">
+    {{#if node}}
+    <h3>{{ node.label }}
+        <button class="btn btn-primary well"> <i class="icon icon-pencil"></i></button>
+    </h3>
+    <div class="nav well">
+        <button class="btn well"> <i class="icon icon-pencil"></i> {{ cluster.label }}</button>
+    </div>
+    <ul class="nav nav-list well">
+        <li class="">
+            <a href="#">
+            Voisin A
+            </a>
+        </li>
+        <li class="">
+            <a href="#">
+            Voisin A
+            </a>
+        </li>
+        <li class="">
+            <a href="#">
+            Voisin A
+            </a>
+        </li>
+    </ul>
+    <ul class="nav nav-list well">
+        <li class="">
+            <a href="#">
+            Note A
+            </a>
+        </li>
+        <li class="">
+            <a href="#">
+            Note A
+            </a>
+        </li>
         <li class="">
             <a href="#">
             Note A
             </a>
         </li>
     </ul>
+    {{/if}}
 </div>
 </template>
