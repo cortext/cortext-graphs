@@ -1,5 +1,8 @@
 if (Meteor.isClient) {
     Meteor.startup(function() {
+        Session.set('selected_cluster', undefined);
+        Session.set('selected_neighbors', undefined);
+        Session.set('selected_node', undefined);
         if (window.CorTextGraphs === undefined) {
             window.CorTextGraphs = {};
         }
@@ -16,22 +19,34 @@ if (Meteor.isClient) {
                     var livesidebar = Meteor.render(function() {
                         return Template.nodepanel({
                             node: Session.get('selected_node'),
-                            cluster: Session.get('selected_cluster')
+                            cluster: Session.get('selected_cluster'),
+                            neighbors: Session.get('selected_neighbors')
                         });
                     });
                     $('#sidebar').html(livesidebar);
                 },
                 updateSidebar: function(e) {
-                    var node = e.target.getNodes([e.content[0]]);
-                    if (node.length == 0) return;
-                    if (node[0].attr.level === 'high') {
+                    var node = e.target.getNodes(e.content[0]);
+                    if (!node) return;
+                    if (node.attr.level === 'high') {
                         return;
                     }
                     var cluster = e.target.getNodes(
-                        ['node-high-' + node[0].attr.cluster_index]);
-                    if (cluster.length == 0) return;
-                    Session.set('selected_node', node[0]);
-                    Session.set('selected_cluster', cluster[0]);
+                        'node-high-' + node.attr.cluster_index);
+                    var neighbors = [];
+                    e.target.iterEdges(
+                        function(edge) {
+                            if (edge.source == node.id) {
+                                neighbors.push(
+                                    e.target.getNodes(edge.target));
+                            }
+                        }
+                    );
+                    if (cluster) {
+                        Session.set('selected_cluster', cluster);
+                    }
+                    Session.set('selected_neighbors', neighbors);
+                    Session.set('selected_node', node);
                 },
                 /*
                  * initialize sigma instance and draw the graph
