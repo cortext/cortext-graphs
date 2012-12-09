@@ -1,8 +1,5 @@
 if (Meteor.isClient) {
     Meteor.startup(function() {
-        Session.set('selected_cluster', undefined);
-        Session.set('selected_neighbors', undefined);
-        Session.set('selected_node', undefined);
         if (window.CorTextGraphs === undefined) {
             window.CorTextGraphs = {};
         }

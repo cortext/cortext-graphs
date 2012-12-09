@@ -67,11 +67,11 @@
     <h3>{{ node.label }}
         <button class="btn btn-primary well"> <i class="icon icon-pencil"></i></button>
     </h3>
-    {{#if cluster}}
+    
     <div class="nav well">
-        <button class="btn well"><i class="icon icon-pencil"></i> {{ cluster.label }}</button>
+        <span class='cluster'>{{#if cluster}}{{ cluster.label }}{{/if}}</span>
     </div>
-    {{/if}}
+    
     {{#if neighbors}}
     <ul class="nav nav-list well">
         {{#each neighbors}}
