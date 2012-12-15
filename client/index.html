@@ -14,12 +14,12 @@
         <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->
         <div class="container-fluid" id="navbar-fluid">
-          <a class="brand" href="#" id="go-home">
+          <a class="brand"  id="go-home">
               <img src='/'/>
           </a>
           <ul class="nav pull-right" id="navbar-right">
             <li>
-              <a href="#">
+              <a >
                 Login
               </a>
             </li>
@@ -76,26 +76,32 @@
     <ul class="nav nav-list well">
         {{#each neighbors}}
         <li class="">
-            <a href="#">{{this.label}}</a>
+            <a>{{this.label}}
+            <div class="btn-group">
+                <button class="btn little-btn" data-neighbor-action='switch'>
+                    <i class='icon-zoom-in'></i>
+                </button>
+                <button class="btn little-btn" data-neighbor-action='note'>
+                    <i class="icon-plus"></i>
+                </button>
+            </div>
+            </a>
         </li>
         {{/each}}
     </ul>
     {{/if}}
     <ul class="nav nav-list well">
+        {{#if notes}}
+        {{#each notes}}
         <li class="">
-            <a href="#">
+            <a >
             Note A
             </a>
         </li>
+        {{/each}}
+        {{/if}}
         <li class="">
-            <a href="#">
-            Note A
-            </a>
-        </li>
-        <li class="">
-            <a href="#">
-            Note A
-            </a>
+            <a ></a>
         </li>
     </ul>
     {{/if}}

@@ -56,6 +56,8 @@ if (Meteor.isClient) {
                     this.sigma.bind('overnodes', this.updateSidebar).draw();
                     this.sigma.drawingProperties({
                         font: 'Arial',
+                        labelSize: 'fixed',
+                        defaultLabelSize: 18,
                         edgeColor: 'source',
                         defaultEdgeType: 'curve'
                     }).graphProperties({
