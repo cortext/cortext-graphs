@@ -10,7 +10,7 @@
 <body>
     <div id="navbar" class="navbar navbar-fixed-top navbar-inverse">
       <div class="navbar-inner">
-        <!--[if lt IE 7]>
+        <!--[if lt IE 8]>
         <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->
         <div class="container-fluid" id="navbar-fluid">
@@ -65,11 +65,12 @@
 <div class="well sidebar-nav">
     {{#if node}}
     <div class="page-header">
-        <h3>{{ node.label }}&nbsp;<span class="badge badge-success">{{ node.attr.weight }}</span></h3>
+        <h3>{{ node.label }}&nbsp;<span class="badge badge-success" style='background-color:{{ cluster.color }}'>
+                {{ node.attr.weight }}</span></h3>
 
     </div>
     <div class="nav well">
-        <span class='cluster'>{{#if cluster}}{{ cluster.label }}{{/if}}</span>
+        <span class='cluster' style='background-color:{{ cluster.color }}'>{{#if cluster}}{{ cluster.label }}{{/if}}</span>
     </div>
     
     {{#if neighbors}}
