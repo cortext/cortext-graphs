@@ -31,7 +31,7 @@ if (Meteor.isClient) {
                     var neighbors = [];
                     window.CorTextGraphs.sigmaview.sigma.iterEdges(
                         function(edge) {
-                            if (edge.source == node.id) {
+                            if (edge.source == node.id || edge.target == node.id) {
                                 neighbors.push(
                                     window.CorTextGraphs.sigmaview.sigma.getNodes(edge.target));
                             }
