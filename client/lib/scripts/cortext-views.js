@@ -3,16 +3,12 @@ if (Meteor.isClient) {
         if (window.CorTextGraphs === undefined) {
             window.CorTextGraphs = {};
         }
-        if (window.CorTextGraphs.sigmaview === undefined) {
-            var SigmaView = Backbone.View.extend({
-                /*
-                 * Sigma instance
-                 */
-                sigma: null,
+        if (window.CorTextGraphs.sidebar === undefined) {
+            var Sidebar = Backbone.View.extend({
+                events: {
+                    "click .neighborswitch": "switchSidebar"
+                },
                 initialize: function() {
-                    if (this.sigma !== null) {
-                        this.sigma.emptyGraph();
-                    }
                     var livesidebar = Meteor.render(function() {
                         return Template.nodepanel({
                             node: Session.get('selected_node'),
@@ -20,7 +16,32 @@ if (Meteor.isClient) {
                             neighbors: Session.get('selected_neighbors')
                         });
                     });
-                    $('#sidebar').html(livesidebar);
+                    this.$el.html(livesidebar);
+                },
+                switchSidebar: function(event) {
+                    var node_id = $(event.currentTarget).attr('data-neighbor-switch');
+                    var node = window.CorTextGraphs.sigmaview.sigma.getNodes(node_id);
+                    if (!node) return;
+                    if (node.attr.level === 'high') {
+                        return;
+                    }
+                    // TODO highlight node.forceLabel = true;
+                    var cluster = window.CorTextGraphs.sigmaview.sigma.getNodes(
+                        'node-high-' + node.attr.cluster_index);
+                    var neighbors = [];
+                    window.CorTextGraphs.sigmaview.sigma.iterEdges(
+                        function(edge) {
+                            if (edge.source == node.id) {
+                                neighbors.push(
+                                    window.CorTextGraphs.sigmaview.sigma.getNodes(edge.target));
+                            }
+                        }
+                    );
+                    if (cluster) {
+                        Session.set('selected_cluster', cluster);
+                    }
+                    Session.set('selected_neighbors', neighbors);
+                    Session.set('selected_node', node);
                 },
                 updateSidebar: function(e) {
                     var node = e.target.getNodes(e.content[0]);
@@ -44,6 +65,22 @@ if (Meteor.isClient) {
                     }
                     Session.set('selected_neighbors', neighbors);
                     Session.set('selected_node', node);
+                }
+            });
+            window.CorTextGraphs.sidebar = new Sidebar({
+                el: document.getElementById('sidebar')
+            });
+        }
+        if (window.CorTextGraphs.sigmaview === undefined) {
+            var SigmaView = Backbone.View.extend({
+                /*
+                 * Sigma instance
+                 */
+                sigma: null,
+                initialize: function() {
+                    if (this.sigma !== null) {
+                        this.sigma.emptyGraph();
+                    }
                 },
                 /*
                  * initialize sigma instance and draw the graph
@@ -53,7 +90,9 @@ if (Meteor.isClient) {
                     // TODO add a spinner
                     this.sigma = window.sigma.init(
                         document.getElementById('sigma'));
-                    this.sigma.bind('overnodes', this.updateSidebar).draw();
+                    this.sigma.bind('overnodes',
+                                    window.CorTextGraphs.sidebar.updateSidebar
+                                   ).draw();
                     this.sigma.drawingProperties({
                         font: 'Arial',
                         labelSize: 'fixed',
@@ -141,7 +180,7 @@ if (Meteor.isClient) {
              * init view
              */
             window.CorTextGraphs.sigmaview = new SigmaView({
-                el: $('#sigma').get(0)
+                el: document.getElementById('sigma')
             });
         }
     });
