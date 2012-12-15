@@ -65,12 +65,15 @@
 <div class="well sidebar-nav">
     {{#if node}}
     <div class="page-header">
-        <h3>{{ node.label }}&nbsp;<span class="badge badge-success" style='background-color:{{ cluster.color }}'>
+        <h3>{{ node.label }}&nbsp;<span class="badge" style='background-color:{{ cluster.color }}'>
                 {{ node.attr.weight }}</span></h3>
 
     </div>
     <div class="nav well">
-        <span class='cluster' style='background-color:{{ cluster.color }}'>{{#if cluster}}{{ cluster.label }}{{/if}}</span>
+        <span class='cluster'>{{#if cluster}}{{ cluster.label }}{{/if}}
+        &nbsp;<span class="badge" style='background-color:{{ cluster.color }}'>
+        {{ cluster.attr.weight }}
+        </span></span>
     </div>
     
     {{#if neighbors}}
@@ -78,8 +81,12 @@
         {{#each neighbors}}
         <li class="">
             <a>{{this.label}}
+            &nbsp;<span class="badge" style='background-color:{{ this.color }}'>
+            {{ this.attr.weight }}
+        </span>
             <div class="btn-group">
-                <button class="btn little-btn neighborswitch" data-neighbor-switch='{{this.id}}'>
+                <button
+                    class="btn little-btn neighborswitch" data-neighbor-switch='{{this.id}}'>
                     <i class='icon-zoom-in'></i>
                 </button>
                 <button class="btn little-btn neighboraddnote">
