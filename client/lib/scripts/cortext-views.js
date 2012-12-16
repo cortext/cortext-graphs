@@ -6,34 +6,57 @@ if (Meteor.isClient) {
         if (window.CorTextGraphs.sidebar === undefined) {
             var Sidebar = Backbone.View.extend({
                 events: {
-                    "click .neighborswitch": "switchSidebar"
+                    "click .neighbor-switch": "switchSidebar"
                 },
                 initialize: function() {
-                    var livesidebar = Meteor.render(function() {
-                        return Template.nodepanel({
-                            node: Session.get('selected_node'),
-                            cluster: Session.get('selected_cluster'),
-                            neighbors: Session.get('selected_neighbors')
-                        });
+                },
+                render: function() {
+                    this.$el.html(Template.nodepanel({
+                        node: Session.get('selected_node'),
+                        cluster: Session.get('selected_cluster'),
+                        neighbors: Session.get('selected_neighbors')
+                    }));
+                    $('.cluster').editable({
+                        type: 'textarea',
+                        title: 'set a label for the cluster',
                     });
-                    this.$el.html(livesidebar);
+                    $('.new-note').editable({
+                        type: 'textarea',
+                        title: 'write a note about the current node',
+                        emptytext: 'new note'
+                    });
+                    $('.neighbor-add-note').click(function(event) {
+                        event.stopPropagation();
+                        $('.new-note').editable('toggle');
+                    });
                 },
                 switchSidebar: function(event) {
-                    var node_id = $(event.currentTarget).attr('data-neighbor-switch');
-                    var node = window.CorTextGraphs.sigmaview.sigma.getNodes(node_id);
+                    if (event !== null) {
+                        var node_id = $(event.currentTarget)
+                            .attr('data-neighbor-switch');
+                        var sigma = window.CorTextGraphs.sigmaview.sigma;
+                        var node = sigma.getNodes(node_id);
+                    } else {
+                        var sigma = arguments[2];
+                        var node = arguments[1];
+                    }
                     if (!node) return;
                     if (node.attr.level === 'high') {
                         return;
                     }
                     // TODO highlight node.forceLabel = true;
-                    var cluster = window.CorTextGraphs.sigmaview.sigma.getNodes(
+                    var cluster = sigma.getNodes(
                         'node-high-' + node.attr.cluster_index);
                     var neighbors = [];
-                    window.CorTextGraphs.sigmaview.sigma.iterEdges(
+                    sigma.iterEdges(
                         function(edge) {
                             if (edge.source == node.id) {
                                 neighbors.push(
-                                    window.CorTextGraphs.sigmaview.sigma.getNodes(edge.target));
+                                    sigma.getNodes(edge.target));
+                            }
+                            if (edge.target == node.id) {
+                                neighbors.push(
+                                    sigma.getNodes(edge.source));
                             }
                         }
                     );
@@ -42,29 +65,11 @@ if (Meteor.isClient) {
                     }
                     Session.set('selected_neighbors', neighbors);
                     Session.set('selected_node', node);
+                    window.CorTextGraphs.sidebar.render();
                 },
                 updateSidebar: function(e) {
                     var node = e.target.getNodes(e.content[0]);
-                    if (!node) return;
-                    if (node.attr.level === 'high') {
-                        return;
-                    }
-                    var cluster = e.target.getNodes(
-                        'node-high-' + node.attr.cluster_index);
-                    var neighbors = [];
-                    e.target.iterEdges(
-                        function(edge) {
-                            if (edge.source == node.id) {
-                                neighbors.push(
-                                    e.target.getNodes(edge.target));
-                            }
-                        }
-                    );
-                    if (cluster) {
-                        Session.set('selected_cluster', cluster);
-                    }
-                    Session.set('selected_neighbors', neighbors);
-                    Session.set('selected_node', node);
+                    window.CorTextGraphs.sidebar.switchSidebar(null, node, e.target);
                 }
             });
             window.CorTextGraphs.sidebar = new Sidebar({
