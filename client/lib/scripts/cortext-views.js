@@ -53,11 +53,13 @@ if (Meteor.isClient) {
                             if (i == pagesnumber + 1) {
                                 label = 'Next';
                             }
-                            $('.neighbor-pages').append(
+                            $('.neighbor-pages').show().append(
                                 '<li><a data-neighbor-page="' +
                                 label + '">' +
                                 label + '</a></li>');
                         }
+                    } else {
+                        $('.neighbor-pages').hide();
                     }
                     this.switchNeighborPage({
                         currentTarget: $('<a data-neighbor-page="1"></a>')[0]
