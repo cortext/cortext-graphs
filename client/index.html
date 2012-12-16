@@ -63,37 +63,39 @@
 
 <template name="nodepanel">
 <div class="well sidebar-nav">
-    {{#if node}}
+{{#if node}}
     <div class="page-header">
-        <h3>{{ node.label }}&nbsp;<span class="badge" style='background-color:{{ cluster.color }}'>
-                {{ node.attr.weight }}</span></h3>
-
+        <h3>{{ node.label }}
+            <span class="badge" style='background-color:{{ cluster.color }}'>
+                {{ node.attr.weight }}
+            </span>
+        </h3>
     </div>
     <div class="nav well">
-        <span class='cluster'>{{#if cluster}}{{ cluster.label }}{{/if}}
-        &nbsp;<span class="badge" style='background-color:{{ cluster.color }}'>
+        <span class='cluster'>{{#if cluster}}{{ cluster.label }}{{/if}}</span>
+        <span class="badge" style='background-color:{{ cluster.color }}'>
         {{ cluster.attr.weight }}
-        </span></span>
+        </span>
     </div>
     
     {{#if neighbors}}
     <ul class="nav nav-list well">
         {{#each neighbors}}
-        <li class="">
+        <li>
             <a>{{this.label}}
-            &nbsp;<span class="badge" style='background-color:{{ this.color }}'>
-            {{ this.attr.weight }}
-        </span>
-            <div class="btn-group">
-                <button
-                    class="btn little-btn neighborswitch" data-neighbor-switch='{{this.id}}'>
-                    <i class='icon-zoom-in'></i>
-                </button>
-                <button class="btn little-btn neighboraddnote">
-                    <i class="icon-plus"></i>
-                </button>
-            </div>
-            </a>
+                <span class="badge" style='background-color:{{ this.color }}'>
+                    {{ this.attr.weight }}
+                </span>
+                <div class="btn-group">
+                    <button
+                        class="btn little-btn neighbor-switch" data-neighbor-switch='{{this.id}}'>
+                        <i class='icon-zoom-in'></i>
+                    </button>
+                    <button class="btn little-btn neighbor-add-note" data-neighbor-add-note-source='{{this.id}}' data-neighbor-add-note-target='{{node.id}}'>
+                        <i class="icon-plus"></i>
+                    </button>
+                </div>
+                </a>
         </li>
         {{/each}}
     </ul>
@@ -101,17 +103,17 @@
     <ul class="nav nav-list well">
         {{#if notes}}
         {{#each notes}}
-        <li class="">
+        <li>
             <a >
             Note A
             </a>
         </li>
         {{/each}}
         {{/if}}
-        <li class="">
-            <a ></a>
+        <li>
+            <a class='new-note'></a>
         </li>
     </ul>
-    {{/if}}
+{{/if}}
 </div>
 </template>
