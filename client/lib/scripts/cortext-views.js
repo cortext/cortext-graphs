@@ -6,9 +6,35 @@ if (Meteor.isClient) {
         if (window.CorTextGraphs.sidebar === undefined) {
             var Sidebar = Backbone.View.extend({
                 events: {
-                    "click .neighbor-switch": "switchSidebar"
+                    'click .neighbor-switch': 'switchSidebar',
+                    'click [data-neighbor-page]': 'switchNeighborPage'
                 },
                 initialize: function() {
+                },
+                switchNeighborPage: function(e) {
+                    var page = $(e.currentTarget).attr('data-neighbor-page');
+                    if (page == 'Next') {
+                        var num = parseInt($('[data-neighbor-page].active').attr('data-neighbor-page')) + 1;
+                    } else if (page == 'Prev') {
+                        var num = parseInt($('[data-neighbor-page].active').attr('data-neighbor-page')) - 1;
+                    } else {
+                        var num = parseInt(page, 10);
+                    }
+                    if (num > Math.ceil(Session.get('selected_neighbors').length / 5) ||
+                        num < 1) {
+                        return;
+                    }
+                    $('.neighbor').each(function(i) {
+                        if (i + 1 <= num * 5 && i + 1 >= (num * 5) - 4) {
+                            $(this).removeClass('hide');
+                        } else {
+                            $(this).addClass('hide');
+                        }
+                    });
+                    $('[data-neighbor-page]').removeClass('active');
+                    $('[data-neighbor-page]').parent().removeClass('active');
+                    $('[data-neighbor-page=' + num + ']').addClass('active');
+                    $('[data-neighbor-page=' + num + ']').parent().addClass('active');
                 },
                 render: function() {
                     this.$el.html(Template.nodepanel({
@@ -16,9 +42,29 @@ if (Meteor.isClient) {
                         cluster: Session.get('selected_cluster'),
                         neighbors: Session.get('selected_neighbors')
                     }));
+                    var pagesnumber = Math.ceil(
+                        Session.get('selected_neighbors').length / 5);
+                    if (pagesnumber > 1) {
+                        for (var i = 0; i <= pagesnumber + 1; i++) {
+                            var label = i;
+                            if (i == 0) {
+                                label = 'Prev';
+                            }
+                            if (i == pagesnumber + 1) {
+                                label = 'Next';
+                            }
+                            $('.neighbor-pages').append(
+                                '<li><a data-neighbor-page="' +
+                                label + '">' +
+                                label + '</a></li>');
+                        }
+                    }
+                    this.switchNeighborPage({
+                        currentTarget: $('<a data-neighbor-page="1"></a>')[0]
+                    });
                     $('.cluster').editable({
                         type: 'textarea',
-                        title: 'set a label for the cluster',
+                        title: 'set a label for the cluster'
                     });
                     $('.new-note').editable({
                         type: 'textarea',
@@ -63,7 +109,10 @@ if (Meteor.isClient) {
                     if (cluster) {
                         Session.set('selected_cluster', cluster);
                     }
-                    Session.set('selected_neighbors', neighbors);
+                    Session.set('selected_neighbors',
+                                _.uniq(neighbors, false, function(node) {
+                                    return node.id;
+                    }));
                     Session.set('selected_node', node);
                     window.CorTextGraphs.sidebar.render();
                 },

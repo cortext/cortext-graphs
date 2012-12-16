@@ -79,9 +79,9 @@
     </div>
     
     {{#if neighbors}}
-    <ul class="nav nav-list well">
+    <ul class="nav nav-list well neighbor-list">
         {{#each neighbors}}
-        <li>
+        <li class='hide neighbor'>
             <a>{{this.label}}
                 <span class="badge" style='background-color:{{ this.color }}'>
                     {{ this.attr.weight }}
@@ -95,21 +95,29 @@
                         <i class="icon-plus"></i>
                     </button>
                 </div>
-                </a>
+            </a>
         </li>
         {{/each}}
+        <div class="pagination">
+            <ul class='neighbor-pages'></ul>
+        </div>
     </ul>
     {{/if}}
-    <ul class="nav nav-list well">
-        {{#if notes}}
+    {{#if notes}}
+    <ul class="nav nav-list well note-list">
         {{#each notes}}
-        <li>
+        <li class='hide'>
             <a >
             Note A
             </a>
         </li>
         {{/each}}
-        {{/if}}
+        <div class="pagination">
+            <ul class='note-pages'></ul>
+        </div>
+    </ul>
+    {{/if}}
+    <ul class="nav nav-list well">
         <li>
             <a class='new-note'></a>
         </li>
