@@ -37,9 +37,10 @@ if (Meteor.isClient) {
                     $('[data-neighbor-page=' + num + ']').parent().addClass('active');
                 },
                 render: function() {
+                    var cluster = Session.get('selected_cluster');
                     this.$el.html(Template.nodepanel({
                         node: Session.get('selected_node'),
-                        cluster: Session.get('selected_cluster'),
+                        cluster: cluster,
                         neighbors: Session.get('selected_neighbors')
                     }));
                     var pagesnumber = Math.ceil(
@@ -64,9 +65,39 @@ if (Meteor.isClient) {
                     this.switchNeighborPage({
                         currentTarget: $('<a data-neighbor-page="1"></a>')[0]
                     });
+                    var clusternote = window.CorTextGraphs.Notes.find({
+                        type: 'cluster',
+                        graph: Session.get('title')
+                        /* TODO created_by */ /* TODO get last created_at */
+                    }, {
+                        sort: {
+                            created_at: -1
+                        },
+                        limit: 1
+                    })[0];
+                    if (clusternote === undefined) {
+                        var newid = window.CorTextGraphs.Notes.insert({
+                            created_at: Date.now(),
+                            created_by: Session.get('user').username,
+                            text: Session.get('selected_cluster').label,
+                            type: 'cluster',
+                            format: 'raw',
+                            graph: Session.get('title'),
+                            source: cluster.id
+                        });
+                        var clusternote = window.CorTextGraphs.Notes.findOne({
+                            _id: newid
+                        });
+
+                    }
                     $('.cluster').editable({
                         type: 'textarea',
-                        title: 'set a label for the cluster'
+                        title: 'set a label for the cluster',
+                        value: clusternote.text,
+                        pk: clusternote._id,
+                        url: function(editable, params) {
+                            console.log(params);
+                        }
                     });
                     $('.new-note').editable({
                         type: 'textarea',

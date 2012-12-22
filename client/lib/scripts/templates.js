@@ -3,5 +3,8 @@ if (Meteor.isClient) {
         Session.set('selected_cluster', undefined);
         Session.set('selected_neighbors', undefined);
         Session.set('selected_node', undefined);
+        Session.set('user', {
+            username: 'testuser'
+        });
     });
 }
