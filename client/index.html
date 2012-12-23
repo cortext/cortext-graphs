@@ -62,51 +62,55 @@
 </template>
 
 <template name="nodepanel">
-<div class="well sidebar-nav">
-{{#if node}}
-    <div class="page-header">
-        <h3>{{ node.label }}
+    <div class="sidebar-nav">
+    {{#if node}}
+        <h3 class='page-header'>{{ node.label }}
             <span class="badge" style='background-color:{{ cluster.color }}'>
                 {{ node.attr.weight }}
             </span>
         </h3>
-    </div>
-    {{#if cluster}}<div class="nav well">
-    <span class='cluster'></span>
-        <span class="badge" style='background-color:{{ cluster.color }}'>
-        {{ cluster.attr.weight }}
-        </span>
-    </div>{{/if}}
-    
-    {{#if neighbors}}
-    <ul class="nav nav-list well neighbor-list">
-        {{#each neighbors}}
-        <li class='hide neighbor'>
-            <a>{{this.label}}
-                <span class="badge" style='background-color:{{ this.color }}'>
-                    {{ this.attr.weight }}
-                </span>
-                <div class="btn-group">
-                    <button
-                        class="btn little-btn neighbor-switch" data-neighbor-switch='{{this.id}}'>
-                        <i class='icon-zoom-in'></i>
-                    </button>
-                    <button class="btn little-btn neighbor-add-note" data-neighbor-add-note-target='{{this.id}}' data-neighbor-add-note-source='{{node.id}}'>
-                        <i class="icon-plus"></i>
-                    </button>
-                </div>
-            </a>
-        </li>
-        {{/each}}
-        <div class="pagination">
-            <ul class='neighbor-pages'></ul>
+        {{#if cluster}}<div class="nav well">
+        <span class='cluster'></span>
+            <span class="badge" style='background-color:{{ cluster.color }}'>
+            {{ cluster.attr.weight }}
+            </span>
+        </div>{{/if}}
+        
+        {{#if neighbors}}
+        <ul class="nav nav-list well neighbor-list">
+            {{#each neighbors}}
+            <li class='hide neighbor'>
+                <a>{{this.label}}
+                    <span class="badge" style='background-color:{{ this.color }}'>
+                        {{ this.attr.weight }}
+                    </span>
+                    <div class="btn-group">
+                        <button
+                            class="btn little-btn neighbor-switch" data-neighbor-switch='{{this.id}}'>
+                            <i class='icon-zoom-in'></i>
+                        </button>
+                        <button class="btn little-btn neighbor-add-note" data-neighbor-add-note-target='{{this.id}}' data-neighbor-add-note-source='{{node.id}}'>
+                            <i class="icon-plus"></i>
+                        </button>
+                    </div>
+                </a>
+            </li>
+            {{/each}}
+            <div class="pagination">
+                <ul class='neighbor-pages'></ul>
+            </div>
+        </ul>
+        {{/if}}
+        <div id='notelist'>
         </div>
-    </ul>
     {{/if}}
+    </div>
+</template>
+<template name='notelist'>
     {{#if notes}}
     <ul class="nav nav-list well note-list">
         {{#each notes}}
-        <li class=''>
+        <li class='hide note'>
             <a title='by {{this.created_by}}'>
                 {{ this.text }}
             </a>
@@ -122,6 +126,4 @@
             <a class='new-note'></a>
         </li>
     </ul>
-{{/if}}
-</div>
 </template>
