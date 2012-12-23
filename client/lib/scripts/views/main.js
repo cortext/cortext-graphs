@@ -3,14 +3,117 @@ if (Meteor.isClient) {
         if (window.CorTextGraphs === undefined) {
             window.CorTextGraphs = {};
         }
+
+        if (window.CorTextGraphs.notelist === undefined) {
+            var NoteList = Backbone.View.extend({
+                initialize: function() {},
+                events: {
+                    'click [data-note-page]': 'switchPage'
+                },
+                switchPage: function(e) {
+                    var page = $(e.currentTarget).attr('data-note-page');
+                    if (page == 'Next') {
+                        var num = parseInt($('[data-note-page].active').attr('data-note-page')) + 1;
+                    } else if (page == 'Prev') {
+                        var num = parseInt($('[data-note-page].active').attr('data-note-page')) - 1;
+                    } else {
+                        var num = parseInt(page, 10);
+                    }
+                    if (num > Math.ceil($('#notelist').data('notes').length / 5) ||
+                        num < 1) {
+                        return;
+                    }
+                    $('.note').each(function(i) {
+                        if (i + 1 <= num * 5 && i + 1 >= (num * 5) - 4) {
+                            $(this).removeClass('hide');
+                        } else {
+                            $(this).addClass('hide');
+                        }
+                    });
+                    $('[data-note-page]').removeClass('active');
+                    $('[data-note-page]').parent().removeClass('active');
+                    $('[data-note-page=' + num + ']').addClass('active');
+                    $('[data-note-page=' + num + ']').parent().addClass('active');
+                },
+                render: function() {
+                    var notes = window.CorTextGraphs.Notes.find({
+                            graph: Session.get('title'),
+                            source: Session.get('selected_node').id
+                        }).fetch();
+                    $('#notelist').data('notes', notes);
+                    $('#notelist').html(Template.notelist({
+                        notes: notes
+                    }));
+                    var pagesnumber = Math.ceil(notes.length / 5);
+                    if (pagesnumber > 1) {
+                        for (var i = 0; i <= pagesnumber + 1; i++) {
+                            var label = i;
+                            if (i == 0) {
+                                label = 'Prev';
+                            }
+                            if (i == pagesnumber + 1) {
+                                label = 'Next';
+                            }
+                            $('.note-pages').show().append(
+                                '<li><a data-note-page="' +
+                                label + '">' +
+                                label + '</a></li>');
+                        }
+                    } else {
+                        $('.note-pages').hide();
+                    }
+                    this.switchPage({
+                        currentTarget: $('<a data-note-page="1"></a>')[0]
+                    });
+                    var that = this;
+                    $('.new-note').editable({
+                        type: 'textarea',
+                        title: 'write a note about the current node',
+                        emptytext: 'new note',
+                        validate: function(value) {
+                            if ($.trim(value) == '') {
+                                return 'field can not be empty';
+                            }
+                        },
+                        source: Session.get('selected_node').id,
+                        pk: Session.get('selected_node').id,
+                        url: function(params) {
+                            window.CorTextGraphs.Notes.insert({
+                                created_at: Date.now(),
+                                created_by: Session.get('user').username,
+                                text: params.value,
+                                type: $(this).data('target') ? 'edge' : 'node',
+                                format: 'raw',
+                                graph: Session.get('title'),
+                                source: params.pk,
+                                target: $(this).data('target')
+                            });
+                        }
+                    }).on('save', function(e, params) {
+                        that.render();
+                    });
+                    $('.neighbor-add-note').click(function(event) {
+                        event.stopPropagation();
+                        $('.new-note').data('target',
+                                            $(event.currentTarget).attr(
+                                                'data-neighbor-add-note-target'));
+                        $('.new-note').editable('toggle');
+                    });
+                }
+            });
+            window.CorTextGraphs.notelist = new NoteList({
+            });
+        }
         if (window.CorTextGraphs.sidebar === undefined) {
             var Sidebar = Backbone.View.extend({
                 events: {
                     'click .neighbor-switch': 'switchSidebar',
                     'click [data-neighbor-page]': 'switchNeighborPage'
                 },
-                initialize: function() {
-                },
+                initialize: function() {},
+                /*
+                 * TODO refactor with switchPage()
+                 */
                 switchNeighborPage: function(e) {
                     var page = $(e.currentTarget).attr('data-neighbor-page');
                     if (page == 'Next') {
@@ -42,10 +145,6 @@ if (Meteor.isClient) {
                         node: Session.get('selected_node'),
                         cluster: cluster,
                         neighbors: Session.get('selected_neighbors'),
-                        notes: window.CorTextGraphs.Notes.find({
-                            graph: Session.get('title'),
-                            source: Session.get('selected_node').id
-                        }).fetch()
                     }));
                     var pagesnumber = Math.ceil(
                         Session.get('selected_neighbors').length / 5);
@@ -94,7 +193,6 @@ if (Meteor.isClient) {
                         var clusternote = window.CorTextGraphs.Notes.findOne({
                             _id: newid
                         });
-
                     }
                     $('.cluster').editable({
                         type: 'textarea',
@@ -113,39 +211,14 @@ if (Meteor.isClient) {
                         }
                     }).on('save', function(e, params) {
                         cluster.label = params.newValue;
+                        //FIXME do not work
                         window.CorTextGraphs.sigmaview.sigma.refresh();
                     });
-                    $('.new-note').editable({
-                        type: 'textarea',
-                        title: 'write a note about the current node',
-                        emptytext: 'new note',
-                        validate: function(value) {
-                            if ($.trim(value) == '') {
-                                return 'field can not be empty';
-                            }
-                        },
-                        source: Session.get('selected_node').id,
-                        pk: Session.get('selected_node').id,
-                        url: function(params) {
-                            window.CorTextGraphs.Notes.insert({
-                                created_at: Date.now(),
-                                created_by: Session.get('user').username,
-                                text: params.value,
-                                type: $(this).data('target') ? 'edge' : 'node',
-                                format: 'raw',
-                                graph: Session.get('title'),
-                                source: params.pk,
-                                target: $(this).data('target')
-                            });
-                        }
-                    });
-                    $('.neighbor-add-note').click(function(event) {
-                        event.stopPropagation();
-                        $('.new-note').data('target',
-                                            $(event.currentTarget).attr('data-neighbor-add-note-target'));
-                        $('.new-note').editable('toggle');
-                    });
+                    window.CorTextGraphs.notelist.render();
                 },
+                /*
+                 * Common sidebar update function
+                 */
                 switchSidebar: function(event) {
                     if (event !== null) {
                         var node_id = $(event.currentTarget)
@@ -187,6 +260,9 @@ if (Meteor.isClient) {
                     Session.set('selected_node', node);
                     window.CorTextGraphs.sidebar.render();
                 },
+                /*
+                 * Callback on node hover by sigma.js
+                 */
                 updateSidebar: function(e) {
                     var node = e.target.getNodes(e.content[0]);
                     window.CorTextGraphs.sidebar.switchSidebar(null, node, e.target);
