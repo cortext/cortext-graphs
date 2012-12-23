@@ -18,9 +18,6 @@ if (Meteor.isClient) {
         if (window.CorTextGraphs === undefined) {
             window.CorTextGraphs = {};
         }
-        // Publish complete set of graphs to all clients.
-        //Meteor.autosubscribe(function() {
-        //});
 
         window.CorTextGraphs.Notes = new Meteor.Collection('notes');
     });

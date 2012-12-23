@@ -91,7 +91,7 @@
                         class="btn little-btn neighbor-switch" data-neighbor-switch='{{this.id}}'>
                         <i class='icon-zoom-in'></i>
                     </button>
-                    <button class="btn little-btn neighbor-add-note" data-neighbor-add-note-source='{{this.id}}' data-neighbor-add-note-target='{{node.id}}'>
+                    <button class="btn little-btn neighbor-add-note" data-neighbor-add-note-target='{{this.id}}' data-neighbor-add-note-source='{{node.id}}'>
                         <i class="icon-plus"></i>
                     </button>
                 </div>
@@ -106,9 +106,9 @@
     {{#if notes}}
     <ul class="nav nav-list well note-list">
         {{#each notes}}
-        <li class='hide'>
-            <a >
-            Note A
+        <li class=''>
+            <a title='by {{this.created_by}}'>
+                {{ this.text }}
             </a>
         </li>
         {{/each}}

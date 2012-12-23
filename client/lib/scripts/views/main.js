@@ -41,7 +41,11 @@ if (Meteor.isClient) {
                     this.$el.html(Template.nodepanel({
                         node: Session.get('selected_node'),
                         cluster: cluster,
-                        neighbors: Session.get('selected_neighbors')
+                        neighbors: Session.get('selected_neighbors'),
+                        notes: window.CorTextGraphs.Notes.find({
+                            graph: Session.get('title'),
+                            source: Session.get('selected_node').id
+                        }).fetch()
                     }));
                     var pagesnumber = Math.ceil(
                         Session.get('selected_neighbors').length / 5);
@@ -114,10 +118,31 @@ if (Meteor.isClient) {
                     $('.new-note').editable({
                         type: 'textarea',
                         title: 'write a note about the current node',
-                        emptytext: 'new note'
+                        emptytext: 'new note',
+                        validate: function(value) {
+                            if ($.trim(value) == '') {
+                                return 'field can not be empty';
+                            }
+                        },
+                        source: Session.get('selected_node').id,
+                        pk: Session.get('selected_node').id,
+                        url: function(params) {
+                            window.CorTextGraphs.Notes.insert({
+                                created_at: Date.now(),
+                                created_by: Session.get('user').username,
+                                text: params.value,
+                                type: $(this).data('target') ? 'edge' : 'node',
+                                format: 'raw',
+                                graph: Session.get('title'),
+                                source: params.pk,
+                                target: $(this).data('target')
+                            });
+                        }
                     });
                     $('.neighbor-add-note').click(function(event) {
                         event.stopPropagation();
+                        $('.new-note').data('target',
+                                            $(event.currentTarget).attr('data-neighbor-add-note-target'));
                         $('.new-note').editable('toggle');
                     });
                 },
