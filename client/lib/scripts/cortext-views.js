@@ -65,16 +65,16 @@ if (Meteor.isClient) {
                     this.switchNeighborPage({
                         currentTarget: $('<a data-neighbor-page="1"></a>')[0]
                     });
-                    var clusternote = window.CorTextGraphs.Notes.find({
+                    var clusternote = window.CorTextGraphs.Notes.findOne({
                         type: 'cluster',
-                        graph: Session.get('title')
-                        /* TODO created_by */ /* TODO get last created_at */
+                        graph: Session.get('title'),
+                        created_by: Session.get('user').username
                     }, {
                         sort: {
                             created_at: -1
                         },
                         limit: 1
-                    })[0];
+                    });
                     if (clusternote === undefined) {
                         var newid = window.CorTextGraphs.Notes.insert({
                             created_at: Date.now(),
@@ -95,8 +95,15 @@ if (Meteor.isClient) {
                         title: 'set a label for the cluster',
                         value: clusternote.text,
                         pk: clusternote._id,
-                        url: function(editable, params) {
-                            console.log(params);
+                        /*validate: function(value) {
+                            if ($.trim(value) == '') {
+                                return 'This field is required';
+                            }
+                        },*/
+                        url: function(params) {
+                            window.CorTextGraphs.Notes.update(
+                                params.pk,
+                                {$set: { text: params.value }});
                         }
                     });
                     $('.new-note').editable({

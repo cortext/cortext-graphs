@@ -71,12 +71,12 @@
             </span>
         </h3>
     </div>
-    <div class="nav well">
-        <span class='cluster'>{{#if cluster}}{{ cluster.label }}{{/if}}</span>
+    {{#if cluster}}<div class="nav well">
+    <span class='cluster'></span>
         <span class="badge" style='background-color:{{ cluster.color }}'>
         {{ cluster.attr.weight }}
         </span>
-    </div>
+    </div>{{/if}}
     
     {{#if neighbors}}
     <ul class="nav nav-list well neighbor-list">
