@@ -1,8 +1,6 @@
 if (Meteor.isClient) {
     Meteor.startup(function() {
-        if (!Session.get('title')) {
-            Session.set('title', '');
-        }
+
         var rightlist = document.getElementById('navbar-right');
         var navbar = document.getElementById('navbar-fluid');
         navbar.insertBefore( Meteor.render(function () {
@@ -10,9 +8,7 @@ if (Meteor.isClient) {
                 Session.get('title')
                 +'</small></a>';
         }), rightlist );
-        if (window.CorTextGraphs === undefined) {
-            window.CorTextGraphs = {};
-        }
+
         if (window.CorTextGraphs.MainRouter === undefined) {
             window.CorTextGraphs.MainRouter = Backbone.Router.extend({
                 routes: {

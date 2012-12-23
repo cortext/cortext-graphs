@@ -1,5 +1,8 @@
 if (Meteor.isClient) {
     Meteor.startup(function() {
+        if (!Session.get('title')) {
+            Session.set('title', '');
+        }
         /* Notes = {
          *   text: String,
          *   format: String, 'Markdown' | 'Raw',
@@ -15,11 +18,10 @@ if (Meteor.isClient) {
         if (window.CorTextGraphs === undefined) {
             window.CorTextGraphs = {};
         }
-        window.CorTextGraphs.Notes = new Meteor.Collection('notes');
         // Publish complete set of graphs to all clients.
-        Meteor.subscribe('notes', function() {
-            return window.CorTextGraphs.Notes.find();
-        });
-    });
+        //Meteor.autosubscribe(function() {
+        //});
 
+        window.CorTextGraphs.Notes = new Meteor.Collection('notes');
+    });
 }

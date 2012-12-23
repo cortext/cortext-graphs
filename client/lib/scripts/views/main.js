@@ -66,9 +66,11 @@ if (Meteor.isClient) {
                         currentTarget: $('<a data-neighbor-page="1"></a>')[0]
                     });
                     var clusternote = window.CorTextGraphs.Notes.findOne({
-                        type: 'cluster',
-                        graph: Session.get('title'),
+                        source: cluster.id,
+                        graph: Session.get('title')
+                        /* FIXME per-user note ?
                         created_by: Session.get('user').username
+                        */
                     }, {
                         sort: {
                             created_at: -1
@@ -95,16 +97,19 @@ if (Meteor.isClient) {
                         title: 'set a label for the cluster',
                         value: clusternote.text,
                         pk: clusternote._id,
-                        /*validate: function(value) {
+                        validate: function(value) {
                             if ($.trim(value) == '') {
-                                return 'This field is required';
+                                return 'field can not be empty';
                             }
-                        },*/
+                        },
                         url: function(params) {
                             window.CorTextGraphs.Notes.update(
                                 params.pk,
                                 {$set: { text: params.value }});
                         }
+                    }).on('save', function(e, params) {
+                        cluster.label = params.newValue;
+                        window.CorTextGraphs.sigmaview.sigma.refresh();
                     });
                     $('.new-note').editable({
                         type: 'textarea',
@@ -130,6 +135,7 @@ if (Meteor.isClient) {
                     if (node.attr.level === 'high') {
                         return;
                     }
+                    // FIXME center graph view to this node ? sigma.goTo(node.x, node.x);
                     // TODO highlight node.forceLabel = true;
                     var cluster = sigma.getNodes(
                         'node-high-' + node.attr.cluster_index);
@@ -201,8 +207,11 @@ if (Meteor.isClient) {
                     $.get(Session.get('path'),
                         function(data, textStatus) {
                             Session.set('title', data.meta.title);
-                            that.sigma.emptyGraph();
-                            that.pushClusters(data);
+                            Meteor.subscribe('notes', data.meta.title,
+                                function() {
+                                    that.sigma.emptyGraph();
+                                    that.pushClusters(data);
+                            });
                         });
                 },
                 /*
@@ -256,6 +265,19 @@ if (Meteor.isClient) {
                                 function(key) {
                                     var node = object.nodes[key];
                                     node.id = 'node-high-' + node.index;
+                                    var clusternote = window.CorTextGraphs.Notes.findOne({
+                                        source: node.id
+                                        /* FIXME per-user note ?
+                                        created_by: Session.get('user').username
+                                        */
+                                    }, {
+                                        sort: {
+                                            created_at: -1
+                                        }
+                                    });
+                                    if (clusternote !== undefined) {
+                                        node.label = clusternote.text;
+                                    }
                                     node.size = node.width;
                                     node.cluster = true;
                                     node.color = 'rgba(' +
