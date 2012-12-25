@@ -36,10 +36,15 @@ if (Meteor.isClient) {
                     $('[data-note-page=' + num + ']').parent().addClass('active');
                 },
                 render: function() {
-                    var notes = window.CorTextGraphs.Notes.find({
+                    var fromnotes = window.CorTextGraphs.Notes.find({
                             graph: Session.get('title'),
                             source: Session.get('selected_node').id
                         }).fetch();
+                    var tonotes = window.CorTextGraphs.Notes.find({
+                            graph: Session.get('title'),
+                            target: Session.get('selected_node').id
+                        }).fetch();
+                    var notes = _.union(fromnotes, tonotes);
                     this.$el.data('notes', notes);
                     this.$el.html(Template.notelist({
                         notes: notes
@@ -91,13 +96,6 @@ if (Meteor.isClient) {
                         }
                     }).on('save', function(e, params) {
                         that.render();
-                    });
-                    $('.neighbor-add-note').click(function(event) {
-                        event.stopPropagation();
-                        $('.new-note').data('target',
-                                            $(event.currentTarget).attr(
-                                                'data-neighbor-add-note-target'));
-                        $('.new-note').editable('toggle');
                     });
                 }
             });
@@ -216,6 +214,14 @@ if (Meteor.isClient) {
                         window.CorTextGraphs.sigmaview.sigma.refresh();
                     });
                     window.CorTextGraphs.notelist.render();
+                    $('.neighbor-add-note').click(function(event) {
+                        event.stopPropagation();
+                        $('.new-note').data('target',
+                                            $(event.currentTarget).attr(
+                                                'data-neighbor-add-note-target'));
+                        $('.new-note').editable('toggle');
+                    });
+
                 },
                 /*
                  * Common sidebar update function
