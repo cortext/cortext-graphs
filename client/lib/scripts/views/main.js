@@ -36,14 +36,26 @@ if (Meteor.isClient) {
                     $('[data-note-page=' + num + ']').parent().addClass('active');
                 },
                 render: function() {
-                    var fromnotes = window.CorTextGraphs.Notes.find({
+                    var fromnotes = _.map(window.CorTextGraphs.Notes.find({
                             graph: Session.get('title'),
                             source: Session.get('selected_node').id
-                        }).fetch();
-                    var tonotes = window.CorTextGraphs.Notes.find({
+                        }).fetch(), function(note) {
+                            if (note.target !== null) {
+                                note.icon = 'icon-forward';
+                                var node = window.CorTextGraphs.sigmaview.sigma.getNodes(note.target);
+                                note.target = node.label;
+                            }
+                            return note;
+                        });
+                    var tonotes = _.map(window.CorTextGraphs.Notes.find({
                             graph: Session.get('title'),
                             target: Session.get('selected_node').id
-                        }).fetch();
+                        }).fetch(), function(note) {
+                            note.icon = 'icon-backward';
+                            var node = window.CorTextGraphs.sigmaview.sigma.getNodes(note.source);
+                            note.target = node.label;
+                            return note;
+                        });
                     var notes = _.union(fromnotes, tonotes);
                     this.$el.data('notes', notes);
                     this.$el.html(Template.notelist({
@@ -91,7 +103,7 @@ if (Meteor.isClient) {
                                 format: 'raw',
                                 graph: Session.get('title'),
                                 source: params.pk,
-                                target: $(this).data('target')
+                                target: $(this).data('target') || null
                             });
                         }
                     }).on('save', function(e, params) {
@@ -143,7 +155,7 @@ if (Meteor.isClient) {
                     this.$el.html(Template.nodepanel({
                         node: Session.get('selected_node'),
                         cluster: cluster,
-                        neighbors: Session.get('selected_neighbors'),
+                        neighbors: Session.get('selected_neighbors')
                     }));
                     var pagesnumber = Math.ceil(
                         Session.get('selected_neighbors').length / 5);
@@ -240,7 +252,8 @@ if (Meteor.isClient) {
                     if (node.attr.level === 'high') {
                         return;
                     }
-                    // FIXME center graph view to this node ? sigma.goTo(node.x, node.x);
+                    // FIXME center graph view to this node ?
+                    // sigma.goTo(node.x, node.x);
                     // TODO highlight node.forceLabel = true;
                     var cluster = sigma.getNodes(
                         'node-high-' + node.attr.cluster_index);
