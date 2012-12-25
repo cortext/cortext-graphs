@@ -19,7 +19,7 @@ if (Meteor.isClient) {
                     } else {
                         var num = parseInt(page, 10);
                     }
-                    if (num > Math.ceil($('#notelist').data('notes').length / 5) ||
+                    if (num > Math.ceil(window.CorTextGraphs.notelist.$el.data('notes').length / 5) ||
                         num < 1) {
                         return;
                     }
@@ -40,8 +40,8 @@ if (Meteor.isClient) {
                             graph: Session.get('title'),
                             source: Session.get('selected_node').id
                         }).fetch();
-                    $('#notelist').data('notes', notes);
-                    $('#notelist').html(Template.notelist({
+                    this.$el.data('notes', notes);
+                    this.$el.html(Template.notelist({
                         notes: notes
                     }));
                     var pagesnumber = Math.ceil(notes.length / 5);
@@ -102,6 +102,7 @@ if (Meteor.isClient) {
                 }
             });
             window.CorTextGraphs.notelist = new NoteList({
+                el: document.getElementById('notelist')
             });
         }
         if (window.CorTextGraphs.sidebar === undefined) {
@@ -269,7 +270,7 @@ if (Meteor.isClient) {
                 }
             });
             window.CorTextGraphs.sidebar = new Sidebar({
-                el: document.getElementById('sidebar')
+                el: document.getElementById('currentnode')
             });
         }
         if (window.CorTextGraphs.sigmaview === undefined) {

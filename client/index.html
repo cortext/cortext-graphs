@@ -32,6 +32,12 @@
             <div id="sigma" class="span8">
             </div>
             <div id="sidebar" class="span4">
+                <div class="sidebar-nav">
+                    <div id='currentnode'>
+                    </div>
+                    <div id='notelist'>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -62,7 +68,6 @@
 </template>
 
 <template name="nodepanel">
-    <div class="sidebar-nav">
     {{#if node}}
         <h3 class='page-header'>{{ node.label }}
             <span class="badge" style='background-color:{{ cluster.color }}'>
@@ -101,10 +106,7 @@
             </div>
         </ul>
         {{/if}}
-        <div id='notelist'>
-        </div>
     {{/if}}
-    </div>
 </template>
 <template name='notelist'>
     {{#if notes}}
