@@ -223,7 +223,7 @@ if (Meteor.isClient) {
                     }).on('save', function(e, params) {
                         cluster.label = params.newValue;
                         //FIXME do not work
-                        window.CorTextGraphs.sigmaview.sigma.refresh();
+                        window.CorTextGraphs.sigmaview.render();
                     });
                     window.CorTextGraphs.notelist.render();
                     $('.neighbor-add-note').click(function(event) {
