@@ -145,3 +145,36 @@
         </li>
     </ul>
 </template>
+<template name='lastnotes'>
+    {{#if notes}}
+    <ul class="nav nav-list well note-list">
+        {{#each notes}}
+        <li class='hide note'>
+            <a title='by {{this.created_by}}'>
+                {{ this.text }}
+                {{#if this.icon}}
+                    (
+                    <i>
+                        {{#if this.source}}
+                            {{this.source}}
+                        {{/if}}
+                    </i>
+                    <i class="{{this.icon}}"></i>
+                    <i>
+                        {{#if this.target}}
+                            {{this.target}}
+                        {{/if}}
+                    </i>
+                    )
+                {{else}}
+                    <i class="{{this.nodeicon}}"></i>
+                {{/if}}
+            </a>
+        </li>
+        {{/each}}
+        <div class="pagination">
+            <ul class='note-pages'></ul>
+        </div>
+    </ul>
+    {{/if}}
+</template>
