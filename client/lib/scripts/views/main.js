@@ -36,26 +36,40 @@ if (Meteor.isClient) {
                     $('[data-note-page=' + num + ']').parent().addClass('active');
                 },
                 render: function() {
-                    var fromnotes = _.map(window.CorTextGraphs.Notes.find({
+                    var nodeid = Session.get('selected_node').id;
+                    if (nodeid) {
+                        var fromquery = {
                             graph: Session.get('title'),
-                            source: Session.get('selected_node').id
-                        }).fetch(), function(note) {
-                            if (note.target !== null) {
+                            source: nodeid
+                        };
+                    } else {
+                        var fromquery = {
+                            graph: Session.get('title'),
+                        };
+                    }
+                    var fromnotes = _.map(window.CorTextGraphs.Notes.find(
+                        fromquery
+                    ).fetch(), function(note) {
+                            if (note.target) {
                                 note.icon = 'icon-forward';
                                 var node = window.CorTextGraphs.sigmaview.sigma.getNodes(note.target);
                                 note.target = node.label;
                             }
                             return note;
                         });
-                    var tonotes = _.map(window.CorTextGraphs.Notes.find({
-                            graph: Session.get('title'),
-                            target: Session.get('selected_node').id
-                        }).fetch(), function(note) {
-                            note.icon = 'icon-backward';
-                            var node = window.CorTextGraphs.sigmaview.sigma.getNodes(note.source);
-                            note.target = node.label;
-                            return note;
-                        });
+                    if (nodeid) {
+                        var tonotes = _.map(window.CorTextGraphs.Notes.find({
+                                graph: Session.get('title'),
+                                target: nodeid
+                            }).fetch(), function(note) {
+                                note.icon = 'icon-backward';
+                                var node = window.CorTextGraphs.sigmaview.sigma.getNodes(note.source);
+                                note.target = node.label;
+                                return note;
+                            });
+                    } else {
+                        var tonotes = [];
+                    }
                     var notes = _.union(fromnotes, tonotes);
                     this.$el.data('notes', notes);
                     this.$el.html(Template.notelist({
@@ -82,33 +96,37 @@ if (Meteor.isClient) {
                     this.switchPage({
                         currentTarget: $('<a data-note-page="1"></a>')[0]
                     });
-                    var that = this;
-                    $('.new-note').editable({
-                        type: 'textarea',
-                        title: 'write a note about the current node',
-                        emptytext: 'new note',
-                        validate: function(value) {
-                            if ($.trim(value) == '') {
-                                return 'field can not be empty';
+                    if (nodeid) {
+                        var that = this;
+                        $('.new-note').editable({
+                            type: 'textarea',
+                            title: 'write a note about the current node',
+                            emptytext: 'new note',
+                            validate: function(value) {
+                                if ($.trim(value) == '') {
+                                    return 'field can not be empty';
+                                }
+                            },
+                            source: nodeid,
+                            pk: nodeid,
+                            url: function(params) {
+                                window.CorTextGraphs.Notes.insert({
+                                    created_at: Date.now(),
+                                    created_by: Session.get('user').username,
+                                    text: params.value,
+                                    type: $(this).data('target') ? 'edge' : 'node',
+                                    format: 'raw',
+                                    graph: Session.get('title'),
+                                    source: params.pk,
+                                    target: $(this).data('target') || null
+                                });
                             }
-                        },
-                        source: Session.get('selected_node').id,
-                        pk: Session.get('selected_node').id,
-                        url: function(params) {
-                            window.CorTextGraphs.Notes.insert({
-                                created_at: Date.now(),
-                                created_by: Session.get('user').username,
-                                text: params.value,
-                                type: $(this).data('target') ? 'edge' : 'node',
-                                format: 'raw',
-                                graph: Session.get('title'),
-                                source: params.pk,
-                                target: $(this).data('target') || null
-                            });
-                        }
-                    }).on('save', function(e, params) {
-                        that.render();
-                    });
+                        }).on('save', function(e, params) {
+                            that.render();
+                        });
+                    } else {
+                        $('.new-note').hide();
+                    }
                 }
             });
             window.CorTextGraphs.notelist = new NoteList({
@@ -152,87 +170,92 @@ if (Meteor.isClient) {
                 },
                 render: function() {
                     var cluster = Session.get('selected_cluster');
+                    var neighbors = Session.get('selected_neighbors');
                     this.$el.html(Template.nodepanel({
                         node: Session.get('selected_node'),
                         cluster: cluster,
-                        neighbors: Session.get('selected_neighbors')
+                        neighbors: neighbors
                     }));
-                    var pagesnumber = Math.ceil(
-                        Session.get('selected_neighbors').length / 5);
-                    if (pagesnumber > 1) {
-                        for (var i = 0; i <= pagesnumber + 1; i++) {
-                            var label = i;
-                            if (i == 0) {
-                                label = 'Prev';
+                    if (_.isArray(neighbors)) {
+                        var pagesnumber = Math.ceil(
+                            Session.get('selected_neighbors').length / 5);
+                        if (pagesnumber > 1) {
+                            for (var i = 0; i <= pagesnumber + 1; i++) {
+                                var label = i;
+                                if (i == 0) {
+                                    label = 'Prev';
+                                }
+                                if (i == pagesnumber + 1) {
+                                    label = 'Next';
+                                }
+                                $('.neighbor-pages').show().append(
+                                    '<li><a data-neighbor-page="' +
+                                    label + '">' +
+                                    label + '</a></li>');
                             }
-                            if (i == pagesnumber + 1) {
-                                label = 'Next';
-                            }
-                            $('.neighbor-pages').show().append(
-                                '<li><a data-neighbor-page="' +
-                                label + '">' +
-                                label + '</a></li>');
+                        } else {
+                            $('.neighbor-pages').hide();
                         }
-                    } else {
-                        $('.neighbor-pages').hide();
-                    }
-                    this.switchNeighborPage({
-                        currentTarget: $('<a data-neighbor-page="1"></a>')[0]
-                    });
-                    var clusternote = window.CorTextGraphs.Notes.findOne({
-                        source: cluster.id,
-                        graph: Session.get('title')
-                        /* FIXME per-user note ?
-                        created_by: Session.get('user').username
-                        */
-                    }, {
-                        sort: {
-                            created_at: -1
-                        },
-                        limit: 1
-                    });
-                    if (clusternote === undefined) {
-                        var newid = window.CorTextGraphs.Notes.insert({
-                            created_at: Date.now(),
-                            created_by: Session.get('user').username,
-                            text: Session.get('selected_cluster').label,
-                            type: 'cluster',
-                            format: 'raw',
-                            graph: Session.get('title'),
-                            source: cluster.id
+                        this.switchNeighborPage({
+                            currentTarget: $('<a data-neighbor-page="1"></a>')[0]
                         });
+                        $('.neighbor-add-note').click(function(event) {
+                            event.stopPropagation();
+                            $('.new-note').data('target',
+                                                $(event.currentTarget).attr(
+                                                    'data-neighbor-add-note-target'));
+                            $('.new-note').editable('toggle');
+                        });
+                    }
+                    if (_.isObject(cluster)) {
                         var clusternote = window.CorTextGraphs.Notes.findOne({
-                            _id: newid
+                            source: cluster.id,
+                            graph: Session.get('title')
+                            /* FIXME per-user note ?
+                            created_by: Session.get('user').username
+                            */
+                        }, {
+                            sort: {
+                                created_at: -1
+                            },
+                            limit: 1
+                        });
+                        if (clusternote === undefined) {
+                            var newid = window.CorTextGraphs.Notes.insert({
+                                created_at: Date.now(),
+                                created_by: Session.get('user').username,
+                                text: Session.get('selected_cluster').label,
+                                type: 'cluster',
+                                format: 'raw',
+                                graph: Session.get('title'),
+                                source: cluster.id
+                            });
+                            var clusternote = window.CorTextGraphs.Notes.findOne({
+                                _id: newid
+                            });
+                        }
+                        $('.cluster').editable({
+                            type: 'textarea',
+                            title: 'set a label for the cluster',
+                            value: clusternote.text,
+                            pk: clusternote._id,
+                            validate: function(value) {
+                                if ($.trim(value) == '') {
+                                    return 'field can not be empty';
+                                }
+                            },
+                            url: function(params) {
+                                window.CorTextGraphs.Notes.update(
+                                    params.pk,
+                                    {$set: { text: params.value }});
+                            }
+                        }).on('save', function(e, params) {
+                            cluster.label = params.newValue;
+                            //FIXME do not work
+                            window.CorTextGraphs.sigmaview.render();
                         });
                     }
-                    $('.cluster').editable({
-                        type: 'textarea',
-                        title: 'set a label for the cluster',
-                        value: clusternote.text,
-                        pk: clusternote._id,
-                        validate: function(value) {
-                            if ($.trim(value) == '') {
-                                return 'field can not be empty';
-                            }
-                        },
-                        url: function(params) {
-                            window.CorTextGraphs.Notes.update(
-                                params.pk,
-                                {$set: { text: params.value }});
-                        }
-                    }).on('save', function(e, params) {
-                        cluster.label = params.newValue;
-                        //FIXME do not work
-                        window.CorTextGraphs.sigmaview.render();
-                    });
                     window.CorTextGraphs.notelist.render();
-                    $('.neighbor-add-note').click(function(event) {
-                        event.stopPropagation();
-                        $('.new-note').data('target',
-                                            $(event.currentTarget).attr(
-                                                'data-neighbor-add-note-target'));
-                        $('.new-note').editable('toggle');
-                    });
 
                 },
                 /*
@@ -278,14 +301,30 @@ if (Meteor.isClient) {
                                     return node.id;
                     }));
                     Session.set('selected_node', node);
-                    window.CorTextGraphs.sidebar.render();
+                    this.render();
+                },
+                defaultSidebar: function() {
+                    node = {
+                        label: 'last activity'
+                    };
+                    Session.set('selected_neighbors', null);
+                    Session.set('selected_cluster', null);
+                    Session.set('selected_node', node);
+                    this.render();
                 },
                 /*
                  * Callback on node hover by sigma.js
                  */
                 updateSidebar: function(e) {
+                    if (e === undefined) {
+                        this.defaultSidebar();
+                        return;
+                    }
                     var node = e.target.getNodes(e.content[0]);
-                    window.CorTextGraphs.sidebar.switchSidebar(null, node, e.target);
+                    if (node)
+                        window.CorTextGraphs.sidebar.switchSidebar(null, node, e.target);
+                    else
+                        window.CorTextGraphs.sidebar.defaultSidebar();
                 }
             });
             window.CorTextGraphs.sidebar = new Sidebar({
@@ -373,6 +412,7 @@ if (Meteor.isClient) {
                             );
                     });
                     this.sigma.draw();
+                    window.CorTextGraphs.sidebar.updateSidebar();
                 },
                 /*
                  * draw clusters
