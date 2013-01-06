@@ -37,16 +37,14 @@ if (Meteor.isClient) {
                 },
                 render: function() {
                     var nodeid = Session.get('selected_node').id;
-                    if (nodeid) {
-                        var fromquery = {
-                            graph: Session.get('title'),
-                            source: nodeid
-                        };
-                    } else {
-                        var fromquery = {
-                            graph: Session.get('title'),
-                        };
+                    if (!nodeid) {
+                        this.renderLastActivity();
+                        return;
                     }
+                    var fromquery = {
+                        graph: Session.get('title'),
+                        source: nodeid
+                    };
                     var fromnotes = _.map(window.CorTextGraphs.Notes.find(
                         fromquery
                     ).fetch(), function(note) {
@@ -57,24 +55,79 @@ if (Meteor.isClient) {
                             }
                             return note;
                         });
-                    if (nodeid) {
-                        var tonotes = _.map(window.CorTextGraphs.Notes.find({
-                                graph: Session.get('title'),
-                                target: nodeid
-                            }).fetch(), function(note) {
-                                note.icon = 'icon-backward';
-                                var node = window.CorTextGraphs.sigmaview.sigma.getNodes(note.source);
-                                note.target = node.label;
-                                return note;
-                            });
-                    } else {
-                        var tonotes = [];
-                    }
+                    var tonotes = _.map(window.CorTextGraphs.Notes.find({
+                            graph: Session.get('title'),
+                            target: nodeid
+                        }).fetch(), function(note) {
+                            note.icon = 'icon-backward';
+                            var node = window.CorTextGraphs.sigmaview.sigma.getNodes(note.source);
+                            note.target = node.label;
+                            return note;
+                        });
                     var notes = _.union(fromnotes, tonotes);
                     this.$el.data('notes', notes);
                     this.$el.html(Template.notelist({
                         notes: notes
                     }));
+                    this.renderPagination(notes);
+                    var that = this;
+                    $('.new-note').editable({
+                        type: 'textarea',
+                        title: 'write a note about the current node',
+                        emptytext: 'new note',
+                        validate: function(value) {
+                            if ($.trim(value) == '') {
+                                return 'field can not be empty';
+                            }
+                        },
+                        source: nodeid,
+                        pk: nodeid,
+                        url: function(params) {
+                            window.CorTextGraphs.Notes.insert({
+                                created_at: Date.now(),
+                                created_by: Session.get('user').username,
+                                text: params.value,
+                                type: $(this).data('target') ? 'edge' : 'node',
+                                format: 'raw',
+                                graph: Session.get('title'),
+                                source: params.pk,
+                                target: $(this).data('target') || null
+                            });
+                        }
+                    }).on('save', function(e, params) {
+                        that.render();
+                    });
+                },
+                renderLastActivity: function() {
+                    var notes = _.map(window.CorTextGraphs.Notes.find({
+                        graph: Session.get('title'),
+                        type: { $ne: 'cluster' }
+                    }, {
+                        sort: {
+                            created_at: -1
+                        }
+                    }).fetch(), function(note) {
+                            if (note.target) {
+                                note.icon = 'icon-forward';
+                                var nodesource = window.CorTextGraphs.sigmaview.sigma.getNodes(note.source);
+                                note.source = nodesource.label;
+                                var node = window.CorTextGraphs.sigmaview.sigma.getNodes(note.target);
+                                note.target = node.label;
+                            } else {
+                                if (note.type == 'node')
+                                    note.nodeicon = 'icon-asterisk';
+                            }
+                            return note;
+                        });
+                    this.$el.data('notes', notes);
+                    this.$el.html(Template.lastnotes({
+                        notes: notes
+                    }));
+                    this.renderPagination(notes);
+                    $('.new-note').hide();
+                    $('.new-note').parent().hide();
+                },
+                renderPagination: function(notes) {
                     var pagesnumber = Math.ceil(notes.length / 5);
                     if (pagesnumber > 1) {
                         for (var i = 0; i <= pagesnumber + 1; i++) {
@@ -96,38 +149,7 @@ if (Meteor.isClient) {
                     this.switchPage({
                         currentTarget: $('<a data-note-page="1"></a>')[0]
                     });
-                    if (nodeid) {
-                        var that = this;
-                        $('.new-note').editable({
-                            type: 'textarea',
-                            title: 'write a note about the current node',
-                            emptytext: 'new note',
-                            validate: function(value) {
-                                if ($.trim(value) == '') {
-                                    return 'field can not be empty';
-                                }
-                            },
-                            source: nodeid,
-                            pk: nodeid,
-                            url: function(params) {
-                                window.CorTextGraphs.Notes.insert({
-                                    created_at: Date.now(),
-                                    created_by: Session.get('user').username,
-                                    text: params.value,
-                                    type: $(this).data('target') ? 'edge' : 'node',
-                                    format: 'raw',
-                                    graph: Session.get('title'),
-                                    source: params.pk,
-                                    target: $(this).data('target') || null
-                                });
-                            }
-                        }).on('save', function(e, params) {
-                            that.render();
-                        });
-                    } else {
-                        $('.new-note').hide();
-                    }
-                }
+                },
             });
             window.CorTextGraphs.notelist = new NoteList({
                 el: document.getElementById('notelist')
