@@ -162,8 +162,8 @@ Meteor.startup(function() {
             events: {
                 'click .neighbor-switch': 'switchSidebar',
                 'click [data-neighbor-page]': 'switchNeighborPage',
-                'mouseover .selected-node': 'showNode',
-                'mouseout .selected-node': 'hideNode',
+                'mouseover .node-hover': 'showNode',
+                'mouseout .node-hover': 'hideNode',
             },
             initialize: function() {},
             showNode: function(e) {

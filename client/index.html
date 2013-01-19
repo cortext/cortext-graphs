@@ -69,7 +69,7 @@
 
 <template name="nodepanel">
     {{#if node}}
-    <h3 class='page-header selected-node' data-id='{{ node.id }}'>{{ node.label }}
+    <h3 class='page-header node-hover' data-id='{{ node.id }}'>{{ node.label }}
             {{#if node.attr}}
             <span class="badge" style='background-color:{{ cluster.color }}'>
                 {{ node.attr.weight }}
@@ -79,7 +79,7 @@
 
         {{#if cluster}}
         <div class="nav well">
-            <span class='cluster'></span>
+            <span class='cluster node-hover' data-id='{{ cluster.id }}'></span>
             <span class="badge" style='background-color:{{ cluster.color }}'>
             {{ cluster.attr.weight }}
             </span>
@@ -90,7 +90,7 @@
         <ul class="nav nav-list well neighbor-list">
             {{#each neighbors}}
             <li class='hide neighbor'>
-                <a>{{this.label}}
+            <a class='node-hover' data-id='{{ this.id }}'>{{this.label}}
                     <span class="badge" style='background-color:{{ this.color }}'>
                         {{ this.attr.weight }}
                     </span>
