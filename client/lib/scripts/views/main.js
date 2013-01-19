@@ -8,9 +8,21 @@ Meteor.startup(function() {
 
     if (window.CorTextGraphs.notelist === undefined) {
         var NoteList = Backbone.View.extend({
-            initialize: function() {},
             events: {
-                'click [data-note-page]': 'switchPage'
+                'click [data-note-page]': 'switchPage',
+                'mouseover .node-hover': 'showNode',
+                'mouseout .node-hover': 'hideNode',
+            },
+            initialize: function() {},
+            showNode: function(e) {
+                var ids = $(e.currentTarget).attr('data-id').split(',');
+                _.each(ids, function(id) {
+                    window.CorTextGraphs.sigmaview.sigma._core.plotter.drawHoverNode(
+                       window.CorTextGraphs.sigmaview.sigma._core.graph.nodesIndex[id]);
+                });
+            },
+            hideNode: function(e) {
+                window.CorTextGraphs.sigmaview.sigma.refresh();
             },
             switchPage: function(e) {
                 var page = $(e.currentTarget).attr('data-note-page');
@@ -53,7 +65,7 @@ Meteor.startup(function() {
                         if (note.target) {
                             note.icon = 'icon-forward';
                             var node = window.CorTextGraphs.sigmaview.sigma.getNodes(note.target);
-                            note.target = node.label;
+                            note.targetlabel = node.label;
                         }
                         return note;
                     });
@@ -63,7 +75,7 @@ Meteor.startup(function() {
                     }).fetch(), function(note) {
                         note.icon = 'icon-backward';
                         var node = window.CorTextGraphs.sigmaview.sigma.getNodes(note.source);
-                        note.target = node.label;
+                        note.targetlabel = node.label;
                         return note;
                     });
                 var notes = _.union(fromnotes, tonotes);
@@ -112,9 +124,9 @@ Meteor.startup(function() {
                         if (note.target) {
                             note.icon = 'icon-forward';
                             var nodesource = window.CorTextGraphs.sigmaview.sigma.getNodes(note.source);
-                            note.source = nodesource.label;
+                            note.sourcelabel = nodesource.label;
                             var node = window.CorTextGraphs.sigmaview.sigma.getNodes(note.target);
-                            note.target = node.label;
+                            note.targetlabel = node.label;
                         } else {
                             if (note.type == 'node')
                                 note.nodeicon = 'icon-asterisk';
@@ -167,9 +179,11 @@ Meteor.startup(function() {
             },
             initialize: function() {},
             showNode: function(e) {
-                var id = $(e.currentTarget).attr('data-id');
-                window.CorTextGraphs.sigmaview.sigma._core.plotter.drawHoverNode(
-                   window.CorTextGraphs.sigmaview.sigma._core.graph.nodesIndex[id]);
+                var ids = $(e.currentTarget).attr('data-id').split(',');
+                _.each(ids, function(id) {
+                    window.CorTextGraphs.sigmaview.sigma._core.plotter.drawHoverNode(
+                       window.CorTextGraphs.sigmaview.sigma._core.graph.nodesIndex[id]);
+                });
             },
             hideNode: function(e) {
                 window.CorTextGraphs.sigmaview.sigma.refresh();

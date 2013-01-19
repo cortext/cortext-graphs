@@ -118,15 +118,15 @@
     <ul class="nav nav-list well note-list">
         {{#each notes}}
         <li class='hide note'>
-            <a title='by {{this.created_by}}'>
+        <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'>
                 {{ this.text }}
                 {{#if this.icon}}
                     (
                     <i class="icon-asterisk"></i>
                     <i class="{{this.icon}}"></i>
                     <i class="">
-                        {{#if this.target}}
-                            {{this.target}}
+                        {{#if this.targetlabel}}
+                            {{this.targetlabel}}
                         {{/if}}
                     </i>
                     )
@@ -150,19 +150,19 @@
     <ul class="nav nav-list well note-list">
         {{#each notes}}
         <li class='hide note'>
-            <a title='by {{this.created_by}}'>
+        <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'>
                 {{ this.text }}
                 {{#if this.icon}}
                     (
                     <i>
-                        {{#if this.source}}
-                            {{this.source}}
+                        {{#if this.sourcelabel}}
+                            {{this.sourcelabel}}
                         {{/if}}
                     </i>
                     <i class="{{this.icon}}"></i>
                     <i>
-                        {{#if this.target}}
-                            {{this.target}}
+                        {{#if this.targetlabel}}
+                            {{this.targetlabel}}
                         {{/if}}
                     </i>
                     )
