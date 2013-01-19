@@ -69,7 +69,7 @@
 
 <template name="nodepanel">
     {{#if node}}
-        <h3 class='page-header'>{{ node.label }}
+    <h3 class='page-header selected-node' data-id='{{ node.id }}'>{{ node.label }}
             {{#if node.attr}}
             <span class="badge" style='background-color:{{ cluster.color }}'>
                 {{ node.attr.weight }}
