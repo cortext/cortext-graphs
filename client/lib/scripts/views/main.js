@@ -218,6 +218,7 @@ Meteor.startup(function() {
             },
             render: function() {
                 var cluster = Session.get('selected_cluster');
+                cluster.attr.weight = Math.round(cluster.attr.weight);
                 var neighbors = Session.get('selected_neighbors');
                 this.$el.html(Template.nodepanel({
                     node: Session.get('selected_node'),
@@ -494,6 +495,7 @@ Meteor.startup(function() {
                                     parseFloat(node.g).toString() + ',' +
                                     parseFloat(node.b).toString() + ',' +
                                     '0.3' + ')';
+                                node.showLabel = false;
                                 self.sigma.addNode(node.id, node);
                         });
                         that.pushGraph(data);

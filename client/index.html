@@ -69,9 +69,10 @@
 
 <template name="nodepanel">
     {{#if node}}
-    <h3 class='page-header node-hover' data-id='{{ node.id }}'>{{ node.label }}
+        <h3 class='page-header node-hover' data-id='{{ node.id }}'>{{ node.label }}
             {{#if node.attr}}
-            <span class="badge" style='background-color:{{ cluster.color }}'>
+            <span class='pull-right'>
+                <span class="badge" style='background-color:{{ cluster.color }};'>&nbsp;</span>
                 {{ node.attr.weight }}
             </span>
             {{/if}}
@@ -80,8 +81,9 @@
         {{#if cluster}}
         <div class="nav well">
             <span class='cluster node-hover' data-id='{{ cluster.id }}'></span>
-            <span class="badge" style='background-color:{{ cluster.color }}'>
-            {{ cluster.attr.weight }}
+            <span class='pull-right'>
+                <span class="badge" style='background-color:{{ cluster.color }}'>&nbsp;</span>
+                {{ cluster.attr.weight }}
             </span>
         </div>
         {{/if}}
@@ -90,19 +92,21 @@
         <ul class="nav nav-list well neighbor-list">
             {{#each neighbors}}
             <li class='hide neighbor'>
-            <a class='node-hover' data-id='{{ this.id }}'>{{this.label}}
-                    <span class="badge" style='background-color:{{ this.color }}'>
+                <a class='node-hover' data-id='{{ this.id }}'>{{this.label}}
+                    <span class='pull-right'>
+                        <span class="badge" style='background-color:{{ this.color }}'>&nbsp;
+                        </span>
                         {{ this.attr.weight }}
+                        <div class="btn-group">
+                            <button
+                                class="btn little-btn neighbor-switch" data-neighbor-switch='{{this.id}}'>
+                                <i class='icon-zoom-in'></i>
+                            </button>
+                            <button class="btn little-btn neighbor-add-note" data-neighbor-add-note-target='{{this.id}}' data-neighbor-add-note-source='{{node.id}}'>
+                                <i class="icon-plus"></i>
+                            </button>
+                        </div>
                     </span>
-                    <div class="btn-group">
-                        <button
-                            class="btn little-btn neighbor-switch" data-neighbor-switch='{{this.id}}'>
-                            <i class='icon-zoom-in'></i>
-                        </button>
-                        <button class="btn little-btn neighbor-add-note" data-neighbor-add-note-target='{{this.id}}' data-neighbor-add-note-source='{{node.id}}'>
-                            <i class="icon-plus"></i>
-                        </button>
-                    </div>
                 </a>
             </li>
             {{/each}}
@@ -121,7 +125,7 @@
         <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'>
                 {{ this.text }}
                 {{#if this.icon}}
-                    (
+                <span class='pull-right'>(
                     <i class="icon-asterisk"></i>
                     <i class="{{this.icon}}"></i>
                     <i class="">
@@ -129,7 +133,7 @@
                             {{this.targetlabel}}
                         {{/if}}
                     </i>
-                    )
+                    )</span>
                 {{/if}}
             </a>
         </li>
@@ -153,7 +157,7 @@
         <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'>
                 {{ this.text }}
                 {{#if this.icon}}
-                    (
+                <span class='pull-right'>(
                     <i>
                         {{#if this.sourcelabel}}
                             {{this.sourcelabel}}
@@ -165,7 +169,7 @@
                             {{this.targetlabel}}
                         {{/if}}
                     </i>
-                    )
+                    )</span>
                 {{else}}
                     <i class="{{this.nodeicon}}"></i>
                 {{/if}}
