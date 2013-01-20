@@ -88,7 +88,7 @@ Meteor.startup(function() {
                 $('.new-note').editable({
                     type: 'textarea',
                     title: 'write a note about the current node',
-                    emptytext: 'new note',
+                    emptytext: 'new note on the current node',
                     validate: function(value) {
                         if ($.trim(value) == '') {
                             return 'field can not be empty';
@@ -326,8 +326,11 @@ Meteor.startup(function() {
                 if (node.attr.level === 'high') {
                     return;
                 }
-                //window.CorTextGraphs.mainrouter.
-                // FIXME center graph view to this node ?
+
+                window.CorTextGraphs.mainrouter.navigate(
+                    window.location.hash.split('?node=')[0] +
+                    '?node=' + node.id);
+
                 //sigma.zoomTo(node.x, node.x, 2);
                 sigma._core.plotter.drawHoverNode(node);
                 var cluster = sigma.getNodes(
