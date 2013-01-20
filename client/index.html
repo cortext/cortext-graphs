@@ -60,7 +60,7 @@
         </p>
     </div>
     {{#if example}}
-    <a class="btn btn-primary" href="#open/hnetwork-low.json/hnetwork-high.json">
+    <a class="btn btn-primary" href="#open/hnetwork-low.json/hnetwork-high.json?node=null">
         Load example »
     </a>
     {{/if}}
@@ -79,7 +79,8 @@
         </h3>
 
         {{#if cluster}}
-        <div class="nav well">
+        <div class="nav">
+            <h4>cluster</h4>
             <span class='cluster node-hover' data-id='{{ cluster.id }}'></span>
             <span class='pull-right'>
                 <span class="badge" style='background-color:{{ cluster.color }}'>&nbsp;</span>
@@ -154,11 +155,11 @@
     <ul class="nav nav-list well note-list">
         {{#each notes}}
         <li class='hide note'>
-        <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'>
+            <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'>
                 {{ this.text }}
+                <span class='pull-right'>
                 {{#if this.icon}}
-                <span class='pull-right'>(
-                    <i>
+                    (<i>
                         {{#if this.sourcelabel}}
                             {{this.sourcelabel}}
                         {{/if}}
@@ -169,10 +170,11 @@
                             {{this.targetlabel}}
                         {{/if}}
                     </i>
-                    )</span>
+                    )
                 {{else}}
-                    <i class="{{this.nodeicon}}"></i>
+                    (<i class="{{this.nodeicon}}"></i>)
                 {{/if}}
+            </span>
             </a>
         </li>
         {{/each}}
