@@ -404,7 +404,7 @@ Meteor.startup(function() {
              * initialize sigma instance and draw the graph
              *  TODO add a spinner
              */
-            render: function() {
+            render: function(nodeid) {
                 this.$el.empty();
                 this.sigma = window.sigma.init(
                     document.getElementById('sigma'));
@@ -428,14 +428,14 @@ Meteor.startup(function() {
                         Meteor.subscribe('notes', data.meta.title,
                             function() {
                                 that.sigma.emptyGraph();
-                                that.pushClusters(data);
+                                that.pushClusters(data, nodeid);
                         });
                     });
             },
             /*
              * low-level graph drawing
             */
-            pushGraph: function(object) {
+            pushGraph: function(object, nodeid) {
                 var that = this;
                 /*
                  * draw nodes
@@ -470,12 +470,18 @@ Meteor.startup(function() {
                         );
                 });
                 this.sigma.draw();
-                window.CorTextGraphs.sidebar.updateSidebar();
+                if (nodeid) {
+                    var node = this.sigma.getNodes(nodeid);
+                    if (node)
+                        window.CorTextGraphs.sidebar.switchSidebar(null, node, this.sigma);
+                } else {
+                    window.CorTextGraphs.sidebar.defaultSidebar();
+                }
             },
             /*
              * draw clusters
              */
-            pushClusters: function(data) {
+            pushClusters: function(data, nodeid) {
                 var that = this;
                 $.get(Session.get('clusterpath'),
                     function(object, textStatus) {
@@ -507,7 +513,7 @@ Meteor.startup(function() {
                                 node.hoverActive = false;
                                 self.sigma.addNode(node.id, node);
                         });
-                        that.pushGraph(data);
+                        that.pushGraph(data, nodeid);
                     });
 
             }
