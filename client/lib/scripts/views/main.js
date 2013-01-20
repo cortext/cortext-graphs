@@ -334,14 +334,21 @@ Meteor.startup(function() {
                 var neighbors = [];
                 sigma.iterEdges(
                     function(edge) {
+                        var nid = false;
                         if (edge.source == node.id) {
-                            neighbors.push(
-                                sigma.getNodes(edge.target));
+                            nid = edge.target;
                         }
-                        if (edge.target == node.id) {
-                            neighbors.push(
-                                sigma.getNodes(edge.source));
+                        else if (edge.target == node.id) {
+                            nid = edge.source;
                         }
+                        if (!nid) return;
+                        var neighbor = sigma.getNodes(nid)
+                        if (!neighbor) return;
+                        var cluster = sigma.getNodes(
+                            'node-high-' + neighbor.attr.cluster_index);
+                        if (cluster)
+                            neighbor.attr.clusterColor = cluster.color;
+                        neighbors.push(neighbor);
                     }
                 );
                 if (cluster) {
