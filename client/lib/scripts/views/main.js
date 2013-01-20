@@ -218,7 +218,9 @@ Meteor.startup(function() {
             },
             render: function() {
                 var cluster = Session.get('selected_cluster');
-                cluster.attr.weight = Math.round(cluster.attr.weight);
+                if (cluster) {
+                    cluster.attr.weight = Math.round(cluster.attr.weight);
+                }
                 var neighbors = Session.get('selected_neighbors');
                 this.$el.html(Template.nodepanel({
                     node: Session.get('selected_node'),
@@ -393,10 +395,10 @@ Meteor.startup(function() {
             },
             /*
              * initialize sigma instance and draw the graph
+             *  TODO add a spinner
              */
             render: function() {
                 this.$el.empty();
-                // TODO add a spinner
                 this.sigma = window.sigma.init(
                     document.getElementById('sigma'));
                 this.sigma.bind('overnodes',
@@ -495,7 +497,7 @@ Meteor.startup(function() {
                                     parseFloat(node.g).toString() + ',' +
                                     parseFloat(node.b).toString() + ',' +
                                     '0.3' + ')';
-                                node.showLabel = false;
+                                node.hoverActive = false;
                                 self.sigma.addNode(node.id, node);
                         });
                         that.pushGraph(data);
