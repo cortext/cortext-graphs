@@ -326,9 +326,10 @@ Meteor.startup(function() {
                 if (node.attr.level === 'high') {
                     return;
                 }
+                //window.CorTextGraphs.mainrouter.
                 // FIXME center graph view to this node ?
-                // sigma.goTo(node.x, node.x);
-                // TODO highlight node.forceLabel = true;
+                //sigma.zoomTo(node.x, node.x, 2);
+                sigma._core.plotter.drawHoverNode(node);
                 var cluster = sigma.getNodes(
                     'node-high-' + node.attr.cluster_index);
                 var neighbors = [];
