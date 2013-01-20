@@ -93,18 +93,16 @@
         <ul class="nav nav-list well neighbor-list">
             {{#each neighbors}}
             <li class='hide neighbor'>
-                <a class='node-hover' data-id='{{ this.id }}'>{{this.label}}
+                <a class='node-hover neighbor-switch' data-id='{{ this.id }}' data-neighbor-switch='{{this.id}}'>
+                    {{this.label}}
                     <span class='pull-right'>
                         <span class="badge" style='background-color:{{ this.attr.clusterColor }}'>&nbsp;
                         </span>
                         {{ this.attr.weight }}
                         <div class="btn-group">
-                            <button
-                                class="btn little-btn neighbor-switch" data-neighbor-switch='{{this.id}}'>
-                                <i class='icon-zoom-in'></i>
-                            </button>
                             <button class="btn little-btn neighbor-add-note" data-neighbor-add-note-target='{{this.id}}' data-neighbor-add-note-source='{{node.id}}'>
                                 <i class="icon-plus"></i>
+                                note
                             </button>
                         </div>
                     </span>
