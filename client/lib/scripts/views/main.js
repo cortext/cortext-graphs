@@ -409,6 +409,9 @@ Meteor.startup(function() {
              *  TODO add a spinner
              */
             render: function(nodeid) {
+                if (nodeid === "null") {
+                    nodeid = null;
+                }
                 this.$el.empty();
                 this.sigma = window.sigma.init(
                     document.getElementById('sigma'));
