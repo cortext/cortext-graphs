@@ -79,13 +79,22 @@
         </h3>
 
         {{#if cluster}}
-        <div class="nav">
-            <h4>cluster</h4>
-            <span class='cluster node-hover' data-id='{{ cluster.id }}'></span>
-            <span class='pull-right'>
-                <span class="badge" style='background-color:{{ cluster.color }}'>&nbsp;</span>
-                {{ cluster.attr.weight }}
-            </span>
+        <div class="nav row-fluid">
+            <div class="span12">
+                <h4 class=>cluster</h4>
+                <div class="row-fluid">
+                    <div class="span10">
+                        <span class='cluster node-hover' data-id='{{ cluster.id }}'></span>
+                    </div>
+                    <div class="span2">
+                        <span class="badge" style='background-color:{{ cluster.color }}'>&nbsp;</span>
+                        {{ cluster.attr.weight }}
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <span class="span6 offset7 cluster-update"><small>{{ cluster.attr.last_update }}</small></span>
+                </div>
+            </div>
         </div>
         {{/if}}
 
@@ -119,6 +128,8 @@
 <template name='notelist'>
     {{#if notes}}
     <ul class="nav nav-list well note-list">
+        <small>note count = {{notes.length}}</small>
+        <div class='clear'></div>
         {{#each notes}}
         <li class='hide note'>
         <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'>

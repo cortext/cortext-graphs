@@ -52,3 +52,7 @@ body {
     color: white;
     text-shadow: none;
 }
+
+.page-header {
+    margin: 0;
+}

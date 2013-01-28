@@ -218,8 +218,40 @@ Meteor.startup(function() {
             },
             render: function() {
                 var cluster = Session.get('selected_cluster');
-                if (cluster) {
+                if (_.isObject(cluster)) {
                     cluster.attr.weight = Math.round(cluster.attr.weight);
+                    var clusternote = window.CorTextGraphs.Notes.findOne({
+                        source: cluster.id,
+                        graph: Session.get('title')
+                        /* FIXME per-user note ?
+                        created_by: Session.get('user').username
+                        */
+                    }, {
+                        sort: {
+                            created_at: -1
+                        },
+                        limit: 1
+                    });
+                    if (clusternote === undefined) {
+                        var newid = window.CorTextGraphs.Notes.insert({
+                            created_at: Date.now(),
+                            created_by: Session.get('user').username,
+                            text: Session.get('selected_cluster').label,
+                            type: 'cluster',
+                            format: 'raw',
+                            graph: Session.get('title'),
+                            source: cluster.id
+                        });
+                        clusternote = window.CorTextGraphs.Notes.findOne({
+                            _id: newid
+                        });
+                    }
+                    var created_at = new Date(clusternote.created_at);
+                    var seconds = (created_at.getSeconds() < 10) ? "0" + created_at.getSeconds() : created_at.getSeconds();
+                    cluster.attr.last_update = 'last update: ' +
+                        created_at.getDate() + "/" + (created_at.getMonth() + 1) + "/" +
+                        created_at.getFullYear() + " " + created_at.getHours() + ":" +
+                        seconds
                 }
                 var neighbors = Session.get('selected_neighbors');
                 this.$el.html(Template.nodepanel({
@@ -227,6 +259,31 @@ Meteor.startup(function() {
                     cluster: cluster,
                     neighbors: neighbors
                 }));
+                if (_.isObject(cluster)) {
+                    $('.cluster').editable({
+                        type: 'textarea',
+                        title: 'set a label for the cluster',
+                        value: clusternote.text,
+                        pk: clusternote._id,
+                        validate: function(value) {
+                            if ($.trim(value) == '') {
+                                return 'field can not be empty';
+                            }
+                        },
+                        url: function(params) {
+                            window.CorTextGraphs.Notes.update(
+                                params.pk,
+                                {$set: {
+                                    text: params.value,
+                                    created_at: Date.now()
+                                }});
+                        }
+                    }).on('save', function(e, params) {
+                        cluster.label = params.newValue;
+                        //FIXME do not work
+                        window.CorTextGraphs.sigmaview.render();
+                    });
+                }
                 if (_.isArray(neighbors)) {
                     var pagesnumber = Math.ceil(
                         Session.get('selected_neighbors').length / 5);
@@ -256,54 +313,6 @@ Meteor.startup(function() {
                                             $(event.currentTarget).attr(
                                                 'data-neighbor-add-note-target'));
                         $('.new-note').editable('toggle');
-                    });
-                }
-                if (_.isObject(cluster)) {
-                    var clusternote = window.CorTextGraphs.Notes.findOne({
-                        source: cluster.id,
-                        graph: Session.get('title')
-                        /* FIXME per-user note ?
-                        created_by: Session.get('user').username
-                        */
-                    }, {
-                        sort: {
-                            created_at: -1
-                        },
-                        limit: 1
-                    });
-                    if (clusternote === undefined) {
-                        var newid = window.CorTextGraphs.Notes.insert({
-                            created_at: Date.now(),
-                            created_by: Session.get('user').username,
-                            text: Session.get('selected_cluster').label,
-                            type: 'cluster',
-                            format: 'raw',
-                            graph: Session.get('title'),
-                            source: cluster.id
-                        });
-                        var clusternote = window.CorTextGraphs.Notes.findOne({
-                            _id: newid
-                        });
-                    }
-                    $('.cluster').editable({
-                        type: 'textarea',
-                        title: 'set a label for the cluster',
-                        value: clusternote.text,
-                        pk: clusternote._id,
-                        validate: function(value) {
-                            if ($.trim(value) == '') {
-                                return 'field can not be empty';
-                            }
-                        },
-                        url: function(params) {
-                            window.CorTextGraphs.Notes.update(
-                                params.pk,
-                                {$set: { text: params.value }});
-                        }
-                    }).on('save', function(e, params) {
-                        cluster.label = params.newValue;
-                        //FIXME do not work
-                        window.CorTextGraphs.sigmaview.render();
                     });
                 }
                 window.CorTextGraphs.notelist.render();
