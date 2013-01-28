@@ -31,3 +31,24 @@ body {
 .pagination {
     margin-bottom: 0px;
 }
+
+.navbar {
+    background-color: #f6fafe;
+}
+
+#go-home {
+    background-color: #9e1d43;
+}
+
+.graph-title {
+    background-color: #3c3c3c;
+}
+
+.navbar .brand {
+    margin-left: 0;
+}
+
+.graph-title-text {
+    color: white;
+    text-shadow: none;
+}
