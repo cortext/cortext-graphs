@@ -1,3 +1,4 @@
+'use strict';
 if (Meteor.isClient) {
     Meteor.startup(function() {
         Session.set('selected_cluster', undefined);

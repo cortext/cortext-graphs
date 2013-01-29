@@ -1,4 +1,4 @@
-
+'use strict';
 if (Meteor.isClient) {
     Meteor.startup(function () {
         if (!Modernizr.canvas) {

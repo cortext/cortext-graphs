@@ -376,7 +376,7 @@ Meteor.startup(function() {
                 this.render();
             },
             defaultSidebar: function() {
-                node = {
+                var node = {
                     label: 'last activity'
                 };
                 Session.set('selected_neighbors', null);
