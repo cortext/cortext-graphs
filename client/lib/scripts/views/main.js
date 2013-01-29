@@ -1,3 +1,4 @@
+'use strict';
 if (!Meteor.isClient) {
     return;
 }
@@ -477,7 +478,7 @@ Meteor.startup(function() {
                 object.edges && _.keys(object.edges).forEach(
                     function(key) {
                         var edge = object.edges[key];
-                        validID = edge['source'] && edge['source'];
+                        var validID = edge['source'] && edge['source'];
                         validID && that.sigma.addEdge(
                             'edge-low-' + key,
                             'node-low-' + edge['source'],
