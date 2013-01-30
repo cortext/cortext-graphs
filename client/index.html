@@ -103,18 +103,25 @@
             {{#each neighbors}}
             <li class='hide neighbor'>
                 <a class='node-hover neighbor-switch' data-id='{{ this.id }}' data-neighbor-switch='{{this.id}}'>
-                    {{this.label}}
-                    <span class='pull-right'>
+                <div class='row-fluid'>
+                    <div class="span6">
+                            {{this.label}}
+                    </div>
+                    <div class='span3'>
                         <span class="badge" style='background-color:{{ this.attr.clusterColor }}'>&nbsp;
                         </span>
                         {{ this.attr.weight }}
+                    </div>
+                    <div class='span3'>
                         <div class="btn-group">
                             <button class="btn little-btn neighbor-add-note" data-neighbor-add-note-target='{{this.id}}' data-neighbor-add-note-source='{{node.id}}'>
                                 <i class="icon-arrow-left"></i>
+                                <i class="icon-asterisk"></i>
                                 note
                             </button>
                         </div>
-                    </span>
+                    </div>
+                </div>
                 </a>
             </li>
             {{/each}}
@@ -133,9 +140,13 @@
         {{#each notes}}
         <li class='hide note'>
         <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'>
+            <div class='row-fluid'>
+                <div class='span9'>
                 {{ this.text }}
+                </div>
+                <div class='span3'>
                 {{#if this.icon}}
-                <span class='pull-right'>(
+                    (
                     <i class="icon-asterisk"></i>
                     <i class="{{this.icon}}"></i>
                     <!--<i class="">
@@ -143,8 +154,10 @@
                             {{this.targetlabel}}
                         {{/if}}
                     </i>-->
-                    )</span>
+                    )
                 {{/if}}
+                </div>
+                </div>
             </a>
         </li>
         {{/each}}
@@ -165,8 +178,11 @@
         {{#each notes}}
         <li class='hide note'>
             <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'>
+                <div class='row-fluid'>
+                <div class='span9'>
                 {{ this.text }}
-                <span class='pull-right'>
+                </div>
+                <div class='span3'>
                 {{#if this.icon}}
                 (<!--<i>
                         {{#if this.sourcelabel}}
@@ -183,7 +199,8 @@
                 {{else}}
                     (<i class="{{this.nodeicon}}"></i>)
                 {{/if}}
-            </span>
+                </div>
+            </div>
             </a>
         </li>
         {{/each}}

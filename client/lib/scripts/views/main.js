@@ -64,7 +64,7 @@ Meteor.startup(function() {
                     fromquery
                 ).fetch(), function(note) {
                         if (note.target) {
-                            note.icon = 'icon-forward';
+                            note.icon = 'icon-arrow-right';
                             var node = window.CorTextGraphs.sigmaview.sigma.getNodes(note.target);
                             note.targetlabel = node.label;
                         }
@@ -74,7 +74,7 @@ Meteor.startup(function() {
                         graph: Session.get('title'),
                         target: nodeid
                     }).fetch(), function(note) {
-                        note.icon = 'icon-backward';
+                        note.icon = 'icon-arrow-left';
                         var node = window.CorTextGraphs.sigmaview.sigma.getNodes(note.source);
                         note.targetlabel = node.label;
                         return note;
@@ -123,7 +123,7 @@ Meteor.startup(function() {
                     }
                 }).fetch(), function(note) {
                         if (note.target) {
-                            note.icon = 'icon-forward';
+                            note.icon = 'icon-arrow-right';
                             var nodesource = window.CorTextGraphs.sigmaview.sigma.getNodes(note.source);
                             note.sourcelabel = nodesource.label;
                             var node = window.CorTextGraphs.sigmaview.sigma.getNodes(note.target);
