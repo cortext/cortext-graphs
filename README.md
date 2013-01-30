@@ -20,13 +20,17 @@ Système de visualisation pour l’annotation web de cartographie de réseau
 
 * install and configure [Meteor](http://docs.meteor.com/) version >= 0.5.0
 
-  curl https://install.meteor.com | /bin/sh
+```
+    curl https://install.meteor.com | /bin/sh
+```
 
 * [supported platforms](https://github.com/meteor/meteor/wiki/Supported-Platforms)
 * clone this repository
-* start !
+* start on http://localhost:3000
 
+```
     meteor
+```
 
 ## Deploy
 
