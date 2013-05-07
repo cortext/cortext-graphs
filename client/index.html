@@ -10,8 +10,8 @@
   
 <body>
     <div id="navbar" class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <!--[if lt IE 8]>
+<!--      <div class="navbar-inner">
+-->        <!--[if lt IE 8]>
         <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->
         <div class="container-fluid" id="navbar-fluid">
@@ -20,12 +20,30 @@
           </a>
           <ul class="nav pull-right" id="navbar-right">
             <li>
-              <a>
+              <a id="nav-nodes" class="primary-nav">
+              <span>nodes</span>
+              </a>
+              <a id="nav-list_nodes" class="second-nav">
+              list
+              </a>
+              <a id="nav-info_nodes" class="second-nav">
+              info
+              </a>
+            </li>
+            <li id="notes-nav">
+              <a id="nav-notes" class="primary-nav">
+              <span>notes</span>
+              </a>
+              <a id="nav-list_notes" class="second-nav">
+              list
+              </a>
+              <a id="nav-info_notes" class="second-nav">
+              info
               </a>
             </li>
           </ul>
-        </div>
-      </div>
+<!--        </div>
+-->      </div>
     </div>
     <div class="container-fluid" id='main-container'>
         <div class="row-fluid">
