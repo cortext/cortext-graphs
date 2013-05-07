@@ -12,17 +12,17 @@
     min-height: 100%;
     height: 100%;
     width: 332px;
-	background-color:#CCC;
+	background-color:#fff;
+	border-left:1px solid #E1E1E1;
+	border-right:1px solid #E1E1E1;
 }
 
 /* panneau existant "node-info" */
 .sidebar-nav{
-	 margin-top: 100px;
+	margin-top: 44px;
 /*display:none;	
 */	}
-#main-container {
 
-}
 .little-btn {
     padding: 1px 6px;
 }
@@ -52,6 +52,38 @@ body {
 .pagination {
     margin-bottom: 0px;
 }
+
+/* info-nodes */
+
+.nav .title-cluster{
+	background:#9C96A7;	
+	color:#FFF;
+	font-family:"Oxygen-Regular", Arial,Helvetica,sans-serif;
+    font-size: 17px;
+    font-weight: normal;
+	letter-spacing:2px;
+	padding:6px;
+	}
+	
+.row-fluid .span2 {
+	margin-top:-35px;
+	margin-left:-5px;
+	color:#FFF;
+	font-family:"Oxygen-Regular", Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    font-weight: normal;}
+
+.row-fluid .span2b {
+	color:#FFF;
+	margin-top: -20px;
+    padding-left: 18px;
+}	
+	
+	
+h3{font-size:16px;
+}
+
+/* navigation menu */
 
 #navbar {
 background-color: #EEF2F6;
