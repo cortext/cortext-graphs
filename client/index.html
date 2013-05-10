@@ -92,6 +92,9 @@
             <div class="span12">
                 <h4 class="title-cluster">cluster</h4>
                 <div class="row-fluid">
+                
+                                    <span class="span6 offset7 cluster-update"><small>{{ cluster.attr.last_update }}</small></span>
+
                     <div class="span10">
                         <span class='cluster node-hover' data-id='{{ cluster.id }}'></span>
                     </div>
@@ -100,16 +103,15 @@
 -->                        {{ cluster.attr.weight }} <span class="span2b">articles</span>
                     </div>
                 </div>
-                <div class="row-fluid">
-                    <span class="span6 offset7 cluster-update"><small>{{ cluster.attr.last_update }}</small></span>
-                </div>
+                
             </div>
         </div>
         {{/if}}
     {{#if node}}
     
     <div class="title-node">
-                <h4 class="title-node">node</h4>
+                <h4 class="current-node">node</h4>
+         <div class="row-fluid">
         <h3 class='page-header node-hover' data-id='{{ node.id }}'>{{ node.label }}
             {{#if node.attr}}
             <span class='pull-right'>
@@ -118,6 +120,7 @@
             </span>
             {{/if}}
         </h3>
+        </div>
 	</div>
         
 
