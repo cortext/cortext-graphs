@@ -53,7 +53,8 @@ body {
     margin-bottom: 0px;
 }
 
-/* info-nodes */
+/* info-nodes: cluster - node */
+
 .nav, .title-node{
 	height:105px;
 	}
@@ -80,7 +81,8 @@ body {
 
 .row-fluid .offset7:first-child {
     margin-left: 0%;
-	margin-top:-5px;
+	margin-top:-10px;
+	margin-bottom:6px;
 	color:#A3A1A1;
 	font-family:Arial,Helvetica,sans-serif;
     font-size: 12px;
@@ -103,6 +105,19 @@ body {
 	margin-top:-4px;
 	}	
 	
+.nav .neighbour-node{
+	background: url("/neighbour.png") no-repeat 300px 7px #9C96A7; 
+	color:#FFF;
+	font-family:"Oxygen-Regular", Arial,Helvetica,sans-serif;
+    font-size: 17px;
+    font-weight: normal;
+	letter-spacing:2px;
+	padding:6px;
+	margin-top:-2px;
+	margin-bottom:0px;
+
+	}
+			
 .row-fluid .span2 {
 	margin-left: -12px;
     margin-top: -57px;
@@ -139,7 +154,7 @@ line-height:20px;
 }	
 
 .nav .link-annot{
-background: url("/link-arrow.png") no-repeat 303px 49px;
+background: url("/link-arrow.png") no-repeat 303px 51px;
 line-height:20px;
 }	
 
@@ -157,8 +172,61 @@ color:#777777;
     border-radius: 9px 9px 9px 9px;
     padding-left: 7px;
     padding-right: 7px;
-}	
+}
 
+/* info node: neighbour list */	
+
+.neighbor-list {
+    margin-bottom: 0;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+
+.row-fluid .span3 {
+margin-left:12px;
+color:#777777;margin:0px;
+    font-size: 12px;
+		padding-top:5px;
+}
+
+.row-fluid .span-badge {
+		margin-left: 68px;
+    width: 65px;
+}
+.span3 .neighbor-add-note{
+	background: url("/bt1-annot-neighbour.png") no-repeat;
+	width:22px;
+	height:22px;
+	text-shadow:none;
+	line-height:0px;
+	border:none;
+}
+
+.span3 .neighbor-add-note:hover{
+	background: url("/bt-annot-neighbour.png") no-repeat;
+	width:22px;
+	height:22px;
+	text-shadow:none;
+	line-height:0px;
+	border:none;
+}
+.nav-list > li > a {
+    padding: 0;
+	margin:0px;
+}
+
+.row-fluid .span6 {color:#393939;
+	font-family:Arial,Helvetica,sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+	width:50%;
+	padding-top:5px;
+	margin-left:-45px;
+}
+.nav-list .neighbor {
+	border-bottom: solid 1px #EEF2F6;
+}
 
 #notelist{margin-top:75px;}
 

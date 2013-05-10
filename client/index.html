@@ -53,8 +53,8 @@
                 <div class="sidebar-nav">
                     <div id='currentnode'>
                     </div>
-                    <div id='notelist'>
-                    </div>
+                    <!--<div id='notelist'>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -127,29 +127,30 @@
         
 
         {{#if neighbors}}
-        <ul class="nav nav-list well neighbor-list">
-<!--            <h4 class="neighbour-node">neighbour nodes</h4>
--->            {{#each neighbors}}
+        <ul class="nav nav-list neighbor-list"><!--nav nav-list well-->
+            <h4 class="neighbour-node">neighbour nodes</h4>
+           {{#each neighbors}}
             <li class='hide neighbor'>
                 <a class='node-hover neighbor-switch' data-id='{{ this.id }}' data-neighbor-switch='{{this.id}}'>
-                <div class='row-fluid'>
+                <div class='row-fluid'> 
+                <div class='span3'>
+                        <div class="btn-group">
+                            <button class="neighbor-add-note" data-neighbor-add-note-target='{{this.id}}' data-neighbor-add-note-source='{{node.id}}'>
+                                <!--btn little-btn <i class="icon-arrow-left"></i>
+                                <i class="icon-asterisk"></i>
+                                note-->
+                            </button>
+                        </div>
+                    </div>
                     <div class="span6">
                             {{this.label}}
                     </div>
-                    <div class='span3'>
+                    <div class='span3 span-badge'>
                         <span class="badge" style='background-color:{{ this.attr.clusterColor }}'>&nbsp;
                         </span>
                         {{ this.attr.weight }}
                     </div>
-                    <div class='span3'>
-                        <div class="btn-group">
-                            <button class="btn little-btn neighbor-add-note" data-neighbor-add-note-target='{{this.id}}' data-neighbor-add-note-source='{{node.id}}'>
-                                <i class="icon-arrow-left"></i>
-                                <i class="icon-asterisk"></i>
-                                note
-                            </button>
-                        </div>
-                    </div>
+                   
                 </div>
                 </a>
             </li>
