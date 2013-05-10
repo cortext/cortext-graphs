@@ -186,13 +186,13 @@ color:#777777;
 .row-fluid .span3 {
 margin-left:12px;
 color:#777777;margin:0px;
-    font-size: 12px;
+    font-size: 11px;
 		padding-top:5px;
 }
 
 .row-fluid .span-badge {
-		margin-left: 68px;
-    width: 65px;
+		margin-left: 76px;
+    width: 45px;
 }
 .span3 .neighbor-add-note{
 	background: url("/bt1-annot-neighbour.png") no-repeat;
@@ -214,6 +214,10 @@ color:#777777;margin:0px;
 .nav-list > li > a {
     padding: 0;
 	margin:0px;
+}
+
+.nav > li > a:hover {
+    background-color:#fffae9;
 }
 
 .row-fluid .span6 {color:#393939;
