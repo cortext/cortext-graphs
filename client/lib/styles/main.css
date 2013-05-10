@@ -19,7 +19,7 @@
 
 /* panneau existant "node-info" */
 .sidebar-nav{
-	margin-top: 44px;
+	margin-top: 43px;
 /*display:none;	
 */	}
 
@@ -67,7 +67,8 @@ body {
 	letter-spacing:2px;
 	padding:6px;
 	margin-bottom:6px;
-	}
+/*	border-top: solid 3px #27AD19;
+*/	}
 .nav .row-fluid, .title-node .row-fluid{
 	width:330px;
 	margin-left:6px;
@@ -146,6 +147,7 @@ body {
 .title-node .pull-right{
 margin-right:18px;
 color:#777777;
+font-size:12px;
 }	
 
 .title-node .link-annot{
@@ -159,13 +161,15 @@ line-height:20px;
 }	
 
 .title-node .link-annot a{
-margin-left:179px;
+margin-left:189px;
 color:#777777;
+font-size:13px;
 }
 
 .nav .link-annot a{
-margin-left:140px;
+margin-left:155px;
 color:#777777;
+font-size:13px;
 }	
 	
 .badge {
