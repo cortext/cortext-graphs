@@ -101,7 +101,8 @@
                     <div class="span2">
 <!--                        <span class="badge" style='background-color:{{ cluster.color }}'>&nbsp;</span>
 -->                        {{ cluster.attr.weight }} <span class="span2b">articles</span>
-                    </div>
+                    </div>                    
+                    <div class="link-annot"><a href="#">change the label cluster</a></div>
                 </div>
                 
             </div>
@@ -119,6 +120,7 @@
                 {{ node.attr.weight }}
             </span>
             {{/if}}
+            <div class="link-annot"><a href="#">annotate the node</a></div>
         </h3>
         </div>
 	</div>
@@ -126,7 +128,8 @@
 
         {{#if neighbors}}
         <ul class="nav nav-list well neighbor-list">
-            {{#each neighbors}}
+<!--            <h4 class="neighbour-node">neighbour nodes</h4>
+-->            {{#each neighbors}}
             <li class='hide neighbor'>
                 <a class='node-hover neighbor-switch' data-id='{{ this.id }}' data-neighbor-switch='{{this.id}}'>
                 <div class='row-fluid'>

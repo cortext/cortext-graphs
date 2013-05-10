@@ -75,6 +75,7 @@ body {
 	.row-fluid .span10 {
     margin-top: -12px;
 	margin-left:0px;
+	height:15px;
 }
 
 .row-fluid .offset7:first-child {
@@ -99,6 +100,7 @@ body {
     font-weight: normal;
 	letter-spacing:2px;
 	padding:6px;
+	margin-top:-4px;
 	}	
 	
 .row-fluid .span2 {
@@ -122,10 +124,43 @@ body {
 	font-family:Arial,Helvetica,sans-serif;
     font-size: 14px;
     font-weight: normal;
-	margin-top:-10px;
+	margin-top:-7px;
+	border:none;
 }
-	
 
+.title-node .pull-right{
+margin-right:18px;
+color:#777777;
+}	
+
+.title-node .link-annot{
+background: url("/link-arrow.png") no-repeat 303px 6px;
+line-height:20px;
+}	
+
+.nav .link-annot{
+background: url("/link-arrow.png") no-repeat 303px 49px;
+line-height:20px;
+}	
+
+.title-node .link-annot a{
+margin-left:179px;
+color:#777777;
+}
+
+.nav .link-annot a{
+margin-left:140px;
+color:#777777;
+}	
+	
+.badge {
+    border-radius: 9px 9px 9px 9px;
+    padding-left: 7px;
+    padding-right: 7px;
+}	
+
+
+#notelist{margin-top:75px;}
 
 /* navigation menu */
 
