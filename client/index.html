@@ -163,8 +163,12 @@
     {{/if}}
 </template>
 <template name='notelist'>
+  
+   
+     <h4 class="annot-node">annotations</h4>
+
     {{#if notes}}
-    <ul class="nav nav-list well note-list">
+    <ul class="nav note-list">
         <small>note count = {{notes.length}}</small>
         <div class='clear'></div>
         {{#each notes}}
@@ -196,11 +200,13 @@
         </div>
     </ul>
     {{/if}}
-    <ul class="nav nav-list well">
+    
+     <ul class="nav">
         <li>
             <a class='new-note'></a>
         </li>
     </ul>
+    
 </template>
 <template name='lastnotes'>
     {{#if notes}}
