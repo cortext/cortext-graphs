@@ -289,9 +289,18 @@ color:#393939;
     font-size: 13px;
     font-weight: normal;
 	padding-top:5px;
-	padding-left:25px; 
+	padding-left:25px;
+	width:70%; 
 }
 
+
+.row-fluid .span-note {
+margin-left:12px;
+color:#777777;margin-left:54px;
+    font-size: 11px;
+		padding-top:5px;
+		width:45px;
+}
 /*.row-fluid #icon-annot{
 	background: url("/annot-list-grey.png") no-repeat 10px 2px; 
 
@@ -303,7 +312,7 @@ color:#393939;
 
 }
 
-.row-fluid .span9:hover{
+.note-list .row-fluid:hover{
 	   background: url("/annot-list-grey.png") no-repeat 4px 7px #fffae9; 
 }
 
