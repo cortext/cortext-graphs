@@ -167,9 +167,10 @@
    
      <h4 class="annot-node">annotations</h4>
 
-    {{#if notes}}
+    {{#if notes}} 
+    
+    <p>note count = {{notes.length}}</p>
     <ul class="nav note-list">
-        <small>note count = {{notes.length}}</small>
         <div class='clear'></div>
         {{#each notes}}
         <li class='hide note'>
@@ -210,7 +211,7 @@
 </template>
 <template name='lastnotes'>
     {{#if notes}}
-    <ul class="nav nav-list well note-list">
+    <ul class="nav note-list">
         {{#each notes}}
         <li class='hide note'>
             <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'>

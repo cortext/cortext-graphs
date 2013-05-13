@@ -238,9 +238,32 @@ color:#777777;margin:0px;
 
 /* note list */
 
-#notelist{margin-top:15px;}
+#notelist{margin-top:15px;
+    height: 100%;
+    min-height: 100%;
+    width: 332px;
+	/*overflow:auto;*/}
+#notelist .new-note{
+	background:#FAFAFA;
+    border: 1px solid #DCDCDC;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 0 3px rgba(107, 107, 107, 0.3);
+    color: #6E6E6E;
+    cursor: pointer;
+    font: bold 14px arial;
+    width: 280px;
+    padding: 10px;
+    text-align: center;
+	margin-left:15px;
+	margin-top:18px;
+	}	
+#notelist .new-note:hover{
+	background: none repeat scroll 0 0 #DDDDDD;
+    border: 1px solid #B1B1B1;
+    box-shadow: 0 0 3px rgba(0, 86, 156, 0.6);
+    color: #333333;}
 
-.annot-node{background: url("/annot-list.png") no-repeat 308px 7px #9C96A7; 
+.annot-node{background: url("/annot-list.png") no-repeat 310px 7px #9C96A7; 
 	color:#FFF;
 	font-family:"Oxygen-Regular", Arial,Helvetica,sans-serif;
     font-size: 16px;
@@ -248,8 +271,41 @@ color:#777777;margin:0px;
 	letter-spacing:2px;
 	padding:5px;
 	margin-top:-2px;
-	margin-bottom:0px;}
+	}
+	
+#notelist p{
+	background: url("/annot-list-grey.png") no-repeat 10px 2px; 
+	color: #A3A1A1;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    margin-bottom: 0px;
+    padding-left: 26px;	   
+	border-bottom: 1px solid #E1E1E1;
 
+   }	
+.row-fluid .span9 {
+color:#393939;
+	font-family:Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+	padding-top:5px;
+	padding-left:25px; 
+}
+
+/*.row-fluid #icon-annot{
+	background: url("/annot-list-grey.png") no-repeat 10px 2px; 
+
+}	background: url("/annot-list-grey.png") no-repeat 10px 7px #27AD19; 
+*/
+.row-fluid .note{
+	    border-bottom: 1px solid #E1E1E1;
+		background: url("/annot-list-grey.png") no-repeat 10px 7px; 
+
+}
+
+.row-fluid .span9:hover{
+	   background: url("/annot-list-grey.png") no-repeat 4px 7px #fffae9; 
+}
 
 /* navigation menu */
 
