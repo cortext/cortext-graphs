@@ -141,7 +141,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="span6">
+                    <div class="span-label">
                             {{this.label}}
                     </div>
                     <div class='span3 span-badge'>
@@ -175,15 +175,15 @@
         <li class='hide note'>
         <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'>
             <div class='row-fluid'>
-                <div class='span9'>
+                <div class='span-title'>
                 {{ this.text }}
                 </div>
                 <div class='span3 span-note'>
                 {{#if this.icon}}
                     (
-                    <i class="icon-asterisk"></i>
+                   
                     <i class="{{this.icon}}"></i>
-                    <!--<i class="">
+                    <!-- <i class="icon-asterisk"></i><i class="">
                         {{#if this.targetlabel}}
                             {{this.targetlabel}}
                         {{/if}}
@@ -215,23 +215,24 @@
         <li class='hide note'>
             <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'>
             <div class='row-fluid'>
-                <div class='span9'>
+                <div class='span-title'>
                 {{ this.text }}
                 </div>
                 <div class='span5 span-note'>
                 <span class='pull-right'>
                     {{#if this.icon}}
-                    <i class="{{this.icon}}"> {{this.sourcelabel}}</i>
+                    <i class="{{this.icon}}"> </i>{{this.sourcelabel}}
                     <!-- <i>
                         {{#if this.targetlabel}}
                             {{this.targetlabel}}
                         {{/if}}
                     </i> -->
                     {{else}}
-                        <i class="{{this.nodeicon}}"> {{this.sourcelabel}}</i>
+                        <!--<i class="{{this.nodeicon}}"> </i>-->{{this.sourcelabel}}
                     {{/if}}
-                    <span class="badge" style='background-color:{{ this.nodecolor }};'>&nbsp;</span>
-                </span>
+                </span>                    
+                <span class="badge" style='background-color:{{ this.nodecolor }};'>&nbsp;</span>
+
                 </div>
             </div>
             </a>

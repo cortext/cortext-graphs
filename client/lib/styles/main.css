@@ -225,7 +225,7 @@ color:#777777;margin:0px;
     background-color:#fffae9;
 }
 
-.row-fluid .span6 {color:#393939;
+.row-fluid .span-label {color:#393939;
 	font-family:Arial,Helvetica,sans-serif;
     font-size: 14px;
     font-weight: normal;
@@ -284,7 +284,7 @@ color:#777777;margin:0px;
 	border-bottom: 1px solid #E1E1E1;
 
    }	
-.row-fluid .span9 {
+.row-fluid .span-title {
 color:#393939;
 	font-family:Arial,Helvetica,sans-serif;
     font-size: 13px;
