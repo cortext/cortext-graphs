@@ -107,8 +107,8 @@
                 
             </div>
         </div>
-        {{/if}}
-    {{#if node}}
+{{/if}}
+{{#if node}}
     
     <div class="title-node">
                 <h4 class="current-node">node</h4>
@@ -125,7 +125,6 @@
         </div>
 	</div>
         
-
         {{#if neighbors}}
         <ul class="nav nav-list neighbor-list"><!--nav nav-list well-->
             <h4 class="neighbour-node">neighbour nodes</h4>
@@ -215,27 +214,24 @@
         {{#each notes}}
         <li class='hide note'>
             <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'>
-                <div class='row-fluid'>
+            <div class='row-fluid'>
                 <div class='span9'>
                 {{ this.text }}
                 </div>
-                <div class='span3 span-note'>
-                {{#if this.icon}}
-                (<!--<i>
-                        {{#if this.sourcelabel}}
-                            {{this.sourcelabel}}
-                        {{/if}}
-                    </i>-->
-                    <i class="{{this.icon}}"></i>
-                    <!--<i>
+                <div class='span5 span-note'>
+                <span class='pull-right'>
+                    {{#if this.icon}}
+                    <i class="{{this.icon}}"> {{this.sourcelabel}}</i>
+                    <!-- <i>
                         {{#if this.targetlabel}}
                             {{this.targetlabel}}
                         {{/if}}
-                    </i>-->
-                )
-                {{else}}
-                    (<i class="{{this.nodeicon}}"></i>)
-                {{/if}}
+                    </i> -->
+                    {{else}}
+                        <i class="{{this.nodeicon}}"> {{this.sourcelabel}}</i>
+                    {{/if}}
+                    <span class="badge" style='background-color:{{ this.nodecolor }};'>&nbsp;</span>
+                </span>
                 </div>
             </div>
             </a>

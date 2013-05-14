@@ -122,22 +122,27 @@ Meteor.startup(function() {
                         created_at: -1
                     }
                 }).fetch(), function(note) {
-                        if (note.target) {
-                            note.icon = 'icon-arrow-right';
+                    if (note.source) {
                             var nodesource = window.CorTextGraphs.sigmaview.sigma.getNodes(note.source);
+                            console.log(nodesource);
                             note.sourcelabel = nodesource.label;
-                            var node = window.CorTextGraphs.sigmaview.sigma.getNodes(note.target);
-                            note.targetlabel = node.label;
-                        } else {
-                            if (note.type == 'node')
-                                note.nodeicon = 'icon-asterisk';
-                        }
-                        return note;
+                            note.nodecolor = nodesource.color;
+                    }
+                    if (note.target) {
+                        note.icon = 'icon-arrow-right';
+                        var node = window.CorTextGraphs.sigmaview.sigma.getNodes(note.target);
+                        note.targetlabel = node.label;
+                    } else {
+                        if (note.type == 'node')
+                            note.nodeicon = 'icon-asterisk';
+                    }
+                    return note;
                     });
                 this.$el.data('notes', notes);
                 this.$el.html(Template.lastnotes({
                     notes: notes
                 }));
+                console.log('attr id :'+this.$el.attr('id'));
                 this.renderPagination(notes);
                 $('.new-note').hide();
                 $('.new-note').parent().hide();
@@ -219,6 +224,8 @@ Meteor.startup(function() {
             },
             render: function() {
                 var cluster = Session.get('selected_cluster');
+                console.log('cluster:');
+                console.log(cluster);
                 if (_.isObject(cluster)) {
                     cluster.attr.weight = Math.round(cluster.attr.weight);
                     var clusternote = window.CorTextGraphs.Notes.findOne({
@@ -442,7 +449,7 @@ Meteor.startup(function() {
                 $.get(Session.get('path'),
                     function(data, textStatus) {
                         Session.set('title', data.meta.title);
-                        Meteor.subscribe('notes', data.meta.title,
+                        Meteor.subscribe('all-notes', data.meta.title,
                             function() {
                                 that.sigma.emptyGraph();
                                 that.pushClusters(data, nodeid);
