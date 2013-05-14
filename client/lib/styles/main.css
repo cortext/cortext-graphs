@@ -15,7 +15,8 @@
 	background-color:#fff;
 	border-left:1px solid #E1E1E1;
 	border-right:1px solid #E1E1E1;
-}
+/*	float:left;
+*/}
 
 /* panneau existant "node-info" */
 .sidebar-nav{
@@ -315,6 +316,16 @@ color:#777777;margin-left:54px;
 .note-list .row-fluid:hover{
 	   background: url("/annot-list-grey.png") no-repeat 4px 7px #fffae9; 
 }
+
+/*.note .span-note .icon-asterisk{
+	   background: url("/annot-list-grey.png") no-repeat 4px 7px #fffae9; 
+}
+
+.note .span-note .icon-arrow-right{
+	   background: url("/annot-list-grey.png") no-repeat 4px 7px #000; 
+}*/
+
+
 
 /* navigation menu */
 
