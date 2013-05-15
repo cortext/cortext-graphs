@@ -323,6 +323,13 @@ color:#393939;
 	
 }
 
+.row-fluid #last .icon-arrow-right{
+	background: url("/last-note-neighbour.png") no-repeat; 
+	margin-right:8px;
+	
+	
+}
+
 #last .pull-right {
 color:#777777;
     font-size: 11px;

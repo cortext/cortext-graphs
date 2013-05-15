@@ -216,14 +216,16 @@
             <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'> 
             <div class='row-fluid'>
                 <div class='span-title-lastnote'>
-                {{ this.text }} <i class="{{this.icon}}"> </i>
+                {{ this.text }} 
                 </div>
                 <!--<div class='span5 span-lastnote'>
                                  
 
                 </div>-->
                 <div id="last">
+                
                 <span class='pull-right'>
+                <i class="{{this.icon}}"> </i>
                     {{#if this.icon}}
                     {{this.sourcelabel}}
                     <!-- <i>
