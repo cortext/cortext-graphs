@@ -302,6 +302,35 @@ color:#777777;margin-left:54px;
 		padding-top:5px;
 		width:45px;
 }
+
+.row-fluid .span-lastnote {
+ color: #777777;
+    float: right;
+    font-size: 11px;
+    padding-top: 8px;
+    width: 35px;
+}
+
+.row-fluid .span-title-lastnote {
+color:#393939;
+	font-family:Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+	padding-top:5px;
+	margin-bottom:-10px;
+	padding-left:25px;
+	width:95%; 
+	
+}
+
+#last .pull-right {
+color:#777777;
+    font-size: 11px;
+	padding-right: 15px;
+    text-align: right;
+    width: 280px;
+	margin-bottom:5px;
+}
 /*.row-fluid #icon-annot{
 	background: url("/annot-list-grey.png") no-repeat 10px 2px; 
 
@@ -484,4 +513,18 @@ width: 1280px;
 
 .container-fluid {
     padding-left: 0px;
+}
+
+.welcome{
+margin-left:80px;
+margin-top:100px;
+}
+
+.welcome h1{
+font-family: "Oxygen-Regular";
+    font-size: 25px;
+    letter-spacing: 2px;
+	    font-style: normal;
+		font-weight:100;
+		margin-bottom:25px;
 }

@@ -69,7 +69,7 @@
 </body>
 
 <template name="hello">
-<div class="hero-unit">
+<div class="hero-unit welcome">
     <div>
         <h1>
             {{{ text }}}
@@ -213,15 +213,19 @@
     <ul class="nav note-list">
         {{#each notes}}
         <li class='hide note'>
-            <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'>
+            <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'> 
             <div class='row-fluid'>
-                <div class='span-title'>
-                {{ this.text }}
+                <div class='span-title-lastnote'>
+                {{ this.text }} <i class="{{this.icon}}"> </i>
                 </div>
-                <div class='span5 span-note'>
+                <!--<div class='span5 span-lastnote'>
+                                 
+
+                </div>-->
+                <div id="last">
                 <span class='pull-right'>
                     {{#if this.icon}}
-                    <i class="{{this.icon}}"> </i>{{this.sourcelabel}}
+                    {{this.sourcelabel}}
                     <!-- <i>
                         {{#if this.targetlabel}}
                             {{this.targetlabel}}
@@ -229,11 +233,12 @@
                     </i> -->
                     {{else}}
                         <!--<i class="{{this.nodeicon}}"> </i>-->{{this.sourcelabel}}
-                    {{/if}}
-                </span>                    
-                <span class="badge" style='background-color:{{ this.nodecolor }};'>&nbsp;</span>
+                    {{/if}} &nbsp;&nbsp;               
+                    <span class="badge" style='background-color:{{ this.nodecolor }};'>&nbsp;</span>
 
+                </span>  
                 </div>
+                 
             </div>
             </a>
         </li>
