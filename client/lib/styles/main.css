@@ -303,6 +303,11 @@ color:#777777;margin-left:54px;
 		width:45px;
 }
 
+
+.row-fluid .span-note .icon-arrow-left{
+	background: url("/last-note-neighbour.png") no-repeat; 
+}
+
 .row-fluid .span-lastnote {
  color: #777777;
     float: right;
