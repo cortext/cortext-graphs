@@ -181,6 +181,7 @@
                 <div class='row-fluid'>
                 <div class='span9'>
                 {{ this.text }}
+                {{ this.sourcelabel }}
                 </div>
                 <div class='span3'>
                 {{#if this.icon}}
@@ -197,7 +198,7 @@
                     </i>-->
                 )
                 {{else}}
-                    (<i class="{{this.nodeicon}}"></i>)
+                    <i class="{{this.nodeicon}}"></i>
                 {{/if}}
                 </div>
             </div>
@@ -209,4 +210,21 @@
         </div>
     </ul>
     {{/if}}
+</template>
+
+<div id='nodelist'>
+
+</div>
+
+
+<template>
+    <ul class="nodelist">
+        {{#each node}}
+            <li class="node">
+                <div style="background-color: {{this.attr.color}}" /> </div>
+                <h2 class="node_title">{{this.label}}</h2>
+                <div class="node_notes">{{this.attr.number_notes}}</div>
+            </li>
+        {{/each}}
+    </ul>
 </template>
