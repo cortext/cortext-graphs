@@ -10,8 +10,8 @@
   
 <body>
     <div id="navbar" class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <!--[if lt IE 8]>
+<!--      <div class="navbar-inner">
+-->        <!--[if lt IE 8]>
         <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->
         <div class="container-fluid" id="navbar-fluid">
@@ -20,12 +20,30 @@
           </a>
           <ul class="nav pull-right" id="navbar-right">
             <li>
-              <a>
+              <a id="nav-nodes" class="primary-nav">
+              <span>nodes</span>
+              </a>
+              <a id="nav-list_nodes" class="second-nav">
+              list
+              </a>
+              <a id="nav-info_nodes" class="second-nav">
+              info
+              </a>
+            </li>
+            <li id="notes-nav">
+              <a id="nav-notes" class="primary-nav">
+              <span>notes</span>
+              </a>
+              <a id="nav-list_notes" class="second-nav">
+              list
+              </a>
+              <a id="nav-info_notes" class="second-nav">
+              info
               </a>
             </li>
           </ul>
-        </div>
-      </div>
+<!--        </div>
+-->      </div>
     </div>
     <div class="container-fluid" id='main-container'>
         <div class="row-fluid">
@@ -36,6 +54,8 @@
                     <div id='currentnode'>
                     </div>
                     <div id='notelist'>
+                    </div>
+                    <div id='nodelist'>
                     </div>
                 </div>
             </div>
@@ -51,7 +71,7 @@
 </body>
 
 <template name="hello">
-<div class="hero-unit">
+<div class="hero-unit welcome">
     <div>
         <h1>
             {{{ text }}}
@@ -67,60 +87,92 @@
 </div>
 </template>
 
-<template name="nodepanel">
-    {{#if node}}
+<template name="nodelist">
+	
+           {{#each node}}
+    <div class="title-node">
+
+         <div class="row-fluid">
         <h3 class='page-header node-hover' data-id='{{ node.id }}'>{{ node.label }}
             {{#if node.attr}}
             <span class='pull-right'>
                 <span class="badge" style='background-color:{{ cluster.color }};'>&nbsp;</span>
                 {{ node.attr.weight }}
-            </span>
+            </span> 
             {{/if}}
         </h3>
+        </div>
+	</div>
+            
+</template>
 
-        {{#if cluster}}
+
+<template name="nodepanel">
+
+{{#if cluster}}
         <div class="nav row-fluid">
             <div class="span12">
-                <h4 class=>cluster</h4>
+                <h4 class="title-cluster">cluster</h4>
                 <div class="row-fluid">
+                
+                                    <span class="span6 offset7 cluster-update"><small>{{ cluster.attr.last_update }}</small></span>
+
                     <div class="span10">
                         <span class='cluster node-hover' data-id='{{ cluster.id }}'></span>
                     </div>
                     <div class="span2">
-                        <span class="badge" style='background-color:{{ cluster.color }}'>&nbsp;</span>
-                        {{ cluster.attr.weight }}
-                    </div>
+<!--                        <span class="badge" style='background-color:{{ cluster.color }}'>&nbsp;</span>
+-->                        {{ cluster.attr.weight }} <span class="span2b">articles</span>
+                    </div>                    
+                    <div class="link-annot"><a href="#">change the label cluster</a></div>
                 </div>
-                <div class="row-fluid">
-                    <span class="span6 offset7 cluster-update"><small>{{ cluster.attr.last_update }}</small></span>
-                </div>
+                
             </div>
         </div>
-        {{/if}}
+{{/if}}
+{{#if node}}
+    
+    <div class="title-node">
+                <h4 class="current-node">node</h4>
+         <div class="row-fluid">
+        <h3 class='page-header node-hover' data-id='{{ node.id }}'>{{ node.label }}
+            {{#if node.attr}}
+            <span class='pull-right'>
+                <span class="badge" style='background-color:{{ cluster.color }};'>&nbsp;</span>
+                {{ node.attr.weight }}
+            </span> 
+            <div class="link-annot"><a href="#">annotate the node</a></div>
 
+            {{/if}}
+        </h3>
+        </div>
+	</div>
+        
         {{#if neighbors}}
-        <ul class="nav nav-list well neighbor-list">
-            {{#each neighbors}}
+        <ul class="nav nav-list neighbor-list"><!--nav nav-list well-->
+            <h4 class="neighbour-node">neighbour nodes</h4>
+           {{#each neighbors}}
             <li class='hide neighbor'>
                 <a class='node-hover neighbor-switch' data-id='{{ this.id }}' data-neighbor-switch='{{this.id}}'>
-                <div class='row-fluid'>
-                    <div class="span6">
+                <div class='row-fluid'> 
+                <div class='span3'>
+                        <div class="btn-group">
+                            <button class="neighbor-add-note" data-neighbor-add-note-target='{{this.id}}' data-neighbor-add-note-source='{{node.id}}'>
+                                <!--btn little-btn <i class="icon-arrow-left"></i>
+                                <i class="icon-asterisk"></i>
+                                note-->
+                            </button>
+                        </div>
+                    </div>
+                    <div class="span-label">
                             {{this.label}}
                     </div>
-                    <div class='span3'>
+                    <div class='span3 span-badge'>
                         <span class="badge" style='background-color:{{ this.attr.clusterColor }}'>&nbsp;
                         </span>
                         {{ this.attr.weight }}
                     </div>
-                    <div class='span3'>
-                        <div class="btn-group">
-                            <button class="btn little-btn neighbor-add-note" data-neighbor-add-note-target='{{this.id}}' data-neighbor-add-note-source='{{node.id}}'>
-                                <i class="icon-arrow-left"></i>
-                                <i class="icon-asterisk"></i>
-                                note
-                            </button>
-                        </div>
-                    </div>
+                   
                 </div>
                 </a>
             </li>
@@ -132,29 +184,31 @@
         {{/if}}
     {{/if}}
 </template>
-<template name='notelist'>
-    {{#if notes}}
-    <ul class="nav nav-list well note-list">
-        <small>note count = {{notes.length}}</small>
+<template name='notelist'> 
+   
+     <h4 class="annot-node">annotations</h4>
+
+    {{#if notes}} 
+    
+    <p>note count = {{notes.length}}</p>
+    <ul class="nav note-list">
         <div class='clear'></div>
         {{#each notes}}
         <li class='hide note'>
         <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'>
             <div class='row-fluid'>
-                <div class='span9'>
+                <div class='span-title'>
                 {{ this.text }}
                 </div>
-                <div class='span3'>
+                <div class='span3 span-note'>
                 {{#if this.icon}}
-                    (
-                    <i class="icon-asterisk"></i>
+                   
                     <i class="{{this.icon}}"></i>
-                    <!--<i class="">
+                    <!-- <i class="icon-asterisk"></i><i class="">
                         {{#if this.targetlabel}}
                             {{this.targetlabel}}
                         {{/if}}
                     </i>-->
-                    )
                 {{/if}}
                 </div>
                 </div>
@@ -166,49 +220,55 @@
         </div>
     </ul>
     {{/if}}
-    <ul class="nav nav-list well">
+    
+     <ul class="nav">
         <li>
             <a class='new-note'></a>
         </li>
     </ul>
+    
 </template>
 <template name='lastnotes'>
     {{#if notes}}
-    <ul class="nav nav-list well note-list">
+    <ul class="nav note-list">
         {{#each notes}}
         <li class='hide note'>
-            <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'>
-                <div class='row-fluid'>
-                <div class='span9'>
-                {{ this.text }}
-                {{ this.sourcelabel }}
+            <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'> 
+            <div class='row-fluid'>
+                <div class='span-title-lastnote'>
+                {{ this.text }} 
                 </div>
-                <div class='span3'>
-                {{#if this.icon}}
-                (<!--<i>
-                        {{#if this.sourcelabel}}
-                            {{this.sourcelabel}}
-                        {{/if}}
-                    </i>-->
-                    <i class="{{this.icon}}"></i>
-                    <!--<i>
+                <!--<div class='span5 span-lastnote'>
+                                 
+
+                </div>-->
+                <div id="last">
+                
+                <span class='pull-right'>
+                <i class="{{this.icon}}"> </i>
+                    {{#if this.icon}}
+                    {{this.sourcelabel}}
+                    <!-- <i>
                         {{#if this.targetlabel}}
                             {{this.targetlabel}}
                         {{/if}}
-                    </i>-->
-                )
-                {{else}}
-                    <i class="{{this.nodeicon}}"></i>
-                {{/if}}
+                    </i> -->
+                    {{else}}
+                        <!--<i class="{{this.nodeicon}}"> </i>-->{{this.sourcelabel}}
+                    {{/if}} &nbsp;&nbsp;               
+                    <span class="badge" style='background-color:{{ this.nodecolor }};'>&nbsp;</span>
+
+                </span>  
                 </div>
+                 
             </div>
             </a>
         </li>
         {{/each}}
-        <div class="pagination">
+       <!-- <div class="pagination">
             <ul class='note-pages'></ul>
         </div>
-    </ul>
+    </ul>-->
     {{/if}}
 </template>
 

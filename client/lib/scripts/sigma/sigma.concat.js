@@ -1,5 +1,5 @@
 // Define packages:
-var sigma = {};
+sigma = {};
 sigma.tools = {};
 sigma.classes = {};
 sigma.instances = {};
