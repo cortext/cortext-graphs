@@ -13,6 +13,7 @@ Meteor.startup(function() {
                 'click [data-note-page]': 'switchPage',
                 'mouseover .node-hover': 'showNode',
                 'mouseout .node-hover': 'hideNode',
+                'click [data-id]': 'displayCurrentNode'
             },
             initialize: function() {},
             showNode: function(e) {
@@ -53,6 +54,7 @@ Meteor.startup(function() {
             render: function() {
                 var nodeid = Session.get('selected_node').id;
                 if (!nodeid) {
+                    $('.currentnode').hide();
                     this.renderLastActivity();
                     return;
                 }
@@ -124,7 +126,7 @@ Meteor.startup(function() {
                 }).fetch(), function(note) {
                     if (note.source) {
                             var nodesource = window.CorTextGraphs.sigmaview.sigma.getNodes(note.source);
-                            console.log(nodesource);
+                            //console.log(nodesource);
                             note.sourcelabel = nodesource.label;
                             note.nodecolor = nodesource.color;
                     }
@@ -170,18 +172,102 @@ Meteor.startup(function() {
                     currentTarget: $('<a data-note-page="1"></a>')[0]
                 });
             },
+            displayCurrentNode: function(e){
+                 window.CorTextGraphs.mainrouter.navigate(
+                    window.location.hash.split('?node=')[0] +
+                    '?node=' + $(e.currentTarget).attr('data-id'), true);
+            }
         });
         window.CorTextGraphs.notelist = new NoteList({
             el: document.getElementById('notelist')
         });
     }
+
+    if (window.CorTextGraphs.nodelist === undefined){
+        var Nodelist = Backbone.View.extend({
+            events: {
+                'click .node': 'displayCurrentNode',
+                'mouseover .node-hover': 'showNode',
+                'mouseout .node-hover': 'hideNode',
+            },
+            initialize: function() {
+              
+            },
+            showNode: function(e) {
+                window.CorTextGraphs.sidebar.showNode(e);
+            },
+            hideNode: function(e) {
+                window.CorTextGraphs.sidebar.hideNode(e);
+            },
+            displayCurrentNode: function(e){
+               // console.log(e.currentTarget);
+                $('#nav-list_nodes').removeClass('navnodes-hover');
+                this.$el.hide();
+                window.CorTextGraphs.mainrouter.navigate(
+                    window.location.hash.split('?node=')[0] +
+                    '?node=' + $(e.currentTarget).attr('data-id'), true);
+            },
+            render: function(){
+                var ids = new Array();
+                var fromnotes = _.map(window.CorTextGraphs.Notes.find( 
+                     {type: { $ne: 'cluster' } }
+                ).fetch(), function(note) {
+                        if (note.source) {
+                            ids.push(note.source);
+                        }
+                        return note;
+                    });
+
+                var sigma =  window.CorTextGraphs.sigmaview.sigma;
+               // console.log(sigma);
+                
+                var nodes = sigma.getNodes(ids);
+               // console.log(sigma);
+                //return;
+                /*var nodes = [
+                    {id:1, label:'node1'},
+                    {id:2, label:'node2'},
+                    {id:3, label:'node3'}
+                ];*/
+                
+                console.log("rendering nodelist");
+                $('#currentnode').addClass('hide');
+                $('#currentNodeNotes').addClass('hide');
+                this.$el.html(Template.nodelist({
+                    nodes: nodes
+                }));
+                $('#nav-list_nodes').addClass('navnodes-hover');
+                this.$el.show();
+            }
+        });
+        window.CorTextGraphs.nodelist = new Nodelist({
+            el: document.getElementById('nodelist')
+        });
+    }
+
+    if (window.CorTextGraphs.navbar === undefined) {
+        var Navbar = Backbone.View.extend({
+            events: {
+                'click #nav-list_nodes': 'renderNodeList'
+            },
+            initialize: function() {},
+            renderNodeList: function(){
+                console.log("click list");
+                window.CorTextGraphs.nodelist.render();
+            }
+        });
+        window.CorTextGraphs.navbar = new Navbar({
+            el: document.getElementById('navbar-right')
+        });
+    }
+
     if (window.CorTextGraphs.sidebar === undefined) {
         var Sidebar = Backbone.View.extend({
             events: {
                 'click .neighbor-switch': 'switchSidebar',
                 'click [data-neighbor-page]': 'switchNeighborPage',
                 'mouseover .node-hover': 'showNode',
-                'mouseout .node-hover': 'hideNode',
+                'mouseout .node-hover': 'hideNode', 
             },
             initialize: function() {},
             showNode: function(e) {
@@ -222,10 +308,11 @@ Meteor.startup(function() {
                 $('[data-neighbor-page=' + num + ']').addClass('active');
                 $('[data-neighbor-page=' + num + ']').parent().addClass('active');
             },
+            
             render: function() {
                 var cluster = Session.get('selected_cluster');
-                console.log('cluster:');
-                console.log(cluster);
+                //console.log('cluster:');
+                //console.log(cluster);
                 if (_.isObject(cluster)) {
                     cluster.attr.weight = Math.round(cluster.attr.weight);
                     var clusternote = window.CorTextGraphs.Notes.findOne({
@@ -262,6 +349,8 @@ Meteor.startup(function() {
                         seconds
                 }
                 var neighbors = Session.get('selected_neighbors');
+                $('#currentnode').removeClass('hide');
+                $('#notelist').removeClass('hide');
                 this.$el.html(Template.nodepanel({
                     node: Session.get('selected_node'),
                     cluster: cluster,
@@ -337,6 +426,8 @@ Meteor.startup(function() {
                         .attr('data-neighbor-switch');
                     var sigma = window.CorTextGraphs.sigmaview.sigma;
                     var node = sigma.getNodes(node_id);
+                    console.log('node');
+                    console.log(node);
                 } else {
                     var sigma = arguments[2];
                     var node = arguments[1];

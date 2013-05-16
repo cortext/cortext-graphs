@@ -29,4 +29,14 @@ All templates are in client/index.html:
 nb.  the html element #notelist is filled with either notelist or lastnotes templates, depending if their is a current node selected.
 
 #Misc
+## Js
 - $el is the jQuery html element given to a view when it is created (ex : `mySidebar = new Sidebar{el: '#sidebar'}` will allow you to use `$el.html` as the jQuery element `$('#sidebar').html()`) : each view in backbone has an html element attatched.
+
+## Meteor how to ?
+- `declare a public asset (like  img or css) directly inside a html file` 
+Store your asset in the /public directory, and reference it directly, for example : 
+    ``` <img src='logo-cortext.png'/> ̀`` 
+
+##Backbone how to ?
+- navigate to a specific router url : 
+use ```window.CorTextGraphs.mainrouter.navigate(theUrl, true)``` : the 'true' value is used to effectively navigate to the url. If not provided, only the window url is changed.

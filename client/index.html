@@ -10,12 +10,12 @@
   
 <body>
     <div id="navbar" class="navbar navbar-fixed-top">
-<!--      <div class="navbar-inner">
--->        <!--[if lt IE 8]>
+    <div class="navbar-inner">
+       <!--[if lt IE 8]>
         <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->
         <div class="container-fluid" id="navbar-fluid">
-          <a class="brand" id="go-home">
+          <a class="brand" id="go-home" href="/#open/hnetwork-low.json/hnetwork-high.json?node=null">
               <img src='logo-cortext.png'/>
           </a>
           <ul class="nav pull-right" id="navbar-right">
@@ -42,8 +42,8 @@
               </a>
             </li>
           </ul>
-<!--        </div>
--->      </div>
+        </div>
+   </div>
     </div>
     <div class="container-fluid" id='main-container'>
         <div class="row-fluid">
@@ -87,24 +87,23 @@
 </div>
 </template>
 
-<!--<template name="nodelist">
-	
-           {{#each node}}
-    <div class="title-node">
 
-         <div class="row-fluid">
-        <h3 class='page-header node-hover' data-id='{{ node.id }}'>{{ node.label }}
-            {{#if node.attr}}
-            <span class='pull-right'>
-                <span class="badge" style='background-color:{{ cluster.color }};'>&nbsp;</span>
-                {{ node.attr.weight }}
-            </span> 
-            {{/if}}
-        </h3>
+<template name="nodelist">
+    {{#each nodes}}
+    <div class="title-node">
+        <div class="row-fluid">
+            <h3 class='page-header node node-hover' data-id='{{ this.id }}' data-neighbor-switch='{{ this.id }}'>
+                <span class="badge" style='background-color:{{ this.nodecolor }};'>&nbsp;</span>
+                <span>{{ this.label }}</span>
+                {{#if notes}}
+                <span>{{notes.length}}</span>
+                {{/if}}
+            </h3>
         </div>
 	</div>
-            
-</template>-->
+
+    {{/each}}
+</template>
 
 
 <template name="nodepanel">
@@ -185,52 +184,52 @@
     {{/if}}
 </template>
 <template name='notelist'> 
-   
-     <h4 class="annot-node">annotations</h4>
+   <div id="currentNodeNotes">
+        <h4 class="annot-node">annotations</h4>
 
-    {{#if notes}} 
-    
-    <p>note count = {{notes.length}}</p>
-    <ul class="nav note-list">
-        <div class='clear'></div>
-        {{#each notes}}
-        <li class='hide note'>
-        <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'>
-            <div class='row-fluid'>
-                <div class='span-title'>
-                {{ this.text }}
-                </div>
-                <div class='span3 span-note'>
-                {{#if this.icon}}
-                   
-                    <i class="{{this.icon}}"></i>
-                    <!-- <i class="icon-asterisk"></i><i class="">
-                        {{#if this.targetlabel}}
-                            {{this.targetlabel}}
-                        {{/if}}
-                    </i>-->
-                {{/if}}
-                </div>
-                </div>
-            </a>
-        </li>
-        {{/each}}
-        <div class="pagination">
-            <ul class='note-pages'></ul>
-        </div>
-    </ul>
-    {{/if}}
-    
-     <ul class="nav">
-        <li>
-            <a class='new-note'></a>
-        </li>
-    </ul>
-    
+        {{#if notes}} 
+        <p>note count = {{notes.length}}</p>
+        <ul class="nav note-list">
+            <div class='clear'></div>
+             
+            {{#each notes}}
+            <li class='hide note'>
+            <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'>
+                <div class='row-fluid'>
+                    <div class='span-title'>
+                    {{ this.text }}
+                    </div>
+                    <div class='span3 span-note'>
+                    {{#if this.icon}}
+                       
+                        <i class="{{this.icon}}"></i>
+                        <!-- <i class="icon-asterisk"></i><i class="">
+                            {{#if this.targetlabel}}
+                                {{this.targetlabel}}
+                            {{/if}}
+                        </i>-->
+                    {{/if}}
+                    </div>
+                    </div>
+                </a>
+            </li>
+            {{/each}}
+            <div class="pagination">
+                <ul class='note-pages'></ul>
+            </div>
+        </ul>
+        {{/if}}
+
+         <ul class="nav">
+            <li>
+                <a class='new-note'></a>
+            </li>
+        </ul>
+   </div> 
 </template>
 <template name='lastnotes'>
     {{#if notes}}
-    <ul class="nav note-list">
+    <ul class="nav note-list lastnote">
         {{#each notes}}
         <li class='hide note'>
             <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'> 
