@@ -55,8 +55,8 @@
                     </div>
                     <div id='notelist'>
                     </div>
-                   <!-- <div id='nodelist'>
-                    </div>-->
+                    <div id='nodelist'>
+                    </div>
                 </div>
             </div>
         </div>
@@ -87,7 +87,6 @@
 </div>
 </template>
 
-
 <template name="nodelist">
     {{#each nodes}}
     <div class="title-node">
@@ -100,8 +99,7 @@
                 {{/if}}
             </h3>
         </div>
-	</div>
-
+    </div>
     {{/each}}
 </template>
 
@@ -145,7 +143,7 @@
             {{/if}}
         </h3>
         </div>
-	</div>
+    </div>
         
         {{#if neighbors}}
         <ul class="nav nav-list neighbor-list"><!--nav nav-list well-->
