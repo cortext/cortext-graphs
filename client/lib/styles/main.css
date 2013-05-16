@@ -411,7 +411,7 @@ width: 1280px;
 	cursor:pointer;
 	}
 	
-.navbar #nav-list_nodes:hover{
+.navbar #nav-list_nodes:hover, .navnodes-hover{
 	background-color:#27AD19;
 	}	
 
