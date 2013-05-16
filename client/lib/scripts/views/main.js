@@ -267,6 +267,8 @@ Meteor.startup(function() {
                     cluster: cluster,
                     neighbors: neighbors
                 }));
+				
+				
                 if (_.isObject(cluster)) {
                     $('.cluster').editable({
                         type: 'textarea',
@@ -409,6 +411,7 @@ Meteor.startup(function() {
         window.CorTextGraphs.sidebar = new Sidebar({
             el: document.getElementById('currentnode')
         });
+		
     }
     if (window.CorTextGraphs.sigmaview === undefined) {
         var SigmaView = Backbone.View.extend({

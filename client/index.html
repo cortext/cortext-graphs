@@ -55,6 +55,8 @@
                     </div>
                     <div id='notelist'>
                     </div>
+                    <div id='nodelist'>
+                    </div>
                 </div>
             </div>
         </div>
@@ -84,6 +86,26 @@
     {{/if}}
 </div>
 </template>
+
+<template name="nodelist">
+	
+           {{#each node}}
+    <div class="title-node">
+
+         <div class="row-fluid">
+        <h3 class='page-header node-hover' data-id='{{ node.id }}'>{{ node.label }}
+            {{#if node.attr}}
+            <span class='pull-right'>
+                <span class="badge" style='background-color:{{ cluster.color }};'>&nbsp;</span>
+                {{ node.attr.weight }}
+            </span> 
+            {{/if}}
+        </h3>
+        </div>
+	</div>
+            
+</template>
+
 
 <template name="nodepanel">
 
@@ -118,9 +140,10 @@
             <span class='pull-right'>
                 <span class="badge" style='background-color:{{ cluster.color }};'>&nbsp;</span>
                 {{ node.attr.weight }}
-            </span>
-            {{/if}}
+            </span> 
             <div class="link-annot"><a href="#">annotate the node</a></div>
+
+            {{/if}}
         </h3>
         </div>
 	</div>
@@ -161,8 +184,7 @@
         {{/if}}
     {{/if}}
 </template>
-<template name='notelist'>
-  
+<template name='notelist'> 
    
      <h4 class="annot-node">annotations</h4>
 
@@ -243,9 +265,9 @@
             </a>
         </li>
         {{/each}}
-        <div class="pagination">
+       <!-- <div class="pagination">
             <ul class='note-pages'></ul>
         </div>
-    </ul>
+    </ul>-->
     {{/if}}
 </template>
