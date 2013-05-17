@@ -358,9 +358,16 @@ color:#777777;
 
 /* node list */
 
+
 #nodelist {
-	padding-top:15px;
+	padding-top:10px;
 }
+
+/*#nodelist .green{
+	height:3px;
+	width:100%;
+	background-color:#27AD19;
+	}*/
 
 #nodelist .title-node {
 	border-bottom: 1px solid #E1E1E1;
