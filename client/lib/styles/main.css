@@ -132,7 +132,7 @@ body {
 }	
 	
 .page-header {
-	margin:0px 0px -7px 6px;
+	margin:-7px 0px 0px 6px;
 	color:#393939;
 	font-family:Arial,Helvetica,sans-serif;
     font-size: 14px;
@@ -149,12 +149,11 @@ body {
 .title-node .link-annot{
 	background: url("/link-arrow.png") no-repeat 303px 6px;
 	line-height:20px;
-	margin-bottom:5px;
 }	
 
 .nav .link-annot{
-	background: url("/link-arrow.png") no-repeat 303px 51px;
-	line-height:10px;
+	background: url("/link-arrow.png") no-repeat 303px 56px;
+	line-height:20px;
 	margin-bottom:-7px;
 }	
 
