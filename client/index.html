@@ -87,22 +87,6 @@
 </div>
 </template>
 
-<template name="nodelist">
-    {{#each nodes}}
-    <div class="title-node">
-        <div class="row-fluid">
-            <h3 class='page-header node node-hover' data-id='{{ this.id }}' data-neighbor-switch='{{ this.id }}'>
-                <span class="badge" style='background-color:{{ this.nodecolor }};'>&nbsp;</span>
-                <span>{{ this.label }}</span>
-                {{#if notes}}
-                <span>{{notes.length}}</span>
-                {{/if}}
-            </h3>
-        </div>
-    </div>
-    {{/each}}
-</template>
-
 
 <template name="nodepanel">
 
@@ -262,9 +246,24 @@
             </a>
         </li>
         {{/each}}
-       <!-- <div class="pagination">
+        <div class="pagination">
             <ul class='note-pages'></ul>
         </div>
-    </ul>-->
+    </ul>
     {{/if}}
+</template>
+
+
+<template name="nodelist">
+
+    {{#each nodes}}
+    <div class="title-node">
+            <h2 class='titlenode node node-hover' data-id='{{ this.id }}' data-neighbor-switch='{{ this.id }}'>            
+               <span class="badge" style='background-color:{{  this.nodecolor }};'>&nbsp;</span>
+                 <span>{{ this.label }}</span>               
+                                
+            </h2>
+    </div>
+    {{/each}}
+    
 </template>
