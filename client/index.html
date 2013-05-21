@@ -165,6 +165,7 @@
         {{/if}}
     {{/if}}
 </template>
+
 <template name='notelist'> 
    <div id="currentNodeNotes">
         <h4 class="annot-node">annotations</h4>
@@ -261,11 +262,11 @@
 {{#each nodes}}
     <div class="title-node">
             <h2 class='titlenode node node-hover' data-id='{{ this.id }}' data-neighbor-switch='{{ this.id }}'>            
-               <span class="badge" style='background-color:{{  this.nodecolor }};'>&nbsp;</span>
+             <span class="badge" style='background-color:{{ this.nodecolor }};'>&nbsp;</span>
                  <span>{{ this.label }}</span>               
                                 
             </h2>
     </div>
     {{/each}}
-    
+
 </template>

@@ -245,6 +245,8 @@ Meteor.startup(function() {
         });
     }
 
+
+
     if (window.CorTextGraphs.navbar === undefined) {
         var Navbar = Backbone.View.extend({
             events: {
