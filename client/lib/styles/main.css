@@ -361,8 +361,8 @@ color:#777777;
 }
 
 .row-fluid .note{
-	border-bottom: 1px solid #E1E1E1;
-	background: url("/annot-list-grey.png") no-repeat 10px 7px; 
+	border-bottom: 2px solid #FFFFFF/*#E1E1E1#F8F8F9*/;
+	background: url("/annot-list-grey.png") no-repeat 10px 7px #fbfbfb ; 
 }
 
 .note-list .row-fluid:hover{
@@ -381,7 +381,8 @@ color:#777777;
 }
 
 #nodelist .title-node {
-	border-bottom: 1px solid #E1E1E1;
+	border-bottom: 2px solid #ffffff/*#E1E1E1*/;
+	background-color:#fbfbfb;
 }
 
 #nodelist .title-node:hover {

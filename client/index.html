@@ -260,7 +260,7 @@
 
 
 <template name="nodelist">
-        <p class="count">node count = {{nodes.length}}</p>   
+        <p class="count">{{nodes.length}} nodes </p>   
         {{#each nodes}}
         <div class="title-node" data-id='{{ this.id }}'>
                 <h2 class='titlenode node node-hover'  data-id='{{ this.id }}' data-neighbor-switch='{{ this.id }}'>            
