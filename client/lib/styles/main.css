@@ -565,11 +565,21 @@ color:#777777;
 }
 
 #footer p{
-	font-family: "Oxygen-Regular";
+	font-family: arial, "Oxygen-Regular";
     font-size: 14px;
 	font-style: normal;
 	font-weight:100;
 	margin-left:75px;
 	margin-top:7px;
 	float:left;
+	color:#393939;
+}
+
+#footer a{
+	color:#393939;
+}
+
+#footer a:hover{
+	color:#393939;
+	text-decoration:underline;
 }
