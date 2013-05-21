@@ -51,7 +51,7 @@
             </div>
             <div id="sidebar" class="span4">
 <!--                <div class="sidebar-nav">
--->                    <div id='currentnode'>
+-->                 <div id='currentnode'>
                     </div>
                     <div id='notelist'>
                     </div>
@@ -60,12 +60,6 @@
                 </div>
 <!--            </div>
 -->        </div>
-
-        <div id="footer" class="row-fluid">
-         <div>
-            <p class="muted credit"><a href="https://github.com/cortext/cortext-graphs/">Cortext Graphs</a> is a <a href="http://www.gnu.org/licenses/agpl-3.0.html">Free Software</a> made by <a href="http://www.cortext.net/">Cortext research team at IFRIS Universit&eacute; Paris-Est</a></p>
-          </div>
-        </div>
     </div>
 
 </body>
@@ -85,6 +79,11 @@
     </a>
     {{/if}}
 </div>
+<div id="footer" class="row-fluid">
+         <div>
+            <p class="muted credit"><a href="https://github.com/cortext/cortext-graphs/">Cortext Graphs</a> is a <a href="http://www.gnu.org/licenses/agpl-3.0.html">Free Software</a> made by <a href="http://www.cortext.net/">Cortext research team at IFRIS Universit&eacute; Paris-Est</a></p>
+          </div>
+        </div>
 </template>
 
 
@@ -256,16 +255,13 @@
 
 
 <template name="nodelist">
-
-<!--	<div class="green"></div>
--->    
-{{#each nodes}}
-    <div class="title-node">
-            <h2 class='titlenode node node-hover' data-id='{{ this.id }}' data-neighbor-switch='{{ this.id }}'>            
-             <span class="badge" style='background-color:{{ this.color }};'>&nbsp;</span>
-                 <span>{{ this.label }}</span>               
-            </h2>
-    </div>
-    {{/each}}
-
+        <p class="count">node count = {{nodes.length}}</p>   
+        {{#each nodes}}
+        <div class="title-node" data-id='{{ this.id }}'>
+                <h2 class='titlenode node node-hover'  data-id='{{ this.id }}' data-neighbor-switch='{{ this.id }}'>            
+                 <span class="badge" style='background-color:{{ this.color }};'>&nbsp;</span>
+                     <span>{{ this.label }}</span> <span class="pullright">{{this.noteCount}}</span>               
+                </h2>
+        </div>
+        {{/each}}
 </template>

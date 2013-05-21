@@ -15,7 +15,7 @@
 	border-left:1px solid #E1E1E1;
 	border-right:1px solid #E1E1E1;
 	overflow:hidden;
-	margin-top: 43px;
+	margin-top: 55px;
 }
 
 /* panneau existant "node-info" */
@@ -45,7 +45,7 @@ body {
 
 .container-fluid,
 .row-fluid {
-    height: 93%;
+    height: 100%;
 }
 
 #footer {
@@ -68,6 +68,8 @@ body {
 	letter-spacing:2px;
 	padding:5px;
 	margin-bottom:6px;
+	margin-top:0;
+
 }
 
 .nav .row-fluid, .title-node .row-fluid{
@@ -362,6 +364,7 @@ color:#777777;
 
 
 #nodelist {
+	margin-top: 0px;
 	padding-top:10px;
 	height: 100%;
 	overflow-y : scroll;
@@ -436,7 +439,7 @@ color:#777777;
 	cursor:pointer;
 }
 	
-.navbar #nav-list_nodes:hover, .navnodes-hover{
+.navbar #nav-list_nodes:hover, .navbar #nav-list_nodes.navnodes-hover{
 	background-color:#27AD19;
 }	
 
