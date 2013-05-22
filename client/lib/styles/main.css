@@ -362,7 +362,7 @@ color:#777777;
 
 .row-fluid .note{
 	border-bottom: 2px solid #FFFFFF/*#E1E1E1#F8F8F9*/;
-	background: url("/annot-list-grey.png") no-repeat 10px 7px #fbfbfb ; 
+	background: url("/annot-list-grey.png") no-repeat 10px 7px #eeeeee; 
 }
 
 .note-list .row-fluid:hover{
@@ -375,14 +375,32 @@ color:#777777;
 
 #nodelist {
 	margin-top: 0px;
-	padding-top:10px;
-	height: 100%;
+/*	padding-top:10px;
+*/	height: 100%;
 	overflow-y : scroll;
 }
 
+#nodelist .count {
+	background: url("/navnodes-img.png") no-repeat 295px 7px #9C96A7 ;
+    color: #FFFFFF;
+    font-family: "Oxygen-Regular",Arial,Helvetica,sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: 2px;
+    margin-bottom: 0px;
+    margin-top: 0;
+    padding: 3px;
+}
+
+#nodelist .count span{
+	 margin-left:10px;
+} 
+
+
+
 #nodelist .title-node {
 	border-bottom: 2px solid #ffffff/*#E1E1E1*/;
-	background-color:#fbfbfb;
+	background-color:#eeeeee;
 }
 
 #nodelist .title-node:hover {

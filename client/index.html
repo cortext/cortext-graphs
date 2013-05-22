@@ -175,7 +175,7 @@
         <h4 class="annot-node">annotations</h4>
 
         {{#if notes}} 
-        <p>note count = {{notes.length}}</p>
+        <p> {{notes.length}} notes</p>
         <ul class="nav note-list">
             <div class='clear'></div>
              
@@ -260,7 +260,8 @@
 
 
 <template name="nodelist">
-        <p class="count">{{nodes.length}} nodes </p>   
+
+        <div class="count"><span>{{nodes.length}} nodes </span></div>   
         {{#each nodes}}
         <div class="title-node" data-id='{{ this.id }}'>
                 <h2 class='titlenode node node-hover'  data-id='{{ this.id }}' data-neighbor-switch='{{ this.id }}'>            
