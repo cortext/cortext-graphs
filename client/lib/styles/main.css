@@ -17,7 +17,15 @@
 	overflow:hidden;
 	margin-top: 55px;
 	margin-left: 0px; 
+	position: fixed;
+	right: 10px;
 
+}
+/* node selected panel  */
+#currentnode, #noteinfo{
+	position: absolute;
+	width:332px;
+	right: 0;
 }
 
 /* panneau existant "node-info" */
@@ -116,6 +124,7 @@ body {
 	letter-spacing:2px;
 	padding:5px;
 	margin-top:-4px;
+
 }	
 	
 .nav .neighbour-node{
