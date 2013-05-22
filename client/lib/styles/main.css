@@ -417,6 +417,20 @@ color:#777777;
     padding-left: 10px;
 	line-height:30px;
 }
+
+#nodelist .title-node .titlenode .nbr-notes{
+	float:right;
+	background: url("/annot-list-grey.png") no-repeat 2px 7px; 
+	color: #A3A1A1;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    margin-bottom: 0px;
+    padding-right: 10px;
+}
+
+#nodelist .title-node .titlenode .nbr-notes .number-notes{
+	padding-left:18px;   
+}
 	
 #nodelist .title-node .titlenode .badge{
 	margin-right:15px;
