@@ -240,6 +240,8 @@
 <template name='notelist'>
     {{#if notes}}
     <ul class="nav note-list lastnote">
+            <div class="count"><span>{{notes.length}} notes </span></div>   
+
         {{#each notes}}
         <li class='hide note'>
             <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'> 
@@ -247,14 +249,15 @@
                 <div class='span-title-lastnote'>
                 {{ this.text }} 
                 </div>
+                                            
                 <div id="last">
-                
                 <span class='pull-right'>
                 <i class="{{this.icon}}"> </i>
                     {{#if this.icon}}
                     {{this.sourcelabel}}
-                    {{else}}
-                       {{this.sourcelabel}}
+                    {{else}} 
+<!--                    <i class="{{this.nodeicon}}"></i>
+-->                       {{this.sourcelabel}}
                     {{/if}} &nbsp;&nbsp;               
                     <span class="badge" style='background-color:{{ this.nodecolor }};'>&nbsp;</span>
 
