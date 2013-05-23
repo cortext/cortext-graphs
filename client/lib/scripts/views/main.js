@@ -396,6 +396,7 @@ Meteor.startup(function() {
             },
             render: function() {
                 $('#nodelist').addClass('hide');
+                $('#notelist').addClass('hide');
                 $('#noteedit').addClass('hide');
                 $('#nav-list_nodes').removeClass('navnodes-hover');
                 var cluster = Session.get('selected_cluster');
