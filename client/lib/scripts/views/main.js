@@ -62,7 +62,8 @@ Meteor.startup(function() {
                     //return;
                 }
                 console.log('rendering noteEdit for node '+nodeid);
-                var node = window.CorTextGraphs.sigmaview.sigma.getNodes(nodeid);
+                var sigma = window.CorTextGraphs.sigmaview.sigma;
+                var node = sigma.getNodes(nodeid);
                 console.log(node);
                 var fromquery = {
                     graph: Session.get('title'),
@@ -73,7 +74,7 @@ Meteor.startup(function() {
                 ).fetch(), function(note) {
                         if (note.target) {
                             note.icon = 'icon-arrow-right';
-                            var node = window.CorTextGraphs.sigmaview.sigma.getNodes(note.target);
+                            var node = sigma.getNodes(note.target);
                             note.targetlabel = node.label;
                         }
                         return note;
@@ -83,14 +84,17 @@ Meteor.startup(function() {
                         target: nodeid
                     }).fetch(), function(note) {
                         note.icon = 'icon-arrow-left';
-                        var node = window.CorTextGraphs.sigmaview.sigma.getNodes(note.source);
+                        var node = sigma.getNodes(note.source);
                         note.targetlabel = node.label;
                         return note;
                     });
                 var notes = _.union(fromnotes, tonotes);
+                var cluster = sigma.getNodes(
+                    'node-high-' + node.attr.cluster_index);
                 this.$el.data('notes', notes);
                 this.$el.html(Template.noteedit({
                     notes: notes,
+                    cluster : cluster,
                     node: node
                 }));
                 this.renderPagination(notes);
@@ -471,7 +475,14 @@ Meteor.startup(function() {
                     neighbors: neighbors
                 }));
                 this.$el.removeClass('hide');
-				
+				$('.node-add-note').click(function(event) {
+                        window.CorTextGraphs.NoteEdit.render();
+                        event.stopPropagation();
+                        $('.new-note').data('source',
+                                            $(event.currentTarget).attr(
+                                                'data-neighbor-add-note-source'));
+                        $('.new-note').editable('toggle');
+                    });
 				
                 if (_.isObject(cluster)) {
                     $('.cluster').editable({
@@ -522,6 +533,7 @@ Meteor.startup(function() {
                         currentTarget: $('<a data-neighbor-page="1"></a>')[0]
                     });
                     $('.neighbor-add-note').click(function(event) {
+                        window.CorTextGraphs.NoteEdit.render();
                         event.stopPropagation();
                         $('.new-note').data('target',
                                             $(event.currentTarget).attr(

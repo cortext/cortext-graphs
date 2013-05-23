@@ -472,7 +472,10 @@ background: url("/annot-list-grey.png") no-repeat scroll 10px 7px;
 #nodelist {
 	margin-top: 0px;
 	height: 100%;
-	overflow-y : scroll;
+}
+#nodelist .nodelistContainer{
+	height: 100%;
+	overflow-y : auto;
 }
 
 #nodelist .count {
