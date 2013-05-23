@@ -21,6 +21,8 @@
 	position: fixed;
 	right: 10px;
 }
+
+
 /* node selected panel  */
 #currentnode, #noteedit{
 	position: absolute;
@@ -89,8 +91,10 @@ body {
 
 }
 
-.nav .row-fluid, .title-node .row-fluid{
-	}
+.nav .span10 .editableform textarea {
+    height: 35px;
+}
+
 	
 .row-fluid .span10 {
     margin-top: -12px;
@@ -113,6 +117,7 @@ body {
     font-size: 14px;
     font-weight: normal;
 }	
+
 	
 .title-node .current-node{
 	background:#9C96A7;	
@@ -154,7 +159,7 @@ body {
 }	
 	
 .page-header {
-	margin:-7px 0px 0px 6px;
+	margin:-7px 0px 0px 0px;
 	color:#393939;
 	font-family:Arial,Helvetica,sans-serif;
     font-size: 14px;
@@ -180,13 +185,13 @@ body {
 }	
 
 .title-node .link-annot a{
-	margin-left:189px;
+	margin-left:199px;
 	color:#777777;
 	font-size:13px;
 }
 
 .nav .link-annot a{
-margin-left:155px;
+margin-left:199px;
 color:#777777;
 font-size:13px;
 }	
@@ -217,7 +222,7 @@ font-size:13px;
 	margin-left: 76px;
     width: 45px;
 }
-.span3 .neighbor-add-note, .node-add-note{
+.span3 .neighbor-add-note{
 	background: url("/bt1-annot-neighbour.png") no-repeat;
 	width:22px;
 	height:22px;
@@ -226,6 +231,18 @@ font-size:13px;
 	border:none;
 	margin-left:6px;
 	margin-right:6px;
+}
+
+.node-add-note{
+	background: url("/bt1-annot-neighbour.png") no-repeat;
+	width:22px;
+	height:22px;
+	text-shadow:none;
+	line-height:0px;
+	border:none;
+	margin-left:6px;
+	margin-right:6px;
+	margin-top:3px;
 }
 
 .span3 .neighbor-add-note:hover, .node-add-note:hover{
@@ -368,9 +385,18 @@ font-size:13px;
 	width:95%; 
 }
 
-.row-fluid #last .icon-arrow-right{
-	background: url("/last-note-neighbour.png") no-repeat; 
+.row-fluid #last .icon-asterisk{background: url("/node-note.png") no-repeat;
 	margin-right:8px;	
+	margin-top:-4px;
+	width:20px;
+	height:20px;}
+
+.row-fluid #last .icon-arrow-right{
+	background: url("/neighbour-right.png") no-repeat;
+	margin-right:8px;	
+	margin-top:-4px;
+	width:20px;
+	height:20px;
 }
 
 #last .pull-right {
@@ -410,7 +436,7 @@ font-size:13px;
     letter-spacing: 2px;
     margin-bottom: 0px;
     margin-top: 0;
-    padding: 3px;
+    padding: 5px;
 }
 
 #nodelist .count span{
