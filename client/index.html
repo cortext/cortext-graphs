@@ -199,9 +199,8 @@
         <p> {{notes.length}} notes</p>
         <ul class="nav note-list">
             <div class='clear'></div>
-             
             {{#each notes}}
-            <li class='hide note'>
+            <li class='note'>
             <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'>
                 <div class='row-fluid'>
                     <div class='span-title'>
@@ -227,7 +226,6 @@
             </div>
         </ul>
         {{/if}}
-
          <ul class="nav">
             <li>
                 <a class='new-note'></a>
@@ -240,28 +238,25 @@
 <template name='notelist'>
     {{#if notes}}
     <ul class="nav note-list lastnote">
-            <div class="count"><span>{{notes.length}} notes </span></div>   
-
+        <div class="count"><span>{{notes.length}} notes </span></div>   
         {{#each notes}}
-        <li class='hide note'>
+        <li class='note'>
             <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'> 
             <div class='row-fluid'>
                 <div class='span-title-lastnote'>
                 {{ this.text }} 
-                </div>
-                                            
+                </div>                   
                 <div id="last">
-                <span class='pull-right'>
-                <i class="{{this.icon}}"> </i>
-                    {{#if this.icon}}
-                    {{this.sourcelabel}}
-                    {{else}} 
-<!--                    <i class="{{this.nodeicon}}"></i>
--->                       {{this.sourcelabel}}
-                    {{/if}} &nbsp;&nbsp;               
-                    <span class="badge" style='background-color:{{ this.nodecolor }};'>&nbsp;</span>
+                    <span class='pull-right'>
+                    <i class="{{this.icon}}"> </i>
+                        {{#if this.icon}}
+                        {{this.sourcelabel}}
+                        {{else}} 
+                           {{this.sourcelabel}}
+                        {{/if}} &nbsp;&nbsp;               
+                        <span class="badge" style='background-color:{{ this.nodecolor }};'>&nbsp;</span>
 
-                </span>  
+                    </span>  
                 </div>
                  
             </div>

@@ -8,7 +8,7 @@ Meteor.startup(function() {
         window.CorTextGraphs = {};
     }
     ////////////// panel noteedit /////////////////
-    if (window.CorTextGraphs.notEdit === undefined) {
+    if (window.CorTextGraphs.noteEdit === undefined) {
         var NoteEdit = Backbone.View.extend({
             events: {
                 'click [data-note-page]': 'switchPage',
@@ -18,6 +18,7 @@ Meteor.startup(function() {
             },
             initialize: function() {},
             showNode: function(e) {
+                console.log("hover node "+$(e.currentTarget).attr('data-id'));
                 var ids = $(e.currentTarget).attr('data-id').split(',');
                 _.each(ids, function(id) {
                     window.CorTextGraphs.sigmaview.sigma._core.plotter.drawHoverNode(
@@ -131,44 +132,6 @@ Meteor.startup(function() {
                     that.render();
                 });
             },
-            renderLastActivity: function() {
-                console.log('rendering last activity');
-                var notes = _.map(window.CorTextGraphs.Notes.find({
-                    graph: Session.get('title'),
-                    type: { $ne: 'cluster' }
-                    }, {
-                        sort: {
-                            created_at: -1
-                        }
-                    }).fetch(), function(note) {
-                    if (note.source) {
-                            var nodesource = window.CorTextGraphs.sigmaview.sigma.getNodes(note.source);
-                            //console.log(nodesource);
-                            note.sourcelabel = nodesource.label;
-                            note.nodecolor = nodesource.color;
-                    }
-                    if (note.target) {
-                        note.icon = 'icon-arrow-right';
-                        var node = window.CorTextGraphs.sigmaview.sigma.getNodes(note.target);
-                        note.targetlabel = node.label;
-                    } else {
-                        if (note.type == 'node')
-                            note.nodeicon = 'icon-asterisk';
-                    }
-                    return note;
-                    });
-                this.$el.data('notes', notes);
-                $('#notelist').html(Template.notelist({
-                    notes: notes
-                }));
-                $('#notelist').removeClass('hide');
-                $('#notelist').animate({'right':0+'px'});
-                $('#sidebar').css('width',332+'px');
-                console.log('attr id :'+this.$el.attr('id'));
-                this.renderPagination(notes);
-                $('.new-note').hide();
-                $('.new-note').parent().hide();
-            },
             renderPagination: function(notes) {
                 var pagesnumber = Math.ceil(notes.length / 100);
                 if (pagesnumber > 1) {
@@ -193,6 +156,9 @@ Meteor.startup(function() {
                 });
             },
             displayCurrentNode: function(e){
+                $('#notelist').addClass('hide');
+                $('#nodelist').addClass('hide');
+                $('#noteedit').addClass('hide');
                  window.CorTextGraphs.mainrouter.navigate(
                     window.location.hash.split('?node=')[0] +
                     '?node=' + $(e.currentTarget).attr('data-id'), true);
@@ -212,27 +178,7 @@ Meteor.startup(function() {
             },
             initialize: function() {
               
-            },
-            renderPanels: function(){
-                var panels = Session.get('panels_state');
-                if(oldpanels !==undefined)
-                {
-                   _.each(oldpanels, function(panel){
-                   panels['panel_name'];
-                })                    
-                }
-
-                $('#currentnode').animate({
-                        "right": '+=332px'
-                    },
-                    {   queue:false,
-                        duration:160
-                    }
-                );
-                $('#sidebar').css('width', '882px');
-                 var oldpanels = panels;
-                
-            },
+            },            
             showNode: function(e) {
                 window.CorTextGraphs.sidebar.showNode(e);
             },
@@ -297,6 +243,83 @@ Meteor.startup(function() {
             el: document.getElementById('nodelist')
         });
     }
+     ////////////// panel notelist /////////////////
+    if(window.CorTextGraphs.notelist === undefined){
+        var NoteList = Backbone.View.extend({
+            events: {
+                'click .title-node': 'displayCurrentNode',
+                'mouseover .node-hover': 'showNode',
+                'mouseout .node-hover': 'hideNode',
+            },
+            initialize: function () {
+                // body...
+            },
+            showNode: function(e) {
+                console.log("hover node "+$(e.currentTarget).attr('data-id'));
+                var ids = $(e.currentTarget).attr('data-id').split(',');
+                _.each(ids, function(id) {
+                    window.CorTextGraphs.sigmaview.sigma._core.plotter.drawHoverNode(
+                       window.CorTextGraphs.sigmaview.sigma._core.graph.nodesIndex[id]);
+                });
+            },
+            hideNode: function(e) {
+                window.CorTextGraphs.sigmaview.sigma.refresh();
+            },
+            displayCurrentNode: function(){
+                // console.log(e.currentTarget);
+                $('#nav-list_nodes').removeClass('navnodes-hover');
+                this.$el.addClass('hide');
+                console.log($(e.currentTarget).attr('data-id'));
+                $('#notelist').addClass('hide');
+                $('#nodelist').addClass('hide');
+                $('#currentnode').removeClass('hide');
+                if($(e.currentTarget).attr('data-id') !==undefined)
+                {
+                    window.CorTextGraphs.mainrouter.navigate(
+                    window.location.hash.split('?node=')[0] +
+                    '?node=' + $(e.currentTarget).attr('data-id'), true);    
+                }
+            },
+            render: function() {
+                console.log('rendering last activity (notelist)');
+                var notes = _.map(window.CorTextGraphs.Notes.find({
+                    graph: Session.get('title'),
+                    type: { $ne: 'cluster' }
+                    }, {
+                        sort: {
+                            created_at: -1
+                        }
+                    }).fetch(), function(note) {
+                    if (note.source) {
+                            var nodesource = window.CorTextGraphs.sigmaview.sigma.getNodes(note.source);
+                            //console.log(nodesource);
+                            note.sourcelabel = nodesource.label;
+                            note.nodecolor = nodesource.color;
+                    }
+                    if (note.target) {
+                        note.icon = 'icon-arrow-right';
+                        var node = window.CorTextGraphs.sigmaview.sigma.getNodes(note.target);
+                        note.targetlabel = node.label;
+                    } else {
+                        if (note.type == 'node')
+                            note.nodeicon = 'icon-asterisk';
+                    }
+                    return note;
+                    });
+                this.$el.data('notes', notes);
+                $('#notelist').html(Template.notelist({
+                    notes: notes
+                }));
+                $('#notelist').removeClass('hide');
+                $('#notelist').animate({'right':0+'px'});
+                $('#sidebar').css('width',332+'px');
+                console.log('notes : ', notes);
+            }
+        });
+        window.CorTextGraphs.notelist = new NoteList({
+            el: document.getElementById('notelist')
+        });
+    }
      ////////////// panel navbar /////////////////
     if (window.CorTextGraphs.navbar === undefined) {
         var Navbar = Backbone.View.extend({
@@ -321,7 +344,7 @@ Meteor.startup(function() {
                 $('#noteedit').addClass('hide');
                 $('#nodelist').addClass('hide');
                 $('#nav-info_nodes').removeClass('navnodes-hover');
-                window.CorTextGraphs.NoteEdit.renderLastActivity();
+                window.CorTextGraphs.notelist.render();
             },
             renderCurrentNode: function(){
                 $('#noteedit').animate({'right':-332+'px'});
@@ -331,7 +354,7 @@ Meteor.startup(function() {
                 $('#noteedit').addClass('hide');
                 $('#notelist').addClass('hide');
                 $('#nodelist').addClass('hide');
-                window.CorTextGraphs.renderCurrentNode();
+                window.CorTextGraphs.sidebar.renderCurrentNode();
             }
 
         });
@@ -351,6 +374,7 @@ Meteor.startup(function() {
             },
             initialize: function() {},
             showNode: function(e) {
+                console.log('showNode : '+$(e.currentTarget).attr('data-id'))
                 var ids = $(e.currentTarget).attr('data-id').split(',');
                 _.each(ids, function(id) {
                     window.CorTextGraphs.sigmaview.sigma._core.plotter.drawHoverNode(
@@ -395,6 +419,7 @@ Meteor.startup(function() {
 
             },
             render: function() {
+                console.log('rendering sidebar');
                 $('#nodelist').addClass('hide');
                 $('#notelist').addClass('hide');
                 $('#noteedit').addClass('hide');
@@ -440,7 +465,6 @@ Meteor.startup(function() {
                 var neighbors = Session.get('selected_neighbors');
                 $('#currentnode').removeClass('hide');
                 $('#nav-info_nodes').addClass('navnodes-hover');
-                $('#notelist').removeClass('hide');
                 this.$el.html(Template.nodepanel({
                     node: Session.get('selected_node'),
                     cluster: cluster,
