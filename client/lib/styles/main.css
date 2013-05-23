@@ -326,13 +326,27 @@ font-size:13px;
 
 
 .row-fluid .span-note .icon-arrow-left{
-	background: url("/last-note-neighbour.png") no-repeat;
-	margin-left:16px;  
+	background: url("/neighbour-left.png") no-repeat;
+	margin-left:16px; 
+	margin-top:-4px;
+	width:20px;
+	height:20px;
 }
 
 .row-fluid .span-note .icon-arrow-right{
-	background: url("/last-note-neighbour.png") no-repeat;
+	background: url("/neighbour-right.png") no-repeat;
 	margin-left:16px; 
+	margin-top:-4px;
+	width:20px;
+	height:20px;
+}
+
+.row-fluid .span-note .icon-arrow{
+	background: url("/node-note.png") no-repeat;
+	margin-left:16px; 
+	margin-top:-4px;
+	width:20px;
+	height:20px;
 }
 
 .row-fluid .span-lastnote {
