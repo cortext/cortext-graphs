@@ -278,8 +278,20 @@ font-size:13px;
 
 
 /* note list */
+
+#notelist .note-list{
+overflow:scroll;
+height:100%;
+position:absolute;	
+	}
+
+#currentNodeNotes .note{
+background: url("/annot-list-grey.png") no-repeat scroll 10px 7px;
+    border-bottom: 1px solid #EEEEEE;	
+
+	}
 	
-#notelist .new-note{
+#currentNodeNotes .new-note{
 	background:#FAFAFA;
     border: 1px solid #DCDCDC;
     border-radius: 3px 3px 3px 3px;
@@ -294,7 +306,7 @@ font-size:13px;
 	margin-top:18px;
 }
 
-.note-list .count{
+#notelist .count{
 	background: url("/annot-list-white.png") no-repeat 300px 7px #9C96A7 ;
     color: #FFFFFF;
     font-family: "Oxygen-Regular",Arial,Helvetica,sans-serif;
@@ -326,14 +338,27 @@ font-size:13px;
 	letter-spacing:2px;
 	padding:5px;
 	margin-top:-2px;
+	margin-bottom:0px;
+}
+
+.annot-node span{
+	color:#FFF;
+	font-family:"Oxygen-Regular", Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+	letter-spacing:2px;
+	padding:5px;
+	margin-top:-2px;
+	margin-left:170px;
 }
 	
-#notelist p{
+#currentNodeNotes p{
 	background: url("/annot-list-grey.png") no-repeat 10px 2px; 
 	color: #A3A1A1;
     font-family: Arial,Helvetica,sans-serif;
     font-size: 12px;
     margin-bottom: 0px;
+	margin-top:-7px;
     padding-left: 35px;	   
 	border-bottom: 1px solid #E1E1E1;
 }
@@ -359,7 +384,7 @@ font-size:13px;
 
 
 .row-fluid .span-note .icon-arrow-left{
-	background: url("/neighbour-left.png") no-repeat;
+	background: url("/note-neighbour-left.png") no-repeat;
 	margin-left:16px; 
 	margin-top:-4px;
 	width:20px;
@@ -367,7 +392,7 @@ font-size:13px;
 }
 
 .row-fluid .span-note .icon-arrow-right{
-	background: url("/neighbour-right.png") no-repeat;
+	background: url("/note-neighbour-right.png") no-repeat;
 	margin-left:16px; 
 	margin-top:-4px;
 	width:20px;
@@ -396,7 +421,7 @@ font-size:13px;
     font-size: 13px;
     font-weight: normal;
 	padding-top:5px;
-	margin-bottom:-10px;
+	margin-bottom:-5px;
 	padding-left:35px;
 	width:95%; 
 }
@@ -432,8 +457,8 @@ font-size:13px;
 }
 
 .row-fluid .note{
-	border-bottom: 2px solid #FFFFFF;
-	background: url("/annot-list-grey.png") no-repeat 10px 7px #eeeeee; 
+	border-bottom: 2px solid #ffffff;
+	background: url("/annot-list-grey.png") no-repeat 10px 7px #f2edfd; 
 }
 
 .note-list .row-fluid:hover{
@@ -467,8 +492,8 @@ font-size:13px;
 } 
 
 #nodelist .title-node {
-	border-bottom: 2px solid #ffffff;
-	background-color:#eeeeee;
+	border-bottom: 1px solid #ffffff;
+	background-color:#f2edfd;
 }
 
 #nodelist .title-node:hover {

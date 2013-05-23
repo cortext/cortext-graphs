@@ -194,9 +194,8 @@
     </div>
 {{/if}}
    <div id="currentNodeNotes">
-        <h4 class="annot-node">annotations</h4>
+        <h4 class="annot-node">annotations  <span>{{notes.length}}</span></h4>
         {{#if notes}} 
-        <p> {{notes.length}} notes</p>
         <ul class="nav note-list">
             <div class='clear'></div>
             {{#each notes}}
@@ -226,6 +225,8 @@
             </div>
         </ul>
         {{/if}}
+
+        <h4 class="annot-node">annotate</h4>
          <ul class="nav">
             <li>
                 <a class='new-note'></a>
@@ -236,9 +237,11 @@
 
 <!-- note list panel -->
 <template name='notelist'>
-    {{#if notes}}
+    {{#if notes}}  
+   <div class="count"><span>{{notes.length}} notes </span></div>   
     <ul class="nav note-list lastnote">
         <div class="count"><span>{{notes.length}} notes </span></div>   
+
         {{#each notes}}
         <li class='note'>
             <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'> 
