@@ -237,6 +237,8 @@
 <template name='notelist'>
     {{#if notes}}
     <ul class="nav note-list lastnote">
+            <div class="count"><span>{{notes.length}} notes </span></div>   
+
         {{#each notes}}
         <li class='hide note'>
             <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'> 
