@@ -238,9 +238,9 @@
 
 <!-- note list panel -->
 <template name='notelist'>
-    {{#if notes}}
+    {{#if notes}}  
+   <div class="count"><span>{{notes.length}} notes </span></div>   
     <ul class="nav note-list lastnote">
-            <div class="count"><span>{{notes.length}} notes </span></div>   
 
         {{#each notes}}
         <li class='hide note'>

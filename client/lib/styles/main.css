@@ -278,6 +278,12 @@ font-size:13px;
 
 
 /* note list */
+
+.note-list{
+overflow:scroll;
+height:100%;
+position:absolute;	
+	}
 	
 #notelist .new-note{
 	background:#FAFAFA;
@@ -294,7 +300,7 @@ font-size:13px;
 	margin-top:18px;
 }
 
-.note-list .count{
+#notelist .count{
 	background: url("/annot-list-white.png") no-repeat 300px 7px #9C96A7 ;
     color: #FFFFFF;
     font-family: "Oxygen-Regular",Arial,Helvetica,sans-serif;
@@ -359,7 +365,7 @@ font-size:13px;
 
 
 .row-fluid .span-note .icon-arrow-left{
-	background: url("/neighbour-left.png") no-repeat;
+	background: url("/note-neighbour-left.png") no-repeat;
 	margin-left:16px; 
 	margin-top:-4px;
 	width:20px;
@@ -367,7 +373,7 @@ font-size:13px;
 }
 
 .row-fluid .span-note .icon-arrow-right{
-	background: url("/neighbour-right.png") no-repeat;
+	background: url("/note-neighbour-right.png") no-repeat;
 	margin-left:16px; 
 	margin-top:-4px;
 	width:20px;
@@ -396,7 +402,7 @@ font-size:13px;
     font-size: 13px;
     font-weight: normal;
 	padding-top:5px;
-	margin-bottom:-10px;
+	margin-bottom:-5px;
 	padding-left:35px;
 	width:95%; 
 }
