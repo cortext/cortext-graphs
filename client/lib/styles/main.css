@@ -279,13 +279,19 @@ font-size:13px;
 
 /* note list */
 
-.note-list{
+#notelist .note-list{
 overflow:scroll;
 height:100%;
 position:absolute;	
 	}
+
+#currentNodeNotes .note{
+background: url("/annot-list-grey.png") no-repeat scroll 10px 7px;
+    border-bottom: 1px solid #EEEEEE;	
+
+	}
 	
-#notelist .new-note{
+#currentNodeNotes .new-note{
 	background:#FAFAFA;
     border: 1px solid #DCDCDC;
     border-radius: 3px 3px 3px 3px;
@@ -332,14 +338,27 @@ position:absolute;
 	letter-spacing:2px;
 	padding:5px;
 	margin-top:-2px;
+	margin-bottom:0px;
+}
+
+.annot-node span{
+	color:#FFF;
+	font-family:"Oxygen-Regular", Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+	letter-spacing:2px;
+	padding:5px;
+	margin-top:-2px;
+	margin-left:170px;
 }
 	
-#notelist p{
+#currentNodeNotes p{
 	background: url("/annot-list-grey.png") no-repeat 10px 2px; 
 	color: #A3A1A1;
     font-family: Arial,Helvetica,sans-serif;
     font-size: 12px;
     margin-bottom: 0px;
+	margin-top:-7px;
     padding-left: 35px;	   
 	border-bottom: 1px solid #E1E1E1;
 }
@@ -438,8 +457,8 @@ position:absolute;
 }
 
 .row-fluid .note{
-	border-bottom: 2px solid #FFFFFF;
-	background: url("/annot-list-grey.png") no-repeat 10px 7px #eeeeee; 
+	border-bottom: 2px solid #ffffff;
+	background: url("/annot-list-grey.png") no-repeat 10px 7px #f2edfd; 
 }
 
 .note-list .row-fluid:hover{
@@ -473,8 +492,8 @@ position:absolute;
 } 
 
 #nodelist .title-node {
-	border-bottom: 2px solid #ffffff;
-	background-color:#eeeeee;
+	border-bottom: 1px solid #ffffff;
+	background-color:#f2edfd;
 }
 
 #nodelist .title-node:hover {
