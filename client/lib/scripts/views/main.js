@@ -7,8 +7,8 @@ Meteor.startup(function() {
     if (window.CorTextGraphs === undefined) {
         window.CorTextGraphs = {};
     }
-    ////////////// panel noteinfo /////////////////
-    if (window.CorTextGraphs.noteinfo === undefined) {
+    ////////////// panel noteedit /////////////////
+    if (window.CorTextGraphs.noteedit === undefined) {
         var NoteInfo = Backbone.View.extend({
             events: {
                 'click [data-note-page]': 'switchPage',
@@ -36,7 +36,7 @@ Meteor.startup(function() {
                 } else {
                     var num = parseInt(page, 10);
                 }
-                if (num > Math.ceil(window.CorTextGraphs.noteinfo.$el.data('notes').length / 100) ||
+                if (num > Math.ceil(window.CorTextGraphs.noteedit.$el.data('notes').length / 100) ||
                     num < 1) {
                     return;
                 }
@@ -52,8 +52,8 @@ Meteor.startup(function() {
                 $('[data-note-page=' + num + ']').addClass('active');
                 $('[data-note-page=' + num + ']').parent().addClass('active');
             },
-            render: function() {
-                var nodeid = Session.get('selected_node').id;
+            render: function(nodeid) {
+                //var nodeid = Session.get('selected_node').id;
                 if (!nodeid) {
                     $('.currentnode').hide();
                     this.renderLastActivity();
@@ -86,20 +86,13 @@ Meteor.startup(function() {
                     });
                 var notes = _.union(fromnotes, tonotes);
                 this.$el.data('notes', notes);
-                this.$el.html(Template.noteinfo({
+                this.$el.html(Template.noteedit({
                     notes: notes,
                     node: node
                 }));
                 this.renderPagination(notes);
                 $(this).removeClass('hide');
-                $('#currentnode').animate({
-                        "right": '+=332px'
-                    },
-                    {   queue:false,
-                        duration:160
-                    }
-                );
-                $('#sidebar').css('width', '882px');
+
                 var that = this;
                 $('.new-note').editable({
                     type: 'textarea',
@@ -192,8 +185,8 @@ Meteor.startup(function() {
                     '?node=' + $(e.currentTarget).attr('data-id'), true);
             }
         });
-        window.CorTextGraphs.noteinfo = new NoteInfo({
-            el: document.getElementById('noteinfo')
+        window.CorTextGraphs.noteedit = new NoteInfo({
+            el: document.getElementById('noteedit')
         });
     }
     ////////////// panel nodelist /////////////////
@@ -206,6 +199,26 @@ Meteor.startup(function() {
             },
             initialize: function() {
               
+            },
+            renderPanels: function(){
+                var panels = Session.get('panels_state');
+                if(oldpanels !==undefined)
+                {
+                   _.each(oldpanels, function(panel){
+                   panels['panel_name'];
+                })                    
+                }
+
+                $('#currentnode').animate({
+                        "right": '+=332px'
+                    },
+                    {   queue:false,
+                        duration:160
+                    }
+                );
+                $('#sidebar').css('width', '882px');
+                 var oldpanels = panels;
+                
             },
             showNode: function(e) {
                 window.CorTextGraphs.sidebar.showNode(e);
@@ -333,7 +346,7 @@ Meteor.startup(function() {
             },
             renderNoteinfo: function(e){
                 e.preventDefault();
-                window.CorTextGraphs.noteinfo.render();
+                window.CorTextGraphs.noteedit.render();
 
             },
             render: function() {
@@ -444,7 +457,7 @@ Meteor.startup(function() {
                     });
                 }
 
-                //window.CorTextGraphs.noteinfo.render();
+                //window.CorTextGraphs.noteedit.render();
 
             },
             /*

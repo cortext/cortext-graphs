@@ -23,7 +23,7 @@
               list
               </a>
               <a id="nav-info_nodes" class="second-nav">
-              info
+              view
               </a>
             </li>
             <li id="notes-nav">
@@ -34,7 +34,7 @@
               list
               </a>
               <a id="nav-info_notes" class="second-nav">
-              info
+              edit
               </a>
             </li>	
          </ul>
@@ -47,7 +47,7 @@
             <div id="sidebar" class="span4">
                 <div id='currentnode'>
                 </div>
-                <div id='noteinfo'>
+                <div id='noteedit'>
                 </div>
                 <div id='notelist'>
                 </div>
@@ -58,7 +58,7 @@
     </div>
 
 </body>
-
+<!-- hello template -->
 <template name="hello">
     <div class="hero-unit welcome">
         <div>
@@ -81,7 +81,81 @@
     </div>
 </template>
 
+<!-- node view pannel -->
 <template name="nodepanel">
+{{#if cluster}}
+<div class="nav row-fluid">
+    <div class="span12">
+        <h4 class="title-cluster">cluster</h4>
+        <div class="row-fluid">
+                            <span class="span6 offset7 cluster-update"><small>{{ cluster.attr.last_update }}</small></span>
+            <div class="span10">
+                <span class='cluster node-hover' data-id='{{ cluster.id }}'></span>
+            </div>
+            <div class="span2">
+                {{ cluster.attr.weight }} <span class="span2b">articles</span>
+            </div>                    
+            <div class="link-annot"><a href="#">edit cluster label</a></div>
+        </div>
+        
+    </div>
+</div>
+{{/if}}
+{{#if node}}
+    <div class="title-node">
+        <h4 class="current-node">node</h4>
+        <div class="row-fluid">
+            <h3 class='page-header node-hover' data-id='{{ node.id }}'>
+                <div class="btn-group">
+                            <button title="annotate {{node.label}}" class="node-add-note" data-neighbor-add-note-target='{{this.id}}' data-neighbor-add-note-source='{{node.id}}'>
+                            </button>
+                </div>
+                {{ node.label }}
+                {{#if node.attr}}
+                <span class='pull-right'>
+                    <span class="badge" style='background-color:{{ cluster.color }};'>&nbsp;</span>
+                    {{ node.attr.weight }}
+                </span> 
+                <div class="link-annot"><a href="#">view annotations</a></div>
+                {{/if}}
+            </h3>
+        </div>
+    </div>
+    {{#if neighbors}}
+    <ul class="nav nav-list neighbor-list"><!--nav nav-list well-->
+        <h4 class="neighbour-node">neighbour nodes</h4>
+       {{#each neighbors}}
+        <li class='hide neighbor'>
+            <a class='node-hover neighbor-switch' data-id='{{ this.id }}' data-neighbor-switch='{{this.id}}'>
+            <div class='row-fluid'> 
+                <div class='span3'>
+                    <div class="btn-group">
+                        <button title="annotate the link to {{this.label}}" class="neighbor-add-note" data-neighbor-add-note-target='{{this.id}}' data-neighbor-add-note-source='{{node.id}}'>
+                        </button>
+                    </div>
+                </div>
+                <div class="span-label">
+                    {{this.label}}
+                </div>
+                <div class='span3 span-badge'>
+                    <span class="badge" style='background-color:{{ this.attr.clusterColor }}'>&nbsp;
+                    </span>
+                    {{ this.attr.weight }}
+                </div>
+                </div>
+            </a>
+        </li>
+        {{/each}}
+        <div class="pagination">
+            <ul class='neighbor-pages'></ul>
+        </div>
+    </ul>
+    {{/if}}
+{{/if}}
+</template>
+
+<!-- note edit panel -->
+<template name='noteedit'> 
 {{#if cluster}}
     <div class="nav row-fluid">
         <div class="span12">
@@ -115,54 +189,7 @@
             </h3>
         </div>
     </div>
-    {{#if neighbors}}
-    <ul class="nav nav-list neighbor-list"><!--nav nav-list well-->
-        <h4 class="neighbour-node">neighbour nodes</h4>
-       {{#each neighbors}}
-        <li class='hide neighbor'>
-            <a class='node-hover neighbor-switch' data-id='{{ this.id }}' data-neighbor-switch='{{this.id}}'>
-            <div class='row-fluid'> 
-                <div class='span3'>
-                        <div class="btn-group">
-                            <button class="neighbor-add-note" data-neighbor-add-note-target='{{this.id}}' data-neighbor-add-note-source='{{node.id}}'>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="span-label">
-                        {{this.label}}
-                    </div>
-                    <div class='span3 span-badge'>
-                        <span class="badge" style='background-color:{{ this.attr.clusterColor }}'>&nbsp;
-                        </span>
-                        {{ this.attr.weight }}
-                    </div>
-                </div>
-            </a>
-        </li>
-        {{/each}}
-        <div class="pagination">
-            <ul class='neighbor-pages'></ul>
-        </div>
-    </ul>
-    {{/if}}
 {{/if}}
-</template>
-
-<template name='noteinfo'> 
-    <div class="title-node">
-        <h4 class="current-node">node</h4>
-        <div class="row-fluid">
-            <h3 class='page-header node-hover' data-id='{{ node.id }}'>{{ node.label }}
-                {{#if node.attr}}
-                <span class='pull-right'>
-                    <span class="badge" style='background-color:{{ cluster.color }};'>&nbsp;</span>
-                    {{ node.attr.weight }}
-                </span> 
-                <div class="link-annot"><a href="#">annotate the node</a></div>
-                {{/if}}
-            </h3>
-        </div>
-    </div>
    <div id="currentNodeNotes">
         <h4 class="annot-node">annotations</h4>
         {{#if notes}} 
@@ -205,6 +232,8 @@
         </ul>
    </div> 
 </template>
+
+<!-- note list panel -->
 <template name='notelist'>
     {{#if notes}}
     <ul class="nav note-list lastnote">
@@ -240,7 +269,7 @@
     {{/if}}
 </template>
 
-
+<!-- node list panel -->
 <template name="nodelist">
 
         <div class="count"><span>{{nodes.length}} nodes </span></div>   

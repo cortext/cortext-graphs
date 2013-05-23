@@ -22,7 +22,7 @@
 	right: 10px;
 }
 /* node selected panel  */
-#currentnode, #noteinfo{
+#currentnode, #noteedit{
 	position: absolute;
 	width:332px;
 	right: 0;
@@ -217,7 +217,7 @@ font-size:13px;
 	margin-left: 76px;
     width: 45px;
 }
-.span3 .neighbor-add-note{
+.span3 .neighbor-add-note, .node-add-note{
 	background: url("/bt1-annot-neighbour.png") no-repeat;
 	width:22px;
 	height:22px;
@@ -228,7 +228,7 @@ font-size:13px;
 	margin-right:6px;
 }
 
-.span3 .neighbor-add-note:hover{
+.span3 .neighbor-add-note:hover, .node-add-note:hover{
 	background: url("/bt-annot-neighbour.png") no-repeat;
 	width:22px;
 	height:22px;

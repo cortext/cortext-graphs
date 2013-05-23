@@ -18,7 +18,8 @@ if (Meteor.isClient) {
             window.CorTextGraphs.MainRouter = Backbone.Router.extend({
                 routes: {
                     '': 'default',
-                    'open/:path/*clusterpath?node=:nodeid': 'index'
+                    'open/:path/*clusterpath?node=:nodeid': 'index',
+                    'open/:path/*clusterpath?node=:nodeid/edit': 'edit'
                 },
                 default: function() {
                     Session.set('title', '');
@@ -29,6 +30,11 @@ if (Meteor.isClient) {
                     Session.set('path', decodeURIComponent(path));
                     Session.set('clusterpath', decodeURIComponent(clusterpath));
                     window.CorTextGraphs.sigmaview.render(nodeid);
+                },
+                edit: function(path, clusterpath, nodeid) {
+                    Session.set('path', decodeURIComponent(path));
+                    Session.set('clusterpath', decodeURIComponent(clusterpath));
+                    window.CorTextGraphs.noteedit.render(nodeid);
                 }
             });
         }
