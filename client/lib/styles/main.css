@@ -92,7 +92,7 @@ body {
 }
 
 .nav .span10 .editableform textarea {
-    height: 35px;
+    height: 40px;
 }
 
 	
@@ -295,7 +295,7 @@ font-size:13px;
 }
 
 .note-list .count{
-	background: url("/annot-list-white.png") no-repeat 305px 7px #9C96A7 ;
+	background: url("/annot-list-white.png") no-repeat 300px 7px #9C96A7 ;
     color: #FFFFFF;
     font-family: "Oxygen-Regular",Arial,Helvetica,sans-serif;
     font-size: 14px;
@@ -422,6 +422,7 @@ font-size:13px;
     text-align: right;
     width: 280px;
 	margin-bottom:5px;
+	margin-top:5px;
 }
 
 .row-fluid .note{
@@ -444,7 +445,7 @@ font-size:13px;
 }
 
 #nodelist .count {
-	background: url("/navnodes-img.png") no-repeat 305px 7px #9C96A7 ;
+	background: url("/navnodes-img.png") no-repeat 300px 7px #9C96A7 ;
     color: #FFFFFF;
     font-family: "Oxygen-Regular",Arial,Helvetica,sans-serif;
     font-size: 14px;
