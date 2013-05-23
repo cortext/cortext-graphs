@@ -34,7 +34,7 @@ if (Meteor.isClient) {
                 edit: function(path, clusterpath, nodeid) {
                     Session.set('path', decodeURIComponent(path));
                     Session.set('clusterpath', decodeURIComponent(clusterpath));
-                    window.CorTextGraphs.noteedit.render(nodeid);
+                    window.CorTextGraphs.noteEdit.render(nodeid);
                 }
             });
         }

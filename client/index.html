@@ -9,6 +9,26 @@
 </head>
   
 <body>
+    {{> navbar}}
+    <div class="container-fluid" id='main-container'>
+        <div class="row-fluid">
+            <div id="sigma" class="span8">
+            </div>
+            <div id="sidebar" class="span4">
+                <div id='currentnode'>
+                </div>
+                <div id='noteedit'>
+                </div>
+                <div id='notelist'>
+                </div>
+                <div id='nodelist'>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<template name='navbar'>
     <div id="navbar" class="navbar navbar-fixed-top">
         <div class="container-fluid" id="navbar-fluid">
           <a class="brand" id="go-home" href="/#open/hnetwork-low.json/hnetwork-high.json?node=null">
@@ -36,28 +56,11 @@
               <a id="nav-info_notes" class="second-nav">
               edit
               </a>
-            </li>	
+            </li>   
          </ul>
         </div>
     </div>
-    <div class="container-fluid" id='main-container'>
-        <div class="row-fluid">
-            <div id="sigma" class="span8">
-            </div>
-            <div id="sidebar" class="span4">
-                <div id='currentnode'>
-                </div>
-                <div id='noteedit'>
-                </div>
-                <div id='notelist'>
-                </div>
-                <div id='nodelist'>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</body>
+</template>
 <!-- hello template -->
 <template name="hello">
     <div class="hero-unit welcome">

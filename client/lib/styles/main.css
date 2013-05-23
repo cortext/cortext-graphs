@@ -518,7 +518,7 @@ font-size:13px;
 	cursor:pointer;
 }
 
-.navbar #nav-info_nodes:hover{
+.navbar #nav-info_nodes:hover, .navbar #nav-info_nodes.navnodes-hover{
 	background-color:#27AD19;
 }
 	

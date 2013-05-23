@@ -8,8 +8,8 @@ Meteor.startup(function() {
         window.CorTextGraphs = {};
     }
     ////////////// panel noteedit /////////////////
-    if (window.CorTextGraphs.noteedit === undefined) {
-        var NoteInfo = Backbone.View.extend({
+    if (window.CorTextGraphs.notEdit === undefined) {
+        var NoteEdit = Backbone.View.extend({
             events: {
                 'click [data-note-page]': 'switchPage',
                 'mouseover .node-hover': 'showNode',
@@ -36,7 +36,7 @@ Meteor.startup(function() {
                 } else {
                     var num = parseInt(page, 10);
                 }
-                if (num > Math.ceil(window.CorTextGraphs.noteedit.$el.data('notes').length / 100) ||
+                if (num > Math.ceil(window.CorTextGraphs.noteEdit.$el.data('notes').length / 100) ||
                     num < 1) {
                     return;
                 }
@@ -53,9 +53,10 @@ Meteor.startup(function() {
                 $('[data-note-page=' + num + ']').parent().addClass('active');
             },
             render: function(nodeid) {
-                //var nodeid = Session.get('selected_node').id;
+                console.log('rendering noteEdit for node '+nodeid);
                 if (!nodeid) {
-                    $('.currentnode').hide();
+                    var nodeid = Session.get('selected_node').id;
+                    $('.currentnode').addClass('hide');
                     this.renderLastActivity();
                     return;
                 }
@@ -91,8 +92,16 @@ Meteor.startup(function() {
                     node: node
                 }));
                 this.renderPagination(notes);
-                $(this).removeClass('hide');
-
+                this.$el.removeClass('hide');
+                //////////:todo move this to slide common function///////////
+                $('#currentnode').animate({
+                        "right": '332px'
+                    },
+                    {   queue:false,
+                        duration:160
+                    }
+                );
+                $('#sidebar').css('width', '664'+'px');
                 var that = this;
                 $('.new-note').editable({
                     type: 'textarea',
@@ -122,6 +131,7 @@ Meteor.startup(function() {
                 });
             },
             renderLastActivity: function() {
+                console.log('rendering last activity');
                 var notes = _.map(window.CorTextGraphs.Notes.find({
                     graph: Session.get('title'),
                     type: { $ne: 'cluster' }
@@ -147,10 +157,12 @@ Meteor.startup(function() {
                     return note;
                     });
                 this.$el.data('notes', notes);
-                this.$el.html(Template.notelist({
-
+                $('#notelist').html(Template.notelist({
                     notes: notes
                 }));
+                $('#notelist').removeClass('hide');
+                $('#notelist').animate({'right':0+'px'});
+                $('#sidebar').css('width',332+'px');
                 console.log('attr id :'+this.$el.attr('id'));
                 this.renderPagination(notes);
                 $('.new-note').hide();
@@ -185,7 +197,7 @@ Meteor.startup(function() {
                     '?node=' + $(e.currentTarget).attr('data-id'), true);
             }
         });
-        window.CorTextGraphs.noteedit = new NoteInfo({
+        window.CorTextGraphs.noteEdit = new NoteEdit({
             el: document.getElementById('noteedit')
         });
     }
@@ -239,6 +251,7 @@ Meteor.startup(function() {
                 }
             },
             render: function(){
+                console.log("rendering nodelist");
                 var ids = new Array();
                 var sigma =  window.CorTextGraphs.sigmaview.sigma;
                 _.each(window.CorTextGraphs.sigmaview.sigma._core.graph.nodesIndex,function(node){
@@ -272,6 +285,7 @@ Meteor.startup(function() {
                     nodes: nodes
                 }));
                 $('#nav-list_nodes').addClass('navnodes-hover');
+                this.$el.removeClass('hide');
                 this.$el.show();
             }
         });
@@ -283,13 +297,32 @@ Meteor.startup(function() {
     if (window.CorTextGraphs.navbar === undefined) {
         var Navbar = Backbone.View.extend({
             events: {
-                'click #nav-list_nodes': 'renderNodeList'
+                'click #nav-list_nodes': 'renderNodeList',
+                'click #nav-list_notes': 'renderNoteList',
+                'click #nav-info_nodes': 'renderCurrentNode'
             },
             initialize: function() {},
             renderNodeList: function(){
                 //console.log("click list");
+                $('#currentnode').addClass('hide');
+                $('#noteedit').addClass('hide');
+                $('#nav-info_nodes').removeClass('navnodes-hover');
                 window.CorTextGraphs.nodelist.render();
+            },
+            renderNoteList: function(){
+                //console.log("click list");
+                $('#currentnode').addClass('hide');
+                $('#noteedit').addClass('hide');
+                $('#nav-info_nodes').removeClass('navnodes-hover');
+                window.CorTextGraphs.noteEdit.renderLastActivity();
+            },
+            renderCurrentNode: function(){
+                $('#noteedit').animate({'right':-332+'px'});
+                $('#currentnode').animate({'right':0}); 
+                $('#sidebar').css('width', 332+'px');
+                $('#nav-info_nodes').addClass('navnodes-hover');
             }
+
         });
         window.CorTextGraphs.navbar = new Navbar({
             el: document.getElementById('navbar-right')
@@ -300,7 +333,7 @@ Meteor.startup(function() {
         var Sidebar = Backbone.View.extend({
             events: {
                 'click .neighbor-switch': 'switchSidebar',
-                'click .link-annot a' : 'renderNoteinfo',
+                'click .link-annot a' : 'renderNoteEdit',
                 'click [data-neighbor-page]': 'switchNeighborPage',
                 'mouseover .node-hover': 'showNode',
                 'mouseout .node-hover': 'hideNode', 
@@ -344,13 +377,13 @@ Meteor.startup(function() {
                 $('[data-neighbor-page=' + num + ']').addClass('active');
                 $('[data-neighbor-page=' + num + ']').parent().addClass('active');
             },
-            renderNoteinfo: function(e){
+            renderNoteEdit: function(e){
                 e.preventDefault();
-                window.CorTextGraphs.noteedit.render();
+                window.CorTextGraphs.noteEdit.render();
 
             },
             render: function() {
-                $('#nodelist').hide();
+                $('#nodelist').addClass('hide');
                 $('#nav-list_nodes').removeClass('navnodes-hover');
                 var cluster = Session.get('selected_cluster');
                 //console.log('cluster:');
@@ -392,12 +425,14 @@ Meteor.startup(function() {
                 }
                 var neighbors = Session.get('selected_neighbors');
                 $('#currentnode').removeClass('hide');
+                $('#nav-info_nodes').addClass('navnodes-hover');
                 $('#notelist').removeClass('hide');
                 this.$el.html(Template.nodepanel({
                     node: Session.get('selected_node'),
                     cluster: cluster,
                     neighbors: neighbors
                 }));
+                this.$el.removeClass('hide');
 				
 				
                 if (_.isObject(cluster)) {
@@ -457,7 +492,7 @@ Meteor.startup(function() {
                     });
                 }
 
-                //window.CorTextGraphs.noteedit.render();
+                //window.CorTextGraphs.noteEdit.render();
 
             },
             /*
@@ -643,6 +678,7 @@ Meteor.startup(function() {
              * draw clusters
              */
             pushClusters: function(data, nodeid) {
+                console.log("datas for "+nodeid,data);
                 var that = this;
                 $.get(Session.get('clusterpath'),
                     function(object, textStatus) {
