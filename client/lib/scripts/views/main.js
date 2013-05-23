@@ -36,7 +36,7 @@ Meteor.startup(function() {
                 } else {
                     var num = parseInt(page, 10);
                 }
-                if (num > Math.ceil(window.CorTextGraphs.noteEdit.$el.data('notes').length / 100) ||
+                if (num > Math.ceil(window.CorTextGraphs.NoteEdit.$el.data('notes').length / 100) ||
                     num < 1) {
                     return;
                 }
@@ -53,13 +53,14 @@ Meteor.startup(function() {
                 $('[data-note-page=' + num + ']').parent().addClass('active');
             },
             render: function(nodeid) {
-                console.log('rendering noteEdit for node '+nodeid);
+                //console.log('rendering noteEdit for node '+nodeid);
                 if (!nodeid) {
                     var nodeid = Session.get('selected_node').id;
-                    $('.currentnode').addClass('hide');
-                    this.renderLastActivity();
-                    return;
+                    //$('.currentnode').addClass('hide');
+                    //this.renderLastActivity();
+                    //return;
                 }
+                console.log('rendering noteEdit for node '+nodeid);
                 var node = window.CorTextGraphs.sigmaview.sigma.getNodes(nodeid);
                 console.log(node);
                 var fromquery = {
@@ -197,7 +198,7 @@ Meteor.startup(function() {
                     '?node=' + $(e.currentTarget).attr('data-id'), true);
             }
         });
-        window.CorTextGraphs.noteEdit = new NoteEdit({
+        window.CorTextGraphs.NoteEdit = new NoteEdit({
             el: document.getElementById('noteedit')
         });
     }
@@ -241,8 +242,11 @@ Meteor.startup(function() {
             displayCurrentNode: function(e){
                // console.log(e.currentTarget);
                 $('#nav-list_nodes').removeClass('navnodes-hover');
-                this.$el.hide();
+                this.$el.addClass('hide');
                 console.log($(e.currentTarget).attr('data-id'));
+                $('#notelist').addClass('hide');
+                $('#nodelist').addClass('hide');
+                $('#currentnode').removeClass('hide');
                 if($(e.currentTarget).attr('data-id') !==undefined)
                 {
                     window.CorTextGraphs.mainrouter.navigate(
@@ -306,21 +310,28 @@ Meteor.startup(function() {
                 //console.log("click list");
                 $('#currentnode').addClass('hide');
                 $('#noteedit').addClass('hide');
+                $('#notelist').addClass('hide');
                 $('#nav-info_nodes').removeClass('navnodes-hover');
+                $('#sidebar').css('width', 332+'px');
                 window.CorTextGraphs.nodelist.render();
             },
             renderNoteList: function(){
                 //console.log("click list");
                 $('#currentnode').addClass('hide');
                 $('#noteedit').addClass('hide');
+                $('#nodelist').addClass('hide');
                 $('#nav-info_nodes').removeClass('navnodes-hover');
-                window.CorTextGraphs.noteEdit.renderLastActivity();
+                window.CorTextGraphs.NoteEdit.renderLastActivity();
             },
             renderCurrentNode: function(){
                 $('#noteedit').animate({'right':-332+'px'});
                 $('#currentnode').animate({'right':0}); 
                 $('#sidebar').css('width', 332+'px');
                 $('#nav-info_nodes').addClass('navnodes-hover');
+                $('#noteedit').addClass('hide');
+                $('#notelist').addClass('hide');
+                $('#nodelist').addClass('hide');
+                window.CorTextGraphs.renderCurrentNode();
             }
 
         });
@@ -379,11 +390,13 @@ Meteor.startup(function() {
             },
             renderNoteEdit: function(e){
                 e.preventDefault();
-                window.CorTextGraphs.noteEdit.render();
+                console.log("click annot a");
+                window.CorTextGraphs.NoteEdit.render();
 
             },
             render: function() {
                 $('#nodelist').addClass('hide');
+                $('#noteedit').addClass('hide');
                 $('#nav-list_nodes').removeClass('navnodes-hover');
                 var cluster = Session.get('selected_cluster');
                 //console.log('cluster:');
@@ -492,7 +505,7 @@ Meteor.startup(function() {
                     });
                 }
 
-                //window.CorTextGraphs.noteEdit.render();
+                //window.CorTextGraphs.NoteEdit.render();
 
             },
             /*
@@ -572,7 +585,12 @@ Meteor.startup(function() {
                 }
                 var node = e.target.getNodes(e.content[0]);
                 if (node)
+                {
                     window.CorTextGraphs.sidebar.switchSidebar(null, node, e.target);
+                    Session.set('selected_node',node);
+                    console.log('selected node ',Session.get('selected_node',node));
+                }
+                    
                 else
                     window.CorTextGraphs.sidebar.defaultSidebar();
             }
