@@ -11,15 +11,16 @@
 #sidebar {
     min-height: 100%;
     height: 100%;
-    width: 332px;
-	background-color:#9C96A7;
+    width: 1008px;
+	/*background-color:#9C96A7;*/
+	background-color:#eee;	
 	border-left:1px solid #E1E1E1;
 	border-right:1px solid #E1E1E1;
 	overflow:hidden;
 	padding-top: 53px;
 	margin-left: 0px; 
 	position: fixed;
-	right: 10px;
+	right: -1000px;
 }
 
 
@@ -30,18 +31,27 @@
 	right: 0;
 	background-color:#ffffff;
 	min-height:100%;
+	margin-left: 4px;
+	margin-top: 4px;
 }
 
 #noteedit .link-annot a{
 	display:none;
 }
-
+#noteedit{
+	margin-left: 4px;
+	margin-top: 4px;
+	width: 332px;
+}
 #currentnode{
 	position: absolute;
 	width:332px;
 	margin-right:1px;
 	background-color:#ffffff;
 	min-height:100%;
+	margin-left: 4px;
+	margin-top: 4px;
+	right: 336px;
 }
 
 /* panneau existant "node-info" */
@@ -130,6 +140,8 @@ body {
 	font-family:Arial,Helvetica,sans-serif;
     font-size: 14px;
     font-weight: normal;
+
+	border-bottom: none !important;
 }	
 
 	
@@ -208,6 +220,17 @@ body {
 margin-left:199px;
 color:#777777;
 font-size:13px;
+}
+
+.edit-cluster{
+	background: url("/link-arrow.png") no-repeat 303px 6px;
+	line-height:20px;
+}	
+
+.edit-cluster a{
+	margin-left:199px;
+	color:#777777;
+	font-size:13px;
 }	
 	
 .badge {
@@ -292,12 +315,17 @@ font-size:13px;
 
 
 /* note list */
-
+#notelist{
+	width: 332px;
+	height: 100%;
+	margin-left: 4px;
+	margin-top: 4px;
+}
 #notelist .note-list{
-overflow:scroll;
-height:100%;
-position:absolute;	
-	}
+	overflow:scroll;
+	height:100%;
+	width: 100%;
+}
 
 #currentNodeNotes .note{
 background: url("/annot-list-grey.png") no-repeat scroll 10px 7px;
@@ -487,11 +515,12 @@ background: url("/annot-list-grey.png") no-repeat scroll 10px 7px;
 
 
 /* node list */
-
-
 #nodelist {
 	margin-top: 0px;
 	height: 100%;
+	width: 332px;
+	margin-left: 4px;
+	margin-top: 4px;
 }
 #nodelist .nodelistContainer{
 	height: 100%;
@@ -595,7 +624,7 @@ background: url("/annot-list-grey.png") no-repeat scroll 10px 7px;
 	cursor:pointer;
 }
 	
-.navbar #nav-list_nodes:hover, .navbar #nav-list_nodes.navnodes-hover{
+.navbar #nav-list_nodes:hover, .navbar #nav-list_nodes.active{
 	background-color:#27AD19;
 }	
 
@@ -615,7 +644,7 @@ background: url("/annot-list-grey.png") no-repeat scroll 10px 7px;
 	cursor:pointer;
 }
 
-.navbar #nav-info_nodes:hover, .navbar #nav-info_nodes.navnodes-hover{
+.navbar #nav-info_nodes:hover, .navbar #nav-info_nodes.active{
 	background-color:#27AD19;
 }
 	
@@ -644,7 +673,7 @@ background: url("/annot-list-grey.png") no-repeat scroll 10px 7px;
 	cursor:pointer;
 }
 
-.navbar #nav-list_notes:hover{
+.navbar #nav-list_notes:hover, .navbar #nav-list_notes.active{
 	background-color:#235BBE;
 }
 	
@@ -656,10 +685,9 @@ background: url("/annot-list-grey.png") no-repeat scroll 10px 7px;
 	float:left;
 	color:#FFF;
 	text-shadow:none;
-	cursor:pointer;
 }
 
-.navbar #nav-info_notes:hover{
+ .navbar #nav-info_notes.active{
 	background-color:#235BBE;
 }
 

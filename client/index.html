@@ -98,7 +98,7 @@
             <div class="span2">
                 {{ cluster.attr.weight }} <span class="span2b">articles</span>
             </div>                    
-            <div class="link-annot"><a href="#">edit cluster label</a></div>
+            <div class="edit-cluster"><a href="#">edit cluster label</a></div>
         </div>
         
     </div>
@@ -159,21 +159,6 @@
 
 <!-- note edit panel -->
 <template name='noteedit'> 
-{{#if cluster}}
-    <div class="nav row-fluid">
-        <div class="span12">
-            <h4 class="title-cluster">cluster</h4>
-            <div class="row-fluid">
-                                <span class="span6 offset7 cluster-update"><small>{{ cluster.attr.last_update }}</small></span>
-                <div class="span10">
-                    <span class='cluster node-hover' data-id='{{ cluster.id }}'></span>
-                </div>
-                <div class="link-annot"><a href="#">change the cluster label</a></div>
-            </div>
-            
-        </div>
-    </div>
-{{/if}}
    <div id="currentNodeNotes">
         {{#if notes}} 
         <h4 class="annot-node">annotations  <span>{{notes.length}}</span></h4>
@@ -208,6 +193,7 @@
         {{/if}}
 
         <h4 class="annot-node">annotate</h4>
+        <span class='node-edited'> {{#if target}} {{target}} -> {{/if}}{{ node.label }}</span>
          <ul class="nav">
             <li>
                 <a class='new-note'></a>
@@ -220,10 +206,10 @@
 <template name='notelist'>
     {{#if notes}}  
    <div class="count"><span>{{notes.length}} notes </span></div>   
-    <ul class="nav note-list lastnote">
+    <div class="nav note-list lastnote">
         {{#each notes}}
-        <li class='note'>
-            <a title='by {{this.created_by}}' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'> 
+        <div class='note' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'>
+            <a title='by {{this.created_by}}'> 
             <div class='row-fluid'>
                 <div class='span-title-lastnote'>
                 {{ this.text }} 
@@ -243,12 +229,12 @@
                  
             </div>
             </a>
-        </li>
+        </div>
         {{/each}}
         <div class="pagination">
             <ul class='note-pages'></ul>
         </div>
-    </ul>
+    </div>
     {{/if}}
 </template>
 
