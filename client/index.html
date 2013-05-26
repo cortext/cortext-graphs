@@ -98,7 +98,7 @@
             <div class="span2">
                 {{ cluster.attr.weight }} <span class="span2b">articles</span>
             </div>                    
-            <div class="edit-cluster"><a href="#">edit cluster label</a></div>
+            <div class="edit-cluster"><a href="#">edit label</a></div>
         </div>
         
     </div>
@@ -193,7 +193,7 @@
         {{/if}}
 
         <h4 class="annot-node">annotate</h4>
-        <span class='node-edited'> {{#if target}} {{target}} -> {{/if}}{{ node.label }}</span>
+        <span class='node-edited'> {{#if target}} {{target}} &#x27E9; {{/if}}{{ node.label }}</span>
          <ul class="nav">
             <li>
                 <a class='new-note'></a>

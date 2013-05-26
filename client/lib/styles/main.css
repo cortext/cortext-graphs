@@ -32,27 +32,26 @@
 	background-color:#ffffff;
 	min-height:100%;
 	margin-left: 4px;
-	margin-top: 4px;
+	margin-top: 6px;
 }
 
 #noteedit .link-annot a{
 	display:none;
 }
-#noteedit{
-	margin-left: 4px;
-	margin-top: 4px;
-	width: 332px;
-}
+
 #currentnode{
 	position: absolute;
 	width:332px;
 	margin-right:1px;
 	background-color:#ffffff;
 	min-height:100%;
-	margin-left: 4px;
-	margin-top: 4px;
-	right: 336px;
+	margin-top: 6px;
+	right: 334px;
 }
+#currentnode .nav{
+	margin-bottom:8px;
+}
+
 
 /* panneau existant "node-info" */
 
@@ -223,12 +222,12 @@ font-size:13px;
 }
 
 .edit-cluster{
-	background: url("/link-arrow.png") no-repeat 303px 6px;
-	line-height:20px;
+	background: url("/annot-list-grey.png") no-repeat 303px 55px; 
+	line-height:27px;
 }	
 
 .edit-cluster a{
-	margin-left:199px;
+	margin-left:241px;
 	color:#777777;
 	font-size:13px;
 }	
@@ -382,8 +381,8 @@ background: url("/annot-list-grey.png") no-repeat scroll 10px 7px;
 	letter-spacing:2px;
 	padding:5px;
 	margin-top:-2px;
-	margin-bottom:0px;
-}
+/*	margin-bottom:0px;
+*/}
 
 .annot-node span{
 	color:#FFF;
@@ -395,6 +394,7 @@ background: url("/annot-list-grey.png") no-repeat scroll 10px 7px;
 	margin-top:-2px;
 	margin-left:170px;
 }
+
 	
 #currentNodeNotes p{
 	background: url("/annot-list-grey.png") no-repeat 10px 2px; 
@@ -406,6 +406,14 @@ background: url("/annot-list-grey.png") no-repeat scroll 10px 7px;
     padding-left: 35px;	   
 	border-bottom: 1px solid #E1E1E1;
 }
+
+#currentNodeNotes .node-edited{
+	color: #393939;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 14px;
+	margin-top:20px;
+margin-left:10px;}
+
 
 #currentNodeNotes .editableform{
 	margin-top:15px;
