@@ -218,6 +218,13 @@ Meteor.startup(function() {
                     ).count();
                     node.noteCount = noteCount;
                 });
+
+                // Sort nodes by cluster > node title
+                nodes = _.sortBy(nodes, function(node){
+                    return node.color + node.label;
+                });
+
+
                 // var notes = _.map(window.CorTextGraphs.Notes.find({
                 //     graph: Session.get('title'),
                 //     type: { $ne: 'cluster' }
