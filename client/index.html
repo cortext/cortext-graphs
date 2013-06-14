@@ -10,6 +10,9 @@
   
 <body>
     {{> navbar}}
+
+    {{> nav_panels }}
+
     <div class="container-fluid" id='main-container'>
         <div class="row-fluid">
             <div id="sigma" class="span8">
@@ -34,32 +37,21 @@
           <a class="brand" id="go-home" href="/#open/hnetwork-low.json/hnetwork-high.json?node=null">
               <img src='logo-cortext.png'/>
           </a>
-          <ul class="nav pull-right" id="navbar-right"> 
-            <li>
-              <a id="nav-nodes" class="primary-nav">
-              <span>nodes</span>
-              </a>
-              <a id="nav-list_nodes" class="second-nav">
-              list
-              </a>
-              <a id="nav-info_nodes" class="second-nav">
-              view
-              </a>
-            </li>
-            <li id="notes-nav">
-              <a id="nav-notes" class="primary-nav">
-              <span>notes</span>
-              </a>
-              <a id="nav-list_notes" class="second-nav">
-              list
-              </a>
-              <a id="nav-info_notes" class="second-nav">
-              edit
-              </a>
-            </li>   
-         </ul>
         </div>
     </div>
 </template>
 
-<!-- note edit panel -->
+<template name="nav_panels">
+
+<ul id="nav_panels"> 
+    <li class="nodes">
+        <div class="count">{{ count_nodes }}</div>
+        <div class="type">nodes</div>
+    </li>
+    <li class="annotations">
+        <div class="count">{{ count_annotations }}</div>
+        <div class="type">annotations</div>
+    </li>   
+</ul>
+
+</template>

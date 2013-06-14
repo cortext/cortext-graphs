@@ -1,0 +1,42 @@
+#nav_panels {
+  position : absolute;
+  top : 0;
+  right : 0;
+
+  z-index : 2000;
+
+  list-style-type: none;
+}
+
+#nav_panels li {
+  float : left;
+
+  height : 53px;
+  width : 110px;
+}
+
+#nav_panels li > div {
+  text-align: center;
+}
+
+#nav_panels .count {
+  font-size: 20px;
+  line-height: 35px;
+
+  background: #bebebe;
+  color : #444;
+}
+
+#nav_panels .type {
+  font-size : 10px;
+  line-height: 18px;
+
+  background: #444;
+  color : white;
+}
+
+#nav_panels .nodes .count { color : white; background: #235BBE; }
+#nav_panels .nodes .type  { color : #235BBE; background: #32B9E5; }
+
+#nav_panels .annotations .count { color : white; background: #EE6E21; }
+#nav_panels .annotations .type  { color : #EE6E21; background: #F3BE00; }

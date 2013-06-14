@@ -709,6 +709,7 @@ Meteor.startup(function() {
                     minNodeSize: 1,
                     maxNodeSize: 80
                 });
+
                 var that = this;
                 $.get(Session.get('path'),
                     function(data, textStatus) {
@@ -743,6 +744,10 @@ Meteor.startup(function() {
                                     parseFloat(node.b));
                         that.sigma.addNode(node.id, node);
                 });
+
+                $("#nav_panels .nodes .count").html(_(object.nodes).size())
+                $("#nav_panels .annotations .count").html( CorTextGraphs.Notes.find().count() )
+
                 /*
                  * draw edges
                  */
