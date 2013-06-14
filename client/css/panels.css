@@ -40,3 +40,34 @@
 
 #nav_panels .annotations .count { color : white; background: #EE6E21; }
 #nav_panels .annotations .type  { color : #EE6E21; background: #F3BE00; }
+
+.panel { background : white; }
+
+.panel .cluster {
+  padding : 10px 0;
+}
+
+.panel .cluster .color {
+  display: block;
+  width : 16px;
+  height : 16px;
+
+  float:left;
+
+  margin-top : 2px;
+  margin-left : 12px;
+}
+
+.panel .cluster > h2 {
+  margin-left : 40px;
+
+  line-height: 24px;
+
+  font-family: arial;
+  font-size: 14px;
+  color : #393939;
+}
+
+.panel .cluster .nodes {
+  clear : both;
+}

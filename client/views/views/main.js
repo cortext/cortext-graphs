@@ -201,15 +201,28 @@ Meteor.startup(function() {
             },
             render: function(){
                 console.log("rendering nodelist");
+
                 var ids = new Array();
+                var cluster_ids = new Array();
+
                 var sigma =  window.CorTextGraphs.sigmaview.sigma;
                 _.each(window.CorTextGraphs.sigmaview.sigma._core.graph.nodesIndex,function(node){
                     if(node.cluster===false)
                     {
                         ids.push(node.id);
+                    } else {
+                        cluster_ids.push(node.id)
                     }
                 });
+
+                var clusters = sigma.getNodes(cluster_ids);
+
+                _(clusters).each(function(cluster){
+                    cluster.nodes = [];
+                });
+
                 var nodes = sigma.getNodes(ids);
+
                 _.each(nodes, function(node){
                     var noteCount = window.CorTextGraphs.Notes.find({
                             graph: Session.get('title'),
@@ -217,11 +230,19 @@ Meteor.startup(function() {
                         }
                     ).count();
                     node.noteCount = noteCount;
+
+                    _(clusters).find(function(cluster){ return cluster.label == node.attr.cluster_label}).nodes.push(node);
+
                 });
 
                 // Sort nodes by cluster > node title
-                nodes = _.sortBy(nodes, function(node){
-                    return node.color + node.label;
+                nodes = _.groupBy(nodes, function(node){
+                    return node.attr.cluster_label;
+                });
+
+                clusters = _.sortBy(clusters, function(node){
+                    console.log(node);
+                    return node.color;
                 });
 
 
@@ -236,6 +257,7 @@ Meteor.startup(function() {
                 console.log("rendering nodelist");
                 //console.log(nodes);
                 this.$el.html(Template.nodelist({
+                    clusters : clusters,
                     nodes: nodes
                 }));
                 window.CorTextGraphs.navbar.navigate('nodelist');

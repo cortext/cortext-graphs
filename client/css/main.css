@@ -1,6 +1,10 @@
 /* Will be compiled down to a single stylesheet with your sass files */
 @font-face { font-family: "Oxygen-Regular"; 	src: url('/Oxygen-Regular.ttf'); }
 
+body {
+  font-family: arial, sans-serif;
+}
+
 
 #sigma {
     min-height: 100%;
@@ -231,7 +235,7 @@ font-size:13px;
 	color:#777777;
 	font-size:13px;
 }	
-	
+
 .badge {
     border-radius: 9px 9px 9px 9px;
     padding-left: 7px;
