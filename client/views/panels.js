@@ -1,4 +1,4 @@
-var nav_panels = Backbone.View.extend({
+nav_panels = Backbone.View.extend({
 
   events: {
     "click .nodes": "renderNodeList",
@@ -17,13 +17,3 @@ var nav_panels = Backbone.View.extend({
       window.CorTextGraphs.notelist.render();
   }
 });
-
-
-Meteor.startup(function(){
-
-  window.CorTextGraphs.nav_panels = new nav_panels({
-    el: document.getElementById('nav_panels')
-  });
-
-});
-
