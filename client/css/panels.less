@@ -79,9 +79,9 @@
   font-size: 13px;
   line-height: 14px;
 
-  padding : 4px 0;
+  padding : 4px 10px;
 
-  .label { padding-left : 10px; color : #3C3C3C;}
+  .label { color : #3C3C3C;}
 
   &:hover {
     cursor : pointer;
@@ -91,7 +91,7 @@
 
 .in { text-align: center; background: #f0f0f0; color : #3C3C3C; font-size: 13px; padding : 6px 10px; }
 
-.counter {  float : right; padding : 0 10px; color : #777;}
+.counter {  float : right; padding : 0 0 0 10px; color : #777;}
 
 #node_list {
   .cluster  {
@@ -120,6 +120,17 @@
   }
 
   .neighbors {
-    .node { .item }
+    .node { .item;
+      .direction {
+        width : 1em;
+        margin-right : 5px;
+        float : left;
+
+        color : #777;
+
+        .source { float : left; }
+        .dest   { float : right; }
+      }
+    }
   }
 }

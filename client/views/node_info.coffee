@@ -7,15 +7,26 @@
     node = _(nodes).find (node)=>
       return node.id == @options.node_id
 
-    neighbors = []
+    neighbors = {}
 
     _(edges).each (edge)->
 #      console.log edge
-      if edge["source"] == parseInt node.index 
-        neighbors.push nodes[edge["dest"]]
+      if edge["source"] == parseInt node.index
+        n = nodes[edge["dest"]]
+        n.is_destination = true
+
+        neighbors[n.id] = n
 
       if edge["dest"] == parseInt node.index
-        neighbors.push nodes[edge["source"]]
+        n = nodes[edge["source"]]
+  
+        if neighbors[n.id]
+          neighbors[n.id].is_source = true
+        else
+          n.is_source = true
+          neighbors[n.id] = n
+
+    neighbors = _(neighbors).toArray()
 
     cluster = _(window.graph.clusters).find (cluster)=>
       return cluster.index == node.cluster_index

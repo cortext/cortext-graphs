@@ -9,6 +9,10 @@
     <div class="neighbors">
     {{#each neighbors}}
         <div class="node">
+            <div class="direction">
+                {{#if this.is_source }}<i class="icon-caret-left source"></i>{{/if}}
+                {{#if this.is_destination }}<i class="icon-caret-right dest"></i>{{/if}}
+            </div>
             <div class="label">{{ this.label }}</div>
         </div>
     {{/each}} 
