@@ -8,5 +8,5 @@ accounts-ui
 accounts-google
 backbone
 jquery
-bootstrap
 less
+coffeescript

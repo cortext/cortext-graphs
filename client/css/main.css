@@ -5,11 +5,7 @@ body {
   font-family: arial, sans-serif;
 }
 
-
 #sigma {
-    min-height: 100%;
-    height: 100%;
-	width: 73%;
 }
 
 #sidebar {
@@ -23,8 +19,10 @@ body {
 	overflow:hidden;
 	padding-top: 53px;
 	margin-left: 0px; 
+/*
 	position: fixed;
 	right: -1000px;
+*/
 }
 
 
@@ -69,16 +67,6 @@ body {
 
 .badge {
     color: black;
-}
-
-body {
-    min-height: 100%;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-	background: url("/body-bg.png") repeat-x;
-	background-attachment:fixed;
-    margin: 0;
 }
 
 .container-fluid,
@@ -743,11 +731,6 @@ margin-left:10px;}
     padding-left: 15px;
     padding-right: 15px;
 	line-height:3;
-}
-
-.container-fluid {
-    padding-left: 0px;
-	padding-right:0px;
 }
 
 .welcome{

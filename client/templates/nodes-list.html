@@ -1,23 +1,19 @@
 <template name="nodelist">
-<div class="panel nodelistContainer">
-    {{#each clusters}}
-    <div class="cluster">
+{{#each clusters}}
+<div class="cluster" style='border-color:{{ this.color }};'>
 
-        <div class="color" style='background-color:{{ this.color }};'></div>
-        <h2>{{ this.label }}</h2>
+    <div class="color"></div>
+    <h2  style='background-color:{{ this.color }}; border-color:{{ this.color_plain }};'>{{ this.label }}</h2>
 
-        <div class="nodes">
-        {{#each nodes }}
-            <div class="title-node" data-id='{{ this.id }}'>
-                    <h2 class='titlenode node node-hover'  data-id='{{ this.id }}' data-neighbor-switch='{{ this.id }}'>            
-                    <span>{{ this.label }}</span> <span class="nbr-notes"><span class="number-notes">{{this.noteCount}}</span></span>               
-                    </h2>
-            </div>
-        {{/each}}
+    <div class="nodes">
+    {{#each nodes }}
+        <div class="node" data-id='{{ this.id }}' data-neighbor-switch='{{ this.id }}'>
+            <span class="label">{{ this.label }}</span>
+            <span class="notes">{{this.noteCount}}</span>
         </div>
-
-    </div>
     {{/each}}
+    </div>
 
 </div>
+{{/each}}
 </template>

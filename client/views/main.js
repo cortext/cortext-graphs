@@ -171,101 +171,7 @@ Meteor.startup(function() {
     }
     ////////////// panel nodelist /////////////////
     if (window.CorTextGraphs.nodelist === undefined){
-        var Nodelist = Backbone.View.extend({
-            events: {
-                'click .title-node': 'displayCurrentNode',
-                'mouseover .title-node': 'showNode',
-                'mouseout .title-node': 'hideNode',
-            },
-            initialize: function() {
-              
 
-            },            
-            showNode: function(e) {
-                window.CorTextGraphs.sidebar.showNode(e);
-            },
-            hideNode: function(e) {
-                window.CorTextGraphs.sidebar.hideNode(e);
-            },
-            displayCurrentNode: function(e){
-               // console.log(e.currentTarget);
-                $('#nav-list_nodes').removeClass('navnodes-hover');
-                console.log($(e.currentTarget).attr('data-id'));
-                if($(e.currentTarget).attr('data-id') !==undefined)
-                {
-                    window.CorTextGraphs.navbar.navigate('currentnode');
-                    window.CorTextGraphs.mainrouter.navigate(
-                    window.location.hash.split('?node=')[0] +
-                    '?node=' + $(e.currentTarget).attr('data-id'), true);    
-                }
-            },
-            render: function(){
-                console.log("rendering nodelist");
-
-                var ids = new Array();
-                var cluster_ids = new Array();
-
-                var sigma =  window.CorTextGraphs.sigmaview.sigma;
-                _.each(window.CorTextGraphs.sigmaview.sigma._core.graph.nodesIndex,function(node){
-                    if(node.cluster===false)
-                    {
-                        ids.push(node.id);
-                    } else {
-                        cluster_ids.push(node.id)
-                    }
-                });
-
-                var clusters = sigma.getNodes(cluster_ids);
-
-                _(clusters).each(function(cluster){
-                    cluster.nodes = [];
-                });
-
-                var nodes = sigma.getNodes(ids);
-
-                _.each(nodes, function(node){
-                    var noteCount = window.CorTextGraphs.Notes.find({
-                            graph: Session.get('title'),
-                            source: node.id
-                        }
-                    ).count();
-                    node.noteCount = noteCount;
-
-                    _(clusters).find(function(cluster){ return cluster.label == node.attr.cluster_label}).nodes.push(node);
-
-                });
-
-                // Sort nodes by cluster > node title
-                nodes = _.groupBy(nodes, function(node){
-                    return node.attr.cluster_label;
-                });
-
-                clusters = _.sortBy(clusters, function(node){
-                    console.log(node);
-                    return node.color;
-                });
-
-
-                // var notes = _.map(window.CorTextGraphs.Notes.find({
-                //     graph: Session.get('title'),
-                //     type: { $ne: 'cluster' }
-                // }, {
-                //     sort: {
-                //         created_at: -1
-                //     }
-                // }).fetch()
-                console.log("rendering nodelist");
-                //console.log(nodes);
-                this.$el.html(Template.nodelist({
-                    clusters : clusters,
-                    nodes: nodes
-                }));
-                window.CorTextGraphs.navbar.navigate('nodelist');
-            }
-        });
-        window.CorTextGraphs.nodelist = new Nodelist({
-            el: document.getElementById('nodelist')
-        });
     }
      ////////////// panel notelist /////////////////
     if(window.CorTextGraphs.notelist === undefined){
@@ -541,32 +447,32 @@ Meteor.startup(function() {
                         $('.new-note').editable('toggle');
                     });
 				
-                if (_.isObject(cluster)) {
-                    $('.cluster').editable({
-                        type: 'textarea',
-                        title: 'set a label for the cluster',
-                        value: clusternote.text,
-                        pk: clusternote._id,
-                        validate: function(value) {
-                            if ($.trim(value) == '') {
-                                return 'field can not be empty';
-                            }
-                        },
-                        url: function(params) {
-                            window.CorTextGraphs.Notes.update(
-                                params.pk,
-                                {$set: {
-                                    text: params.value,
-                                    created_at: Date.now()
-                                }});
-                        }
-                    }).on('save', function(e, params) {
-                        cluster.label = params.newValue;
-                        //FIXME do not work
-                        window.CorTextGraphs.sigmaview.render();
-                        window.CorTextGraphs.navbar.navigate('currentnode');
-                    });
-                }
+                // if (_.isObject(cluster)) {
+                //     $('.cluster').editable({
+                //         type: 'textarea',
+                //         title: 'set a label for the cluster',
+                //         value: clusternote.text,
+                //         pk: clusternote._id,
+                //         validate: function(value) {
+                //             if ($.trim(value) == '') {
+                //                 return 'field can not be empty';
+                //             }
+                //         },
+                //         url: function(params) {
+                //             window.CorTextGraphs.Notes.update(
+                //                 params.pk,
+                //                 {$set: {
+                //                     text: params.value,
+                //                     created_at: Date.now()
+                //                 }});
+                //         }
+                //     }).on('save', function(e, params) {
+                //         cluster.label = params.newValue;
+                //         //FIXME do not work
+                //         window.CorTextGraphs.sigmaview.render();
+                //         window.CorTextGraphs.navbar.navigate('currentnode');
+                //     });
+                // }
                 if (_.isArray(neighbors)) {
                     var pagesnumber = Math.ceil(
                         Session.get('selected_neighbors').length / 100);
@@ -711,10 +617,6 @@ Meteor.startup(function() {
              *  TODO add a spinner
              */
             render: function(nodeid) {
-                if (nodeid === "null") {
-                    nodeid = null;
-                    window.CorTextGraphs.sidebar.defaultSidebar();
-                }
                 this.$el.empty();
                 this.sigma = window.sigma.init(
                     document.getElementById('sigma'));
@@ -733,49 +635,24 @@ Meteor.startup(function() {
                 });
 
                 var that = this;
-                $.get(Session.get('path'),
-                    function(data, textStatus) {
-                        Session.set('title', data.meta.title);
-                        Meteor.subscribe('all-notes', data.meta.title,
-                            function() {
-                                that.sigma.emptyGraph();
-                                that.pushClusters(data, nodeid);
-                        });
-                    });
-            },
-            /*
-             * low-level graph drawing
-            */
-            pushGraph: function(object, nodeid) {
-                var that = this;
-                /*
-                 * draw nodes
-                 */
-                var maxweight = _.max(object.nodes,
-                    function(node) { return node.weight; }).weight;
-                object.nodes && _.keys(object.nodes).forEach(
-                    function(key) {
-                        var node = object.nodes[key];
-                        node.id = 'node-low-' + key;
-                        node.size = 2 * (node.weight / maxweight);
-                        node.inDegree = node['in-degree'];
-                        node.outDegree = node['out-degree'];
-                        node.color = '#' + sigma.tools.rgbToHex(
-                                    parseFloat(node.r),
-                                    parseFloat(node.g),
-                                    parseFloat(node.b));
-                        that.sigma.addNode(node.id, node);
+
+                this.sigma.emptyGraph();
+
+                var nodes = window.graph.nodes;
+                var clusters = window.graph.clusters;
+                var edges = window.graph.edges;
+
+                _(clusters).each(function(cluster){
+                    that.sigma.addNode(cluster.id, cluster)
                 });
 
-                $("#nav_panels .nodes .count").html(_(object.nodes).size())
-                $("#nav_panels .annotations .count").html( CorTextGraphs.Notes.find().count() )
+                _(nodes).each(function(node){
+                    that.sigma.addNode(node.id, node)
+                });
 
-                /*
-                 * draw edges
-                 */
-                object.edges && _.keys(object.edges).forEach(
+                edges && _.keys(edges).forEach(
                     function(key) {
-                        var edge = object.edges[key];
+                        var edge = edges[key];
                         var validID = edge['source'] && edge['source'];
                         validID && that.sigma.addEdge(
                             'edge-low-' + key,
@@ -784,18 +661,13 @@ Meteor.startup(function() {
                             edge
                         );
                 });
+
+                $("#nav_panels .nodes .count").html(_(nodes).size())
+                $("#nav_panels .annotations .count").html( CorTextGraphs.Notes.find().count() )
+
                 this.sigma.draw();
-                if (nodeid) {
-                    var node = this.sigma.getNodes(nodeid);
-                    if (node)
-                        window.CorTextGraphs.sidebar.switchSidebar(null, node, this.sigma);
-                } else {
-                    window.CorTextGraphs.sidebar.defaultSidebar();
-                }
             },
-            /*
-             * draw clusters
-             */
+
             pushClusters: function(data, nodeid) {
                 console.log("datas for "+nodeid,data);
                 var that = this;
@@ -826,6 +698,12 @@ Meteor.startup(function() {
                                     parseFloat(node.g).toString() + ',' +
                                     parseFloat(node.b).toString() + ',' +
                                     '0.3' + ')';
+
+                               node.color_plain = '#' + sigma.tools.rgbToHex(
+                                    parseFloat(node.r),
+                                    parseFloat(node.g),
+                                    parseFloat(node.b));
+                                
                                 node.hoverActive = false;
                                 self.sigma.addNode(node.id, node);
                         });
@@ -834,11 +712,12 @@ Meteor.startup(function() {
 
             }
         });
-        /*
-         * init view
-         */
-        window.CorTextGraphs.sigmaview = new SigmaView({
-            el: document.getElementById('sigma')
-        });
+
+        $("#sigma").height($(window).height() + "px");
+        $("#sigma").width($(window).width() + "px");
+
+        // window.CorTextGraphs.sigmaview = new SigmaView({
+        //     el: document.getElementById('sigma')
+        // });
     }
 });

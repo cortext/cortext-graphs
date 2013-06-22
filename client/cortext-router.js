@@ -18,7 +18,8 @@ Meteor.startup(function() {
         window.CorTextGraphs.MainRouter = Backbone.Router.extend({
             routes: {
                 '': 'default',
-                'open/:path/*clusterpath?node=:nodeid': 'index',
+                'open/:path/*clusterpath?node=:nodeid': 'show_node',
+                'open/:path/*clusterpath': 'index',
                 'open/:path/*clusterpath?node=:nodeid/edit': 'edit'
             },
             default: function() {
@@ -26,11 +27,31 @@ Meteor.startup(function() {
                 $('#sigma').html(Template.hello(
                     {example: true, text: 'Welcome to CorText Graphs'}));
             },
-            index: function(path, clusterpath, nodeid) {
+
+            index: function(path, clusterpath) {
                 Session.set('path', decodeURIComponent(path));
                 Session.set('clusterpath', decodeURIComponent(clusterpath));
-                window.CorTextGraphs.sigmaview.render(nodeid);
+                window.graph = new Graph();
+                window.app = new App()
+
+                window.graph.on("graph:loaded", function(){
+                    window.CorTextGraphs.sigmaview.render();
+                })
             },
+
+            show_node: function(path, clusterpath, nodeid) {
+                Session.set('path', decodeURIComponent(path));
+                Session.set('clusterpath', decodeURIComponent(clusterpath));
+
+                window.graph = new Graph()
+                window.app = new App()
+
+                window.graph.on("graph:loaded", function(){
+                    window.CorTextGraphs.sigmaview.render();
+                    window.app.open_node(nodeid);
+                })
+            },
+
             edit: function(path, clusterpath, nodeid) {
                 Session.set('path', decodeURIComponent(path));
                 Session.set('clusterpath', decodeURIComponent(clusterpath));

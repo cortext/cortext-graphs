@@ -1,71 +1,17 @@
 <template name="nodepanel">
-{{#if cluster}}
-<div class="nav row-fluid">
-    <div class="span12">
-        <h4 class="title-cluster">cluster</h4>
-        <div class="row-fluid">
-                            <span class="span6 offset7 cluster-update"><small>{{ cluster.attr.last_update }}</small></span>
-            <div class="span10">
-                <span class='cluster node-hover' data-id='{{ cluster.id }}'></span>
-            </div>
-            <div class="span2">
-                {{ cluster.attr.weight }} <span class="span2b">articles</span>
-            </div>                    
-            <div class="edit-cluster"><a href="#">edit label</a></div>
-        </div>
-        
-    </div>
+<div class="node">
+    <h2>{{ node.label }}</h2>
+
+    <div class="cluster">{{ node.cluster_label }}</div>
 </div>
-{{/if}}
-{{#if node}}
-    <div class="title-node">
-        <h4 class="current-node">node</h4>
-        <div class="row-fluid">
-            <h3 class='page-header node-hover' data-id='{{ node.id }}'>
-                <div class="btn-group">
-                            <button title="annotate {{node.label}}" class="node-add-note" data-neighbor-add-note-target='{{this.id}}' data-neighbor-add-note-source='{{node.id}}'>
-                            </button>
-                </div>
-                {{ node.label }}
-                {{#if node.attr}}
-                <span class='pull-right'>
-                    <span class="badge" style='background-color:{{ cluster.color }};'>&nbsp;</span>
-                    {{ node.attr.weight }}
-                </span> 
-                <div class="link-annot"><a href="#">view annotations</a></div>
-                {{/if}}
-            </h3>
-        </div>
-    </div>
+
     {{#if neighbors}}
-    <ul class="nav nav-list neighbor-list"><!--nav nav-list well-->
-        <h4 class="neighbour-node">neighbours</h4>
-       {{#each neighbors}}
-        <li class='hide neighbor'>
-            <a class='node-hover neighbor-switch' data-id='{{ this.id }}' data-neighbor-switch='{{this.id}}'>
-            <div class='row-fluid'> 
-                <div class='span3'>
-                    <div class="btn-group">
-                        <button title="annotate the link to {{this.label}}" class="neighbor-add-note" data-neighbor-add-note-target='{{this.id}}' data-neighbor-add-note-source='{{node.id}}'>
-                        </button>
-                    </div>
-                </div>
-                <div class="span-label">
-                    {{this.label}}
-                </div>
-                <div class='span3 span-badge'>
-                    <span class="badge" style='background-color:{{ this.attr.clusterColor }}'>&nbsp;
-                    </span>
-                    {{ this.attr.weight }}
-                </div>
-                </div>
-            </a>
-        </li>
-        {{/each}}
-        <div class="pagination">
-            <ul class='neighbor-pages'></ul>
+    <div class="neighbors">
+    {{#each neighbors}}
+        <div class="node">
+            <div class="label">{{ this.label }}</div>
         </div>
-    </ul>
+    {{/each}} 
+    </div>
     {{/if}}
-{{/if}}
 </template>
