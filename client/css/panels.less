@@ -122,13 +122,16 @@
   .neighbors {
     .node { .item;
       .direction {
-        width : 1em;
         margin-right : 5px;
+
+        position : relative;
+        bottom : -1px;
+        width : 1em;
         float : left;
 
         color : #777;
 
-        .source { float : left; }
+        .source { float : left;  }
         .dest   { float : right; }
       }
     }
