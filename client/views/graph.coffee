@@ -12,7 +12,16 @@
 
     @sigma = window.sigma.init document.getElementById('sigma')
 
-    @sigma.bind('overnodes', window.CorTextGraphs.sidebar.updateSidebar).draw()
+    @sigma.bind('overnodes', (e)->
+      node_id = e.target.getNodes(e.content[0]).id
+
+      node = _(window.graph.nodes).find (node)->
+        return node.id == node_id
+
+      console.log "show me node", node.id
+
+      window.app.open_node node.id
+    ).draw()
 
     @sigma.drawingProperties
       font: 'Arial'

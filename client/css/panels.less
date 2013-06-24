@@ -74,6 +74,15 @@
   text-align: center;
 }
 
+.title-small {
+  padding : 0 10px;
+
+  font-family: arial;
+  font-size: 9px;
+
+  color : #777;
+}
+
 .item {
   font-family: arial;
   font-size: 13px;
@@ -92,6 +101,8 @@
 .in { text-align: center; background: #f0f0f0; color : #3C3C3C; font-size: 13px; padding : 6px 10px; }
 
 .counter {  float : right; padding : 0 0 0 10px; color : #777;}
+
+.block { margin-top : 20px; }
 
 #node_list {
   .cluster  {
@@ -119,12 +130,17 @@
     .cluster { .in }
   }
 
+  .block-type { .title-small }
+
   .neighbors {
+    .block;
+
     .node { .item;
       .direction {
         margin-right : 5px;
 
         position : relative;
+        font-size : 14px;
         bottom : -1px;
         width : 1em;
         float : left;
@@ -135,5 +151,9 @@
         .dest   { float : right; }
       }
     }
+  }
+
+  .annotations {
+    .block;
   }
 }
