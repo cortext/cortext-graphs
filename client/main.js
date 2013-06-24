@@ -14,8 +14,8 @@ Meteor.startup(function () {
         el: document.getElementById('nav_panels')
     });
 
-    $("#sigma").height($(window).height() + "px");
-    $("#sigma").width($(window).width() + "px");
+    $("#sigma").height(($(window).height() - 53) + "px");
+    $("#sigma").width(($(window).width()) + "px");
 
     window.CorTextGraphs.sigmaview = new GraphView({
         el: document.getElementById('sigma')

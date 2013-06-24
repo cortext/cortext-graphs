@@ -6,10 +6,9 @@ nav_panels = Backbone.View.extend({
   },
 
   renderNodeList: function(){
-      $('#notelist').hide();
-      $('#nodelist').show();
-      window.CorTextGraphs.nodelist.render();
-
+      window.app.open_node_list();
+      // $('#nodelist').show();
+      // window.CorTextGraphs.nodelist.render();
   },
   renderAnnotationList: function(){
       $('#nodelist').hide();

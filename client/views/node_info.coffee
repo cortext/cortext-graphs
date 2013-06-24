@@ -38,4 +38,7 @@
       node: node
       neighbors : neighbors
 
+    @$el.find(".cluster").on "click", (e)->
+      window.app.open_node_list()
+
     @$el.find(".cluster").css("background", cluster.color)

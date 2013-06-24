@@ -47,16 +47,17 @@
   position : absolute;
   top : 53px;
   right : 0;
-//  width : 330px;
-  overflow: hidden;
+  // should take a fixed scrollbar to be independant from browser
+  width : 345px;
+  overflow-y: scroll;
 
   background: white;
 
   >div {
     width : 330px;
-    float : left;
-    position : relative;
-    overflow-y : auto;
+    // float : left;
+    // position : relative;
+    // overflow-y : auto;
   }
 }
 
@@ -131,6 +132,10 @@
   }
 
   .block-type { .title-small }
+
+  .cluster {
+    cursor: pointer;
+  }
 
   .neighbors {
     .block;
