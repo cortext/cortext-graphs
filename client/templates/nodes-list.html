@@ -8,9 +8,9 @@
 
     <div class="nodes">
     {{#each nodes }}
-        <div class="node" data-id='{{ this.id }}' data-neighbor-switch='{{ this.id }}'>
-            <span class="label">{{ this.label }}</span>
-            <span class="notes">{{this.noteCount}}</span>
+        <div class="node" id="{{ this.id }}" data-id='{{ this.id }}' data-neighbor-switch='{{ this.id }}'>
+            <span class="label">{{ label }}</span>
+            <span class="annotations_count"></span>
         </div>
     {{/each}}
     </div>

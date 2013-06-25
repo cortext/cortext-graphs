@@ -39,13 +39,6 @@ Nodelist = Backbone.View.extend({
         });
 
         _.each(nodes, function(node){
-            var noteCount = window.CorTextGraphs.Notes.find({
-                    graph: Session.get('title'),
-                    source: node.id
-                }
-            ).count();
-            node.noteCount = noteCount;
-
             _(clusters).find(function(cluster){ return cluster.label == node.cluster_label}).nodes.push(node);
 
         });
@@ -65,5 +58,19 @@ Nodelist = Backbone.View.extend({
         this.$el.html(Template.nodelist({
             clusters : clusters
         }));
+
+        // might be a little bit ressource greedy
+        _(nodes).each(function(node){
+            var annotations_count = Meteor.render(function(){
+                return window.annotations.find({
+                        graph: Session.get('title'),
+                        source: node.id
+                    }
+                ).count();
+            });
+
+            $("#"+node.id+" .annotations_count").append(annotations_count);
+        });
+
     }
 });

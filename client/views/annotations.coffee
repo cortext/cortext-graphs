@@ -12,6 +12,11 @@
     console.log @node
 
     if @node
+      new annotationFormAdd
+        node : @node
+        el: $("#annotation_add")
+      .render()
+
       Deps.autorun ()=>
         @annotations = window.annotations.find
           source : @node.id
@@ -26,17 +31,8 @@
         @render()
 
   render:()->
-#    console.log "render annotations for node: "+ @node.id
-
     @$el.html Template.annotation_list
       annotations : @annotations
-
-    console.log "form for node", @node
-
-    new annotationFormAdd
-      node : @node
-      el: @$el.children("#annotation_add")
-    .render()
 
 @annotationFormAdd = Backbone.View.extend
   initialize:()->
@@ -48,7 +44,7 @@
       params = 
         created_at: Date.now()
         created_by: undefined
-        text: $(@$el.find('input')[0]).val()
+        text: $(@$el.find('textarea')[0]).val()
         type: 'node'
         format: 'raw'
         graph: Session.get('title')

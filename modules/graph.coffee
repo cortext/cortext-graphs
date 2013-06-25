@@ -51,6 +51,8 @@
         parseFloat(node.g),
         parseFloat(node.b))
 
+#      node.annotations_count = 0
+
     nodes
 
   process_clusters:(clusters)->
