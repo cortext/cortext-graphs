@@ -18,14 +18,13 @@
       $("#nav_panels .nodes .count").html(_(window.graph.nodes).size())
 
     # initialize annotation list panel and counter
-
     annotations_count = Meteor.render ()->
       window.annotations.find().count()
 
     @annotations_list = new annotationsView
       el: document.getElementById 'annotation_list'
 
-    @annotations_list.render()
+#    @annotations_list.render()
 
     $("#nav_panels .annotations .count").html annotations_count 
 
