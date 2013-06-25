@@ -2,7 +2,10 @@
   sigma: null
   
   initialize: ()->
-    console.log('initializing graph')
+    console.log('initializing graph view')
+
+    $("#sigma").height(($(window).height() - 53) + "px");
+    $("#sigma").width(($(window).width()) + "px");
 
     if (this.sigma is not null)
       this.sigma.emptyGraph()
@@ -12,7 +15,7 @@
 
     @sigma = window.sigma.init document.getElementById('sigma')
 
-    @sigma.bind('overnodes', (e)->
+    @sigma.bind('downnodes', (e)->
       node_id = e.target.getNodes(e.content[0]).id
 
       node = _(window.graph.nodes).find (node)->
@@ -20,7 +23,7 @@
 
       console.log "show me node", node.id
 
-      window.app.open_node node.id
+      window.app.panels.open_node node.id
     ).draw()
 
     @sigma.drawingProperties
@@ -53,7 +56,13 @@
         'node-low-' + edge['dest'],
         edge)
 
-    $("#nav_panels .nodes .count").html(_(nodes).size())
-    $("#nav_panels .annotations .count").html( CorTextGraphs.Notes.find().count() )
-
     @sigma.draw()
+
+  show_node:(e)->
+    ids = $(e.currentTarget).attr('data-id').split(',')
+
+    _.each ids, (id)=>
+        @sigma._core.plotter.drawHoverNode @sigma._core.graph.nodesIndex[id]
+
+  hide_node:(e)->
+    @sigma.refresh()

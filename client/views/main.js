@@ -595,9 +595,9 @@ Meteor.startup(function() {
                     window.CorTextGraphs.sidebar.defaultSidebar();
             }
         });
-        window.CorTextGraphs.sidebar = new Sidebar({
-            el: document.getElementById('currentnode')
-        });
+        // window.CorTextGraphs.sidebar = new Sidebar({
+        //     el: document.getElementById('currentnode')
+        // });
 		
     }
     if (window.CorTextGraphs.sigmaview === undefined) {

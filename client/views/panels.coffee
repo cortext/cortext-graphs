@@ -2,6 +2,15 @@
   events:
     "click .nodes": "open_node_list"
 
+  initialize:()->
+    # set container at the right height
+    $("#panels").height(($(window).height()-53) + "px");
+    $("#panels").children().height(($(window).height()-53) + "px");
+
+    window.graph.on "graph:loaded", ()->
+      $("#nav_panels .nodes .count").html(_(window.graph.nodes).size())
+      $("#nav_panels .annotations .count").html( CorTextGraphs.Notes.find().count() )
+
   open_node_list:()->
     window.app.panels.open_node_list
 

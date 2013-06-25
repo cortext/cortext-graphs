@@ -12,11 +12,11 @@ Nodelist = Backbone.View.extend({
     },
 
     showNode: function(e) {
-        window.CorTextGraphs.sidebar.showNode(e);
+        window.app.graph.show_node(e);
     },
 
     hideNode: function(e) {
-        window.CorTextGraphs.sidebar.hideNode(e);
+        window.app.graph.hide_node(e);
     },
 
     displayCurrentNode: function(e){
