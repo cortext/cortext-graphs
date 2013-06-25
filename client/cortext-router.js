@@ -48,7 +48,7 @@ Meteor.startup(function() {
 
                 window.graph.on("graph:loaded", function(){
                     window.CorTextGraphs.sigmaview.render();
-                    window.app.open_node(nodeid);
+                    window.app.panels.open_node(nodeid);
                 })
             },
 
