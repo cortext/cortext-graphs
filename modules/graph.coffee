@@ -19,6 +19,12 @@
       @trigger "graph:loaded"
 
     $.get Session.get('path'), (data)=>
+
+      # set title according to the json node file
+      Session.set('title', data.meta.title)
+
+      Meteor.subscribe('all-notes', data.meta.title)
+
       console.log "loading nodes from json", data
 
       @nodes = @process_nodes data.nodes

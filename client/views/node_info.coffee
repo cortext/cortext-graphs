@@ -31,13 +31,18 @@
     cluster = _(window.graph.clusters).find (cluster)=>
       return cluster.index == node.cluster_index
 
-    console.log node
-    console.log cluster
-
     @$el.html Template.nodepanel
       node: node
       neighbors : neighbors
 
+    # nest the list of annotation view
+    @annotations_view = new annotationsView
+      node: node
+      el: @$el.children('.node').children('.annotations')
+
+    @annotations_view.render()
+
+    # add some informations about the cluster the node is in
     @$el.find(".cluster").on "click", (e)->
       window.app.panels.open_node_list()
 

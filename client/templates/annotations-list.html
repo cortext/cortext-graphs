@@ -1,8 +1,11 @@
-<template name='notelist'>
-    {{#if notes}}  
-   <div class="count"><span>{{notes.length}} notes </span></div>   
+<template name='annotation_list'>
+
+<div class="block-type">annotations</div>
+
+{{#if annotations}}  
+<!--    <div class="count"><span>{{annotations.length}} annotations </span></div>    -->
     <div class="nav note-list lastnote">
-        {{#each notes}}
+        {{#each annotations}}
         <div class='note' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'>
             <a title='by {{this.created_by}}'> 
             <div class='row-fluid'>
@@ -30,5 +33,7 @@
             <ul class='note-pages'></ul>
         </div>
     </div>
-    {{/if}}
+{{else}}
+  <div class="message">There is no annotation yet</div>
+{{/if}}
 </template>

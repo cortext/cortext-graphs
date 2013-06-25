@@ -1,10 +1,7 @@
 @App = Backbone.View.extend
   initialize : ()->
-    listofnodes = new Nodelist
-      el: document.getElementById 'node_list'
 
-    window.graph.on "graph:loaded", ()->
-        listofnodes.render()
+    window.annotations = window.CorTextGraphs.Notes;
 
     @counters = new nav_panels
       el: document.getElementById 'nav_panels'
