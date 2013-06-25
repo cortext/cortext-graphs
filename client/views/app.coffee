@@ -2,7 +2,7 @@
   initialize : ()->
     # set container at the right height
     $("#panels").height(($(window).height()-53) + "px");
-    # $("#panels").children().height(($(window).height()-53) + "px");
+    $("#panels").children().height(($(window).height()-53) + "px");
 
     listofnodes = new Nodelist
       el: document.getElementById('node_list')
@@ -11,12 +11,12 @@
         listofnodes.render()
 
   open_node_list : ()->
-    $('#node_info').hide()
-    $('#node_list').show()
+    $('#node_info').slideDown(600)
+    $('#node_list').slideDown(600)
 
   close_node_list : ()->
-    $('#node_list').hide()
-    $('#node_info').show()
+    $('#node_list').slideUp(600)
+    $('#node_info').slideDown(600)
 
   open_node: (node_id)->
     node_info = new NodeInfo 
