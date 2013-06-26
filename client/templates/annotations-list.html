@@ -6,12 +6,14 @@
 <!--    <div class="count"><span>{{annotations.length}} annotations </span></div>    -->
 <div class="annotations">
 {{#each annotations}}
-  <div class='annotation' class='node-hover' data-source-id="{{ source }}" data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'>
+  <div class='annotation' data-source-id="{{ source }}" data-id='{{ _id }}'>
     <div class="info">
       <div class="source">{{ node.label }}</div>
       <div class="created">{{ date created_at }}</div>
     </div>
-    <div class='content'>{{ text }}</div>
+    <div class='content'>
+      {{#markdown}}{{ text }}{{/markdown}}
+    </div>
   </div>
 {{/each}}
 {{else}}

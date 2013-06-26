@@ -26,6 +26,7 @@
         .fetch()
 
         _(@annotations).each (annotation)=>
+          console.log annotation
           annotation.node = @node
 
         @render()
