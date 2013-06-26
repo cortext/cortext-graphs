@@ -1,6 +1,42 @@
 Cortext Graphs - Tech notes
 ===========================
 
+# Routes
+
+PROPOSAL
+
+
+
+## dashboard
+
+```
+
+/
+
+```
+
+## app mode
+
+Where `@` denote a variable. The logic is to get a permanent url for each view and use the `#` locator only to perform visual focus actions.
+
+Nodes can be node or cluster. Might be confusing and will change if it is the case.
+
+```
+
+/@graph_id/
+
+/@graph_id/list:nodes
+/@graph_id/list:nodes#node:@node_id
+/@graph_id/list:nodes#orderby:@order_rule
+
+/@graph_id/list:annotations
+/@graph_id/list:annotations@#annotation:@annotation_id
+
+/@graph_id/node:@node_id
+/@graph_id/node:@node_id#annotation:@annotation_id
+
+```
+
 #Collection
 For server-side published datasets, see `server/publish.js`.
 
