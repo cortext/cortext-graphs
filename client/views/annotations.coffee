@@ -1,4 +1,7 @@
 @annotationsView = Backbone.View.extend
+  events:
+    'click .annotation' : 'open_source'
+
   initialize:()->
     if @options.node_id is undefined
       @node = undefined
@@ -40,6 +43,10 @@
   render:()->
     @$el.html Template.annotation_list
       annotations : @annotations
+
+  open_source:(e)->
+    window.CorTextGraphs.mainrouter.navigate(window.location.hash.split('?node=')[0] +
+    '?node=' + $(e.currentTarget).attr('data-source-id'), true);    
 
 @annotationFormAdd = Backbone.View.extend
   initialize:()->
