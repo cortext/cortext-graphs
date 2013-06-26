@@ -62,11 +62,17 @@ Nodelist = Backbone.View.extend({
         // might be a little bit ressource greedy
         _(nodes).each(function(node){
             var annotations_count = Meteor.render(function(){
-                return window.annotations.find({
+                var count = window.annotations.find({
                         graph: Session.get('title'),
                         source: node.id
                     }
                 ).count();
+
+                if(count > 0){
+                    return count
+                } else {
+                    return ""
+                }
             });
 
             $("#"+node.id+" .annotations_count").append(annotations_count);

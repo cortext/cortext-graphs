@@ -195,5 +195,55 @@
 
   .annotations {
     .block;
+
+    .annotation {
+      margin-bottom : 10px;
+    
+
+      .info {
+        .title-small; position : relative;
+
+        .source { width : 200px; }
+        
+        .created {
+          position : absolute;
+          top : 1px;
+          right : 10px;
+          width : 100px;
+
+          text-align : right;
+        }
+      }
+
+      .content { .item; }
+    }
+  }
+}
+
+#annotation_list {
+  &>div { padding : 20px 0; }
+
+  .block-type { display : none; }
+
+  .annotation {
+    margin-bottom : 10px;
+  
+
+    .info {
+      .title-small; position : relative;
+
+      .source { width : 200px; }
+      
+      .created {
+        position : absolute;
+        top : 1px;
+        right : 10px;
+        width : 100px;
+
+        text-align : right;
+      }
+    }
+
+    .content { .item; }
   }
 }
