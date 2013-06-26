@@ -21,7 +21,6 @@ Nodelist = Backbone.View.extend({
 
     displayCurrentNode: function(e){
         if($(e.currentTarget).attr('data-id') !==undefined){
-            window.CorTextGraphs.navbar.navigate('currentnode');
             window.CorTextGraphs.mainrouter.navigate(
             window.location.hash.split('?node=')[0] +
             '?node=' + $(e.currentTarget).attr('data-id'), true);    
