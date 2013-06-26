@@ -61,4 +61,5 @@
       # console.log @options.node
       # console.log "insert", params
 
-      window.annotations.insert params
+      window.annotations.insert params, (error, id)=>
+        $(@$el.find('textarea')[0]).val('')
