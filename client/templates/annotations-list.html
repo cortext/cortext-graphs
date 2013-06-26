@@ -8,7 +8,7 @@
 {{#each annotations}}
   <div class='annotation' class='node-hover' data-id='{{ this.source }}{{#if this.target}},{{ this.target }}{{/if}}'>
     <div class="info">
-      <div class="source">{{ source }}</div>
+      <div class="source">{{ node.label }}</div>
       <div class="created">{{ date created_at }}</div>
     </div>
     <div class='content'>{{ text }}</div>

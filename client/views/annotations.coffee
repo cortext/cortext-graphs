@@ -21,13 +21,20 @@
         @annotations = window.annotations.find
           source : @node.id
         .fetch()
-        
-        console.log @annotations
-        
+
+        _(@annotations).each (annotation)=>
+          annotation.node = @node
+
         @render()
     else
       Deps.autorun ()=>
         @annotations = window.annotations.find().fetch()
+
+        # not optimal dude !
+        _(@annotations).each (annotation)->
+          annotation.node = _(window.graph.nodes).find (node)->
+            annotation.source is node.id
+
         @render()
 
   render:()->
