@@ -9,33 +9,32 @@
     @nodes = []
     @edges = []
 
-    @import_from_json()
-
     console.log this
 
-  import_from_json:()->
+  open_url:(url)->
 
-    done = _.after 2, ()=>
-      @trigger "graph:loaded"
+    $.get url, (data)=>
+      done = _.after 2, ()=>
+        @trigger "graph:loaded"
 
-    $.get Session.get('path'), (data)=>
+      $.get data.nodes, (data)=>
 
-      # set title according to the json node file
-      Session.set('title', data.meta.title)
+        # set title according to the json node file
+        Session.set('title', data.meta.title)
 
-      Meteor.subscribe('all-notes', data.meta.title)
+        Meteor.subscribe('all-notes', data.meta.title)
 
-      console.log "loading nodes from json", data
+        console.log "loading nodes from json", data
 
-      @nodes = @process_nodes data.nodes
-      @edges = data.edges
-      done()
+        @nodes = @process_nodes data.nodes
+        @edges = data.edges
+        done()
 
-    $.get Session.get('clusterpath'), (data)=>
-      console.log "loading clusters from json", data
+      $.get data.clusters, (data)=>
+        console.log "loading clusters from json", data
 
-      @clusters = @process_clusters data.nodes
-      done()
+        @clusters = @process_clusters data.nodes
+        done()
 
   process_nodes:(nodes)->
     max_weight = _(nodes).max((node)-> node.weight).weight

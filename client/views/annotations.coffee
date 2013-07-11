@@ -46,8 +46,8 @@
       annotations : @annotations
 
   open_source:(e)->
-    window.CorTextGraphs.mainrouter.navigate(window.location.hash.split('?node=')[0] +
-    '?node=' + $(e.currentTarget).attr('data-source-id'), true);    
+    node_id = $(e.currentTarget).attr('data-source-id')
+    window.app.panels.open_node(node_id)
 
 @annotationFormAdd = Backbone.View.extend
   initialize:()->

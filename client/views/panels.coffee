@@ -30,12 +30,19 @@
 
   open_node_list:()->
     window.app.panels.open_node_list()
-
+  
   open_annotation_list:()->
     window.app.panels.open_annotation_list()
 
 @Panels = Backbone.View.extend
+  initialize: ()->
+    $('#node_list').hide()
+    $('#node_info').hide()
+    $('#annotation_list').hide()
+
   open_node_list : ()->
+    window.app.router.navigate(window.app.root_url+"/list/nodes")
+    
     @close_annotation_list()
     @close_node()
     $('#node_list').slideDown(600)
@@ -44,18 +51,23 @@
     $('#node_list').slideUp(600)
 
   open_node: (node_id)->
+    window.app.router.navigate(window.app.root_url+"/node/"+node_id)
+
     node_info = new NodeInfo 
       node_id : node_id
       el : document.getElementById "node_info"
 
     @close_node_list()
     @close_annotation_list()
+    $('#node_info').slideDown(600)
     node_info.render()
 
   close_node:()->
     $('#node_info').slideDown(600)
 
   open_annotation_list: ()->
+    window.app.router.navigate(window.app.root_url+"/list/annotations")
+    
     @close_node_list()
     @close_node()
     $('#annotation_list').slideDown(600)

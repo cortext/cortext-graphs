@@ -3,6 +3,8 @@
 
     window.annotations = window.CorTextGraphs.Notes;
 
+    @router = window.CorTextGraphs.mainrouter
+
     @counters = new nav_panels
       el: document.getElementById 'nav_panels'
 

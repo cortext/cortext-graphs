@@ -21,9 +21,8 @@ Nodelist = Backbone.View.extend({
 
     displayCurrentNode: function(e){
         if($(e.currentTarget).attr('data-id') !==undefined){
-            window.CorTextGraphs.mainrouter.navigate(
-            window.location.hash.split('?node=')[0] +
-            '?node=' + $(e.currentTarget).attr('data-id'), true);    
+            var node_id = $(e.currentTarget).attr('data-id');
+            window.app.panels.open_node(node_id);
         }
     },
 

@@ -18,3 +18,15 @@ Meteor.publish('description', function(options){
     node : options.node
   });
 });
+
+Graphs = new Meteor.Collection('graphs');
+
+Meteor.publish('graphs', function(){
+  return Graphs.find({});
+});
+
+Meteor.publish('graph', function(graph_short_id){
+  return Graphs.find({
+    short_id : graph_short_id
+  });
+});

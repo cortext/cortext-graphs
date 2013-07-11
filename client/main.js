@@ -12,5 +12,5 @@ Meteor.startup(function () {
 
     window.CorTextGraphs.mainrouter = new window.CorTextGraphs.MainRouter();
 
-    Backbone.history.start(/*{pushState: true}*/);
+    Backbone.history.start({pushState: true});
 });

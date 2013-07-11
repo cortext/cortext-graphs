@@ -25,7 +25,7 @@
 
       if node_id.match(/node-low/)
         node = window.graph.find_node node_id
-        window.app.panels.open_node node.id        
+        window.app.panels.open_node node.id
         @sigma.draw()
 
     # highlight cluster and child on hover in a cluster
