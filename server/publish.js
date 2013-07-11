@@ -7,7 +7,7 @@ Meteor.publish('all-notes', function(graph) {
     });
 });
 
-Descriptions = new Meteor.Descriptions('descriptions');
+Descriptions = new Meteor.Collection('descriptions');
 
 Meteor.publish('description', function(options){
   check(options.graph, String);
