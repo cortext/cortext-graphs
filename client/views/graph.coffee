@@ -10,21 +10,39 @@
     if (this.sigma is not null)
       this.sigma.emptyGraph()
 
+  add_events: ()->
+    # highlight neighbors when hovering a node
+    # @sigma.bind 'overnodes', (e)=>
+    #   node_id = e.target.getNodes(e.content[0]).id
+
+    #   if node_id.match(/node-low/)
+    #     @sigma.iterEdges (e)=>
+          
+
+    # Open node panel on click
+    @sigma.bind 'downnodes', (e)=>
+      node_id = e.target.getNodes(e.content[0]).id
+
+      if node_id.match(/node-low/)
+        node = window.graph.find_node node_id
+        window.app.panels.open_node node.id        
+        @sigma.draw()
+
+    # highlight cluster and child on hover in a cluster
+    # @sigma.bind 'downnodes', (e)=>
+    #   node_id = e.target.getNodes(e.content[0]).id
+
+    #   if node_id.match(/node-high/)
+    #     console.log "cluster"
+    # .bind 'outnode', (e)=>
+
+    # Open cluster panel on click
+    # TODO
+
   render: ()->
     @$el.empty()
 
     @sigma = window.sigma.init document.getElementById('sigma')
-
-    @sigma.bind('downnodes', (e)->
-      node_id = e.target.getNodes(e.content[0]).id
-
-      node = _(window.graph.nodes).find (node)->
-        return node.id == node_id
-
-      console.log "show me node", node.id
-
-      window.app.panels.open_node node.id
-    ).draw()
 
     @sigma.drawingProperties
       font: 'Arial'
@@ -35,6 +53,8 @@
     .graphProperties
       minNodeSize: 1,
       maxNodeSize: 80
+
+    @add_events()
 
     @sigma.emptyGraph()
 

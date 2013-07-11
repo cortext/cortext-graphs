@@ -2,6 +2,15 @@
 <div class="node">
   <h2>{{ node.label }}</h2>
 
+  <div class="block-type">description</div>
+  {{#if description}}
+  <div class="description">{{ node.description }}</div>
+  {{else}}
+  <div class="message">There is no description yet</div>
+  {{/if}}
+
+  {{> node_description_form }}
+
   <div class="block-type">cluster</div>
   <div class="cluster">{{ node.cluster_label }}</div>
 

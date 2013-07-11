@@ -77,3 +77,15 @@
       node.hoverActive = false
 
     clusters
+
+  find_node:(node_id)->
+    node = _(@nodes).find (node)=>
+      return node.id == node_id
+
+    node
+
+  find_cluster:(cluster_id)->
+    cluster = _(@clusters).find (cluster)=>
+      return cluster.id == cluster_id
+
+    cluster
