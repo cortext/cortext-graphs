@@ -1,3 +1,5 @@
+graphs = new Meteor.Collection 'graphs'
+
 @Router =  Backbone.Router.extend
   routes:
     '': 'default'
@@ -36,8 +38,6 @@
           this.navigate('graph/'+ current_graph.short_id);
 
   graph: (graph_short_id, cb)=>
-    graphs = new Meteor.Collection 'graphs'
-
     Meteor.subscribe 'graph', graph_short_id, ()->
       graph = graphs.findOne { short_id : graph_short_id}
 
@@ -56,6 +56,7 @@
         console.log "graph not found", graph_short_id
 
   graph_node_list: (graph_short_id)->
+
     @graph graph_short_id, ()->
       window.app.panels.open_node_list()
 
