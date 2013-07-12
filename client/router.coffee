@@ -7,19 +7,16 @@ graphs = new Meteor.Collection 'graphs'
     'graph/:graph_id' : 'graph'
     'graph/:graph_id/list/nodes' : 'graph_node_list'
     'graph/:graph_id/list/annotations' : 'graph_annotation_list'
-    'graph/:graph_id/list/annotations' : 'graph_annotation_list'
     'graph/:graph_id/node/:node_id' : 'graph_node_info'
 
   default: ()->
 
-  open_graph: (path)=>
+  open_graph: (path)->
     url = decodeURIComponent path
 
     console.log 'trying to open', url
 
-    graphs = new Meteor.Collection 'graphs'
-
-    Meteor.subscribe 'graphs', ()->
+    Meteor.subscribe 'graphs', ()=>
       current_graph = graphs.findOne { url : url }
 
       if(current_graph)
