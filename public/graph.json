@@ -1,0 +1,4 @@
+{
+  "nodes" : "/demo/hnetwork-low.json",
+  "clusters" : "/demo/hnetwork-high.json"
+}

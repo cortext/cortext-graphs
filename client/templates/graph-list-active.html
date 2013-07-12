@@ -1,0 +1,11 @@
+<template name="graph_list-active">
+{{#if graphs}}
+{{#each graphs}}
+<div class="graph">
+  <a href="/graph/{{ url }}">{{ short_id }}</a>
+</div>
+{{/each}}
+{{else}}
+  <div class="message">There is no active graph yet</div>
+{{/if}}
+</template>

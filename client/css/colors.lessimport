@@ -1,0 +1,23 @@
+@color-violet               : #9E1D43;
+@color-violet-secondary     : #F772BD;
+
+@color-pink                 : #E62E60;
+@color-pink-secondary       : #F5A4DA;
+
+@color-blue                 : #235BBE;
+@color-blue-secondary       : #32B9E5;
+
+@color-green                : #27AD19;
+@color-green-secondary      : #D0D644;
+
+@color-orange               : #EE6E21;
+@color-orange-secondary     : #F3BE00;
+
+@color-yellow               : #FFD505;
+@color-yellow-secondary     : #FFFB61;
+
+@color-grey-dark            : #3C3C3C;
+@color-grey-dark-secondary  : #504B59;
+
+@color-grey-light           : #777777;
+@color-grey-light-secondary : #4C4C4C;

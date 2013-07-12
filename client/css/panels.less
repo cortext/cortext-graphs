@@ -1,4 +1,7 @@
 @import "scrollbar.lessimport";
+@import "mixins.lessimport";
+@import "colors.lessimport";
+@import "elements.lessimport";
 
 body { .siFancyScrollbar }
 
@@ -48,24 +51,10 @@ body { .siFancyScrollbar }
 }
 
 #panels {
-  position : absolute;
-  top : 53px;
+  .panel;
+
   right : 0;
-  // should take a fixed scrollbar to be independant from browser
-  width : 330px;
-  overflow: hidden;
-
-  background: white;
-
   border-left : 1px solid #f0f0f0;
-
-  >div {
-    width : 330px;
-    overflow-y : auto;
-    // float : left;
-    // position : relative;
-    // overflow-y : auto;
-  }
 
   form {
     margin : 20px 0;
@@ -90,60 +79,18 @@ body { .siFancyScrollbar }
 
 }
 
-.group {
-  border-left-width: 3px;
-  border-left-style: solid;
-}
+#graph_list {
+  .panel;
 
-.title_big {
-  font-family: "Oxygen-Regular", arial;
-  font-size : 18px;
-  line-height : 24px;
+  border-right : 1px solid #f0f0f0;
 
-  padding:  12px 25px;
-  text-align: center;
-}
+  div>h2 { .title-small; }
 
-.title-small {
-  padding : 0 10px 2px;
+  .demo a.button{ background-color : @color-blue; }
 
-  font-family: arial;
-  font-size: 9px;
-
-  color : #777;
-}
-
-.item {
-  font-family: arial;
-  font-size: 13px;
-  line-height: 14px;
-
-  padding : 4px 10px;
-
-  .label { color : #3C3C3C;}
-
-  &:hover {
-    cursor : pointer;
-    background : #f0f0f0;
+  #list-active_graphs {
+    .graph { .item; }
   }
-
-  p { margin-bottom : 0.75em; }
-}
-
-.in { text-align: center; background: #f0f0f0; color : #3C3C3C; font-size: 13px; padding : 6px 10px; }
-
-.counter {  float : right; padding : 0 0 0 10px; color : #777;}
-
-.block { margin-top : 20px; }
-
-.message {
-  margin : 0px 50px;
-
-  color : #777;
-  font-size : 12px;
-  line-height: 2em;
-  // font-style : italic;
-  text-align : center;
 }
 
 #node_list {

@@ -1,5 +1,10 @@
 graphs = new Meteor.Collection 'graphs'
 
+@graphs = graphs
+
+Meteor.subscribe 'graphs'
+
+
 @Router =  Backbone.Router.extend
   routes:
     '': 'default'
@@ -10,6 +15,8 @@ graphs = new Meteor.Collection 'graphs'
     'graph/:graph_id/node/:node_id' : 'graph_node_info'
 
   default: ()->
+    window.app = new App()
+    window.app.show_graph_list()
 
   open_graph: (path)->
     url = decodeURIComponent path
@@ -43,12 +50,14 @@ graphs = new Meteor.Collection 'graphs'
         window.graph.open_url graph.url
 
         window.app = new App()
+  
         window.app.root_url = "graph/"+graph_short_id
+        window.app.show_panels()
 
         window.graph.on "graph:loaded",()->
             window.app.graph.render()
 
-        cb()
+        cb() if cb
       else
         console.log "graph not found", graph_short_id
 

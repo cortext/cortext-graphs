@@ -1,0 +1,91 @@
+.button {
+  color : white;
+  font : bold 14px/34px arial;
+  text-align : center;
+
+  .rounded-corners(3px);
+
+  margin : 10px;
+
+  width : (330px - 20);
+  height : 34px;
+}
+
+a.button {
+  text-decoration : none;
+  display : inline-block;
+}
+
+
+.panel {
+  position : absolute;
+  top : 53px;  
+  width : 330px;
+  overflow: hidden;
+
+  background: white;
+
+  >div {
+    width : 330px;
+    overflow-y : auto;
+    // float : left;
+    // position : relative;
+    // overflow-y : auto;
+  }
+}
+
+.group {
+  border-left-width: 3px;
+  border-left-style: solid;
+}
+
+.title_big {
+  font-family: "Oxygen-Regular", arial;
+  font-size : 18px;
+  line-height : 24px;
+
+  padding:  12px 25px;
+  text-align: center;
+}
+
+.title-small {
+  padding : 0 10px 2px;
+
+  font-family: arial;
+  font-size: 9px;
+
+  color : #777;
+}
+
+.item {
+  font-family: arial;
+  font-size: 13px;
+  line-height: 14px;
+
+  padding : 4px 10px;
+
+  .label { color : #3C3C3C;}
+
+  &:hover {
+    cursor : pointer;
+    background : #f0f0f0;
+  }
+
+  p { margin-bottom : 0.75em; }
+}
+
+.in { text-align: center; background: #f0f0f0; color : #3C3C3C; font-size: 13px; padding : 6px 10px; }
+
+.counter {  float : right; padding : 0 0 0 10px; color : #777;}
+
+.block { margin-top : 20px; }
+
+.message {
+  margin : 0px 50px;
+
+  color : #777;
+  font-size : 12px;
+  line-height: 2em;
+  // font-style : italic;
+  text-align : center;
+}
