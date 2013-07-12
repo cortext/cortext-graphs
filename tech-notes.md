@@ -25,15 +25,15 @@ Nodes can be node or cluster. Might be confusing and will change if it is the ca
 
 /@graph_id/
 
-/@graph_id/list:nodes
-/@graph_id/list:nodes#node:@node_id
-/@graph_id/list:nodes#orderby:@order_rule
+/@graph_id/list/nodes
+/@graph_id/list/nodes#node:@node_id
+/@graph_id/list/nodes#orderby:@order_rule
 
-/@graph_id/list:annotations
-/@graph_id/list:annotations@#annotation:@annotation_id
+/@graph_id/list/annotations
+/@graph_id/list/annotations@#annotation:@annotation_id
 
-/@graph_id/node:@node_id
-/@graph_id/node:@node_id#annotation:@annotation_id
+/@graph_id/node/@node_id
+/@graph_id/node/@node_id#annotation:@annotation_id
 
 ```
 
