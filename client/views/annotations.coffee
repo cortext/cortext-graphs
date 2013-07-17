@@ -50,24 +50,29 @@
     window.app.panels.open_node(node_id)
 
 @annotationFormAdd = Backbone.View.extend
+  events:
+    "click button.add": "submit"
+
   initialize:()->
+
+  submit: (e)->
+    e.preventDefault()
+
+    params = 
+      created_at: Date.now()
+      created_by: undefined
+      text: $(@$el.find('textarea')[0]).val()
+      type: 'node'
+      format: 'raw'
+      graph: Session.get('title')
+      source: @options.node.id
+      target: null
+
+    # console.log @options.node
+    # console.log "insert", params
+
+    window.annotations.insert params, (error, id)=>
+      $(@$el.find('textarea')[0]).val('')
 
   render:()->
     @$el.html Template.annotation_add()
-
-    @$el.find("button.add").on "click", (e)=>
-      params = 
-        created_at: Date.now()
-        created_by: undefined
-        text: $(@$el.find('textarea')[0]).val()
-        type: 'node'
-        format: 'raw'
-        graph: Session.get('title')
-        source: @options.node.id
-        target: null
-
-      # console.log @options.node
-      # console.log "insert", params
-
-      window.annotations.insert params, (error, id)=>
-        $(@$el.find('textarea')[0]).val('')
