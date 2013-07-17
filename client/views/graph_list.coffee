@@ -1,5 +1,8 @@
 @GraphListView = Backbone.View.extend
   initialize: ()->
+    $("#graph_list").height(($(window).height()-53) + "px");
+    $("#graph_list").children().height(($(window).height()-53) + "px");
+
     Deps.autorun ()=>
       @graphs = window.graphs.find().fetch()
 

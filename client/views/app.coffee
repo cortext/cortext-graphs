@@ -16,13 +16,18 @@
 
     @panels = new Panels
 
+  hide_all_components: ()->
     $('#graph_list').hide()
     $('#nav_panels').hide()
     $('#panels').hide()
 
   show_graph_list: ()->
+    @hide_all_components()
+
     $('#graph_list').show()
 
   show_panels: ()->
+    @hide_all_components()
+
     $('#nav_panels').show()
-    $('#panels').show()    
+    $('#panels').show()

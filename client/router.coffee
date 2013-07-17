@@ -15,6 +15,7 @@ Meteor.subscribe 'graphs'
     'graph/:graph_id/node/:node_id' : 'graph_node_info'
 
   default: ()->
+    window.graph = new Graph()
     window.app = new App()
     window.app.show_graph_list()
 
@@ -28,7 +29,7 @@ Meteor.subscribe 'graphs'
 
       if(current_graph)
         console.log "graph already exists. redirecting", current_graph
-        @navigate 'graph/'+current_graph.short_id
+        @navigate 'graph/'+current_graph.short_id, { trigger : true }
       else
         console.log "creating graph entry"
         
@@ -38,8 +39,8 @@ Meteor.subscribe 'graphs'
           short_id : short_id,
           url : url
 
-        graphs.insert new_graph,(error, result)->
-          this.navigate('graph/'+ current_graph.short_id);
+        graphs.insert new_graph,(error, result)=>
+          @navigate 'graph/'+current_graph.short_id, { trigger : true }
 
   graph: (graph_short_id, cb)=>
     Meteor.subscribe 'graph', graph_short_id, ()->
