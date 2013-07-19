@@ -9,7 +9,7 @@
     @nodes = []
     @edges = []
 
-    console.log this
+#    console.log this
 
   open_url:(url)->
 
