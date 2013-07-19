@@ -42,9 +42,12 @@
 
   open_node_list : ()->
     window.app.router.navigate(window.app.root_url+"/list/nodes")
-    
+
+    $('#panels').show()    
+
     @close_annotation_list()
     @close_node()
+
     $('#node_list').slideDown(600)
 
   close_node_list : ()->
@@ -57,8 +60,11 @@
       node_id : node_id
       el : document.getElementById "node_info"
 
+    $('#panels').show()    
+
     @close_node_list()
     @close_annotation_list()
+
     $('#node_info').slideDown(600)
     node_info.render()
 
@@ -67,9 +73,12 @@
 
   open_annotation_list: ()->
     window.app.router.navigate(window.app.root_url+"/list/annotations")
+
+    $('#panels').show()    
     
     @close_node_list()
     @close_node()
+
     $('#annotation_list').slideDown(600)
 
   close_annotation_list: ()->

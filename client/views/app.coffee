@@ -30,4 +30,4 @@
     @hide_all_components()
 
     $('#nav_panels').show()
-    $('#panels').show()
+    # $('#panels').show()
