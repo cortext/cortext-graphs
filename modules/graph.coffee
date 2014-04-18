@@ -56,8 +56,8 @@
 
   process_clusters:(clusters)->
 
-    _(clusters).each (node)->
-      node.id = "node-high-" + node.index
+    _(clusters).each (node, key)->
+      node.id = "node-high-" + key
       node.cluster = true
 
       node.size = node.width

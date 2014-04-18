@@ -40,7 +40,7 @@ Meteor.subscribe 'graphs'
           url : url
 
         graphs.insert new_graph,(error, result)=>
-          @navigate 'graph/'+current_graph.short_id, { trigger : true }
+          @navigate 'graph/'+new_graph.short_id, { trigger : true }
 
   graph: (graph_short_id, cb)=>
     Meteor.subscribe 'graph', graph_short_id, ()->
